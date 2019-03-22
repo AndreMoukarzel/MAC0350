@@ -1,9 +1,11 @@
 \documentclass{article}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
 
 \title{MAC0350 - EP1}
 \date{}
 \author{
-	Andr\'e Ferrari Moukarzel \\ 9298166
+	André Ferrari Moukarzel \\ 9298166
 	\and 
 	Gabriel Sarti Massukado \\ 10284177
 	\and
@@ -17,16 +19,142 @@
   \pagenumbering{arabic}
   
   \section{Item 2}
+    \subsection{Generalização: Pessoa}
+        \quad A entidade "Pessoa" generaliza de forma sobreponível as entidades regulares "Professor", "Aluno" e "Administradores". \\
+        \quad A pessoa possui CPF e nome como atributos, sendo que CPF é chave primária.
+        \subsubsection{Restrições}
+            \begin{itemize}
+                \item CPF: Número de Cadastro de Pessoa Física da pessoa. Deve ser uma sequência de 11 digitos constituindo uma sequência válida seguinte as regras da Receita Federal. Não pode ser NULL.
+                \item Nome: Nome completo do individuo conforme escrito em sua certidão de nascimento. É composto de letras, podendo conter no máximo 200 caracteres. 
+            \end{itemize}
+            
   	\subsection{Entidade Regular: Professor}
-  		\quad O professor é um cara bacana
+  		\quad O professor é uma entidade especializada de pessoa onde armazenaremos todos os dados das instâncias de cada um dos professores da USP presentes na base de dados. \\
+  		\quad Um professor possui os atributos NUSP e Departamento, sendo que NUSP é chave primária.  
+  		\subsubsection{Restrições}
+  		    \begin{itemize}
+  		        \item NUSP: Número de identificação da USP do professor. É composta de até 9 dígitos e, por ser a chave primária, não pode ser nulo. 
+  		        \item Dpt: Identificação de qual o departamento o professor pertence. Os valores que pode assumir são: MAT, MAC, MAE ou MAP.
+  		    \end{itemize}
+  		    
   	\subsection{Entidade Regular: Aluno}
+  	    \quad O aluno é uma entidade especializada de pessoa onde armazenaremos todos os dados das instâncias de cada um dos alunos da USP presentes na base de dados. \\
+  	    \quad Uma instância de aluno possui o atributo NUSP, que é chave primária.
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  		        \item NUSP: Número de identificação da USP do professor. É composta de até 9 dígitos e, por ser a chave primária, não pode ser nulo. 
+  		    \end{itemize}
+  		    
   	\subsection{Entidade Regular: Administrador}
+  	    \quad O administrador é uma entidade especializada de pessoa em que armazenaremos todos os dados  das instancias de cada um dos administradores na base de dados. \\
+  	    \quad Uma instância de administrador possui os atributos...?
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  	            \item 
+  	        \end{itemize}
+  	        
   	\subsection{Entidade Regular: Disciplina}
+  	    \quad A disciplina é uma entidade em que armazenaremos todos os dados das instâncias de cada uma das disciplinas na base de dados. \\
+  	    \quad Uma disciplina possui um nome, um código, um número de créditos trabalho, um número de créditos aula e período ideal, sendo que o código da matéria é sua chave primária.
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  		        \item Nome\_Disc: Nome por extenso da disciplina. É uma sequência de até 80 caracteres.
+  		        \item Cod\_Disc: O código da matéria, contendo 3 letras seguidas de 4 digitos numéricos. Não pode ser NULL.
+  		        \item Cred\_Trab: Número de créditos trabalho concedidos pela disciplina. Deve ser um número maior ou igual a zero.
+  		        \item Cred\_Aula: Número de créditos aula concedidos pela disciplina. Deve ser um número maior ou igual a zero.
+  		        \item Per\_Ideal: O período ideal para essa disciplina ser cursada. Deve ser um número maior que zero e menor que 11, dado que nenhum curso da USP tem duração de mais de 10 semestres.
+  		    \end{itemize}
+  		    
   	\subsection{Entidade Regular: Curso}
+  	
+  	
+  	
+  	
+  	
   	\subsection{Entidade Regular: Trilha}
-  	\subsection{Entidade Regular: M\'odulo}
-  	\subsection{Entidade Regular: Usu\'ario}
+  	    \quad A trilha é uma entidade regular que representa um conjunto de módulos que representam a especialização em uma área do conhecimento da computação. Possui um nome.
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  	            \item Nome: Nome por extenso da trilha. É uma sequência de até 80 caracteres.
+  		    \end{itemize}
+  		    
+  	\subsection{Entidade Regular: Módulo}
+  	    \quad Um módulo é um conjunto de materia especificas que representam uma pequena área do conhecimento de uma trilha. Cada módulo possui um nome e o número de materias a serem cumpridas.
+  	    \begin{itemize}
+  	            \item Nome: Nome por extenso da trilha. É uma sequência de até 80 caracteres.
+  	            \item Num\_Mat: Número de minimo materiais que devem ser concluidas para completar o módulo. Deve ser um número maior que zero composto de até 2 digitos. 
+  		    \end{itemize}
+  		    
+  	\subsection{Entidade Regular: Usuário}
+  	    \quad O usuário é uma entidade regular em que armazenamos cada uma das instâncias dos usuários do serviço fornecido pelo nosso banco de dados. \\
+  	    \quad Uma instância de usuário tem como atributos...?
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  	            \item 
+  	        \end{itemize}
+  	        
   	\subsection{Entidade Regular: Perfil}
-  	\subsection{Entidade Regular: Servi\c{c}o}
+  	
+  	
+  	
+  	\subsection{Entidade Regular: Serviço}
+  	
+  	\subsection{Entidade Regular: Obrigatoria}
+  	
+  	\subsection{Entidade Regular: Optativa}
+  	
+  	\subsection{Entidade Regular: Livre}
+  	
+  	\subsection{Entidade Regular: Eletiva}
+  	
+  	
+  	\subsection{Agregação: Grade}
+  	    \quad Uma grade é uma agregação das entidades "Disciplina" e "Curso" e da relação "rel\_dis\_curso" em que armazenamos o conjunto de disciplinas pertencentes a um mesmo curso que representam a grade deste curso. 
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  		        \item 
+  		    \end{itemize}
+  		    
+  	\subsection{Agregação: Oferecimento}
+  	    \quad Um oferecimento é uma agregação das entidades "Professor" e "Disciplina" e da relação "Ministra" em que armazenamos as instâncias de oferecimentos de certas disciplinas em um semestre. \\
+  	    \quad Uma instância de oferecimento tem como atributos turma, semestre, ano (que juntos atuam como chave primária) e horário. 
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  	            \item turma: inteiro que indica um grupo de alunos que está cursando o oferecimento. Não pode ser NULL.
+  	            \item semestre: inteiro que indica o semestre em que ocorre o oferecimento. Deve ser "1" ou "2".
+  	            \item ano: inteiro que indica o ano em que ocorre o oferecimento. Deve ser um inteiro maior que 2000.
+  	            \item horario: lista de tuplas que indica em que horarios as aulas do oferecimento ocorrem. Cada tupla contém um \textit{datatime} que representa o horário de início da aula, um \textit{datatime} que representa o horário de término da aula e um inteiro no intervalo [1, 7] que representa o dia da semana. Nenhum desses valores pode ser NULL e o horário deve possuir ao menos uma tupla.
+  	         \end{itemize}
+  	    
+  	\subsection{Relação: pe\_us}
+  	    \quad Relação que representa a posse de uma conta por uma pessoa. Relação 1 para 1 entre as entidades "Pessoa" e "Usuário".
+  	    
+  	\subsection{Relação: us\_pf}
+  	
+  	\subsection{Relação: pf\_se}
+  	
+  	\subsection{Relação: ministra}
+  	    \quad Relação que representa a ministração de uma disciplina por um professor. Um professor pode ministrar múltiplas disciplinas, enquanto uma disciplina só pode ser ministrada por apenas um professor, configurando uma relação 1:N.
+  	\subsection{Relação: cursa}
+  	    \quad Relação que representa um aluno matriculado em um oferecimento de uma disciplina. Um aluno pode cursar múltiplos oferecimentos e um mesmo oferecimento pode ser cursado por múltiplos alunos, configurando uma relação N:M. \\
+  	    \quad Esta relação possui os atributos nota e presença.
+  	    \subsubsection{Restrições}
+  	        \begin{itemize}
+  	            \item Nota: Nota de um aluno em um oferecimento. A nota é um valor de ponto flutuante maior ou igual a 0.0 e menor ou igual a 10.0.
+  	            \item Presença: Presença total de um aluno em um oferecimento que cursa. É um valor de ponto flutuante maior ou igual a 0.0 e menor ou igual a 1.0.
+  	         \end{itemize}
+  	\subsection{Relação: planeja}
+  	    \quad Relação que representa um aluno com pedido de participação em uma disciplina. Um aluno pode planejar cursar múltiplas disciplinas e uma mesma disciplina pode ser alvo de planejamento de múltiplos alunos, configurando uma relação N:M.
+  	\subsection{Relação: administra}
+  	    \quad jajaja me gustan las papas
+  	    \quad si por supuesto chaval
+  	    
+  	\subsection{Relação: rel\_dis\_cur}
+  	
+  	\subsection{Relação: op\_mod}
+  	    \quad Relação que representa a participação de uma disciplina optativa em um módulo. Uma disciplina pode estar em N módulos e um módulo pode conter M disciplinas.
+  	
+  	\subsection{Relação: tr\_mod}
+  	    \quad Relação que representa a inclusão de um módulo em uma trilha. Um módulo só pode ser parte de uma trilha, entretanto uma trilha pode conter N módulos.
 
 \end{document}
