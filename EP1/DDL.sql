@@ -42,7 +42,7 @@ CREATE TABLE b04_Administrador (
 	adm_dat_out TIMESTAMP,
 	CONSTRAINT pk_administrador PRIMARY KEY (adm_id),
 	CONSTRAINT sk_administrador UNIQUE (adm_email),
-	CONSTRAINT UNIQUE(adm_cpf),
+	CONSTRAINT adm_cpf UNIQUE (adm_cpf),
 	CONSTRAINT fk_pessoa FOREIGN KEY (adm_cpf)
 		REFERENCES b01_Pessoa(pes_cpf)
 		ON DELETE CASCADE
@@ -86,7 +86,7 @@ CREATE TABLE b08_Modulo (
 	mod_code integer NOT NULL,
 	mod_name varchar(40),
 	mod_cred_min integer,
-	CONSTRAINT pk_modulo PRIMARY_KEY (mod_id),
+	CONSTRAINT pk_modulo PRIMARY KEY (mod_id),
 	CONSTRAINT sk_modulo UNIQUE (mod_code),
 	CONSTRAINT cred_check CHECK (mod_cred_min > 0)
 );
@@ -168,7 +168,7 @@ CREATE TABLE b15_rel_pf_se (
 	rel_perf_name varchar(20) NOT NULL,
 	rel_serv_code integer NOT NULL,
 	CONSTRAINT pk_rel_pf_se PRIMARY KEY (rel_perf_name, rel_serv_code),
-	CONSTRAINT fk_perf_name FOREIGN KEY (rel_perf_name),
+	CONSTRAINT fk_perf_name FOREIGN KEY (rel_perf_name)
 		REFERENCES b10_Perfil(perf_name)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -199,7 +199,7 @@ CREATE TABLE b17_rel_al_dis (
 	rel_dis_code varchar(7) NOT NULL,
 	plan_semester integer,
 	plan_year integer,
-	CONSTRAINT pk_rel_al_dis PRIMARY KEY (al_nusp, dis_code),
+	CONSTRAINT pk_rel_al_dis PRIMARY KEY (rel_al_nusp, rel_dis_code),
 	CONSTRAINT fk_al_nusp FOREIGN KEY (rel_al_nusp)
 		REFERENCES b03_Aluno(al_nusp)
 		ON DELETE CASCADE
@@ -243,7 +243,7 @@ CREATE TABLE b20_rel_pes_us (
 	rel_user_login varchar(20) NOT NULL,
 	rel_pes_us_date_in TIMESTAMP NOT NULL,
 	rel_pes_us_date_out TIMESTAMP,
-	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_user_login)
+	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_user_login),
 	CONSTRAINT fk_pes_cpf FOREIGN KEY (rel_pes_cpf)
 		REFERENCES b01_Pessoa(pes_cpf)
 		ON DELETE CASCADE
@@ -277,7 +277,7 @@ CREATE TABLE b22_rel_al_of (
 	rel_al_nusp integer NOT NULL,
 	rel_al_of_grade integer,
 	rel_al_of_presence float(24),
-	CONSTRAINT pk_rel_al_of PRIMARY KEY (prof_nusp, dis_code, al_nusp),
+	CONSTRAINT pk_rel_al_of PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_al_nusp),
 	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
