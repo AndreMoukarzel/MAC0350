@@ -1,6 +1,6 @@
 CREATE TABLE b01_Pessoa (
 	pes_id SERIAL,
-	pes_cpf integer NOT NULL,
+	pes_cpf varchar(11) NOT NULL,
 	pes_name varchar(200),
 	pes_sex char(1),
 	pes_birthdate DATE,
@@ -11,9 +11,9 @@ CREATE TABLE b01_Pessoa (
 
 CREATE TABLE b02_Professor (
 	prof_id SERIAL,
-	prof_nusp integer NOT NULL,
+	prof_nusp varchar(9) NOT NULL,
 	prof_dept varchar(3),
-	prof_cpf integer,
+	prof_cpf varchar(11),
 	CONSTRAINT pk_professor PRIMARY KEY (prof_id),
 	CONSTRAINT sk_professor UNIQUE (prof_nusp),
 	CONSTRAINT fk_pessoa FOREIGN KEY (prof_cpf)
@@ -24,8 +24,8 @@ CREATE TABLE b02_Professor (
 
 CREATE TABLE b03_Aluno (
 	al_id SERIAL,
-	al_nusp integer NOT NULL,
-	al_cpf integer,
+	al_nusp varchar(9) NOT NULL,
+	al_cpf varchar(11),
 	CONSTRAINT pk_aluno PRIMARY KEY (al_id),
 	CONSTRAINT sk_aluno UNIQUE (al_nusp),
 	CONSTRAINT fk_pessoa FOREIGN KEY (al_cpf)
@@ -36,7 +36,7 @@ CREATE TABLE b03_Aluno (
 
 CREATE TABLE b04_Administrador (
 	adm_id SERIAL,
-	adm_cpf integer,
+	adm_cpf varchar(11),
 	adm_email varchar(40) NOT NULL,
 	adm_dat_in TIMESTAMP NOT NULL,
 	adm_dat_out TIMESTAMP,
@@ -65,7 +65,7 @@ CREATE TABLE b06_Curso (
 	cur_id SERIAL,
 	cur_code integer NOT NULL,
 	cur_name varchar(60),
-	adm_cpf integer,
+	adm_cpf varchar(11),
 	CONSTRAINT pk_curso PRIMARY KEY (cur_id),
 	CONSTRAINT sk_curso UNIQUE (cur_code),
 	CONSTRAINT fk_adm FOREIGN KEY (adm_cpf)
@@ -179,7 +179,7 @@ CREATE TABLE b15_rel_pf_se (
 );
 
 CREATE TABLE b16_rel_prof_dis (
-	rel_prof_nusp integer NOT NULL,
+	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
 	rel_prof_disc_semester integer,
 	rel_prof_disc_year integer,
@@ -195,7 +195,7 @@ CREATE TABLE b16_rel_prof_dis (
 );
 
 CREATE TABLE b17_rel_al_dis (
-	rel_al_nusp integer NOT NULL,
+	rel_al_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
 	plan_semester integer,
 	plan_year integer,
@@ -239,7 +239,7 @@ CREATE TABLE b19_rel_mod_cur (
 );
 
 CREATE TABLE b20_rel_pes_us (
-	rel_pes_cpf integer NOT NULL,
+	rel_pes_cpf varchar(11) NOT NULL,
 	rel_user_login varchar(20) NOT NULL,
 	rel_pes_us_date_in TIMESTAMP NOT NULL,
 	rel_pes_us_date_out TIMESTAMP,
@@ -255,7 +255,7 @@ CREATE TABLE b20_rel_pes_us (
 );
 
 CREATE TABLE b21_Oferecimento (
-	rel_prof_nusp integer NOT NULL,
+	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
 	rel_rel_oferecimento_year integer,
 	rel_oferecimento_semester integer,
@@ -272,10 +272,10 @@ CREATE TABLE b21_Oferecimento (
 );
 
 CREATE TABLE b22_rel_al_of (
-	rel_prof_nusp integer NOT NULL,
+	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
-	rel_al_nusp integer NOT NULL,
-	rel_al_of_grade integer,
+	rel_al_nusp varchar(9) NOT NULL,
+	rel_al_of_grade float(24),
 	rel_al_of_presence float(24),
 	CONSTRAINT pk_rel_al_of PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_al_nusp),
 	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
@@ -303,7 +303,7 @@ CREATE TABLE b23_serv_tables (
 );
 
 CREATE TABLE b24_of_times (
-	prof_nusp integer NOT NULL,
+	prof_nusp varchar(9) NOT NULL,
 	dis_code varchar(7) NOT NULL,
 	time_in TIME NOT NULL,
 	time_out TIME NOT NULL,
