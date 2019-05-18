@@ -1,3 +1,26 @@
+/*
+Next lines checks if you have permission to create extensions
+and:
+	*create two extensions: pgcrypto for password and citext for email check
+	*create a role dba and a schema admins
+	*grant permissions to dba over admins
+*/
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS citext;
+-- For security create admin schema as well
+CREATE ROLE dba
+	WITH SUPERUSER CREATEDB CREATEROLE
+	LOGIN ENCRYPTED PASSWORD 'dba1234'
+	VALID UNTIL '2019-07-01';
+CREATE SCHEMA IF NOT EXISTS admins;
+GRANT admins TO dba;
+
+
+DROP DOMAIN IF EXISTS email CASCADE;
+CREATE DOMAIN email AS citext
+	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
+
 CREATE TABLE b01_Pessoa (
 	pes_id SERIAL,
 	pes_cpf varchar(11) NOT NULL,
@@ -89,6 +112,16 @@ CREATE TABLE b08_Modulo (
 	CONSTRAINT cred_check CHECK (mod_cred_min > 0)
 );
 
+DROP TABLE IF EXISTS users;
+CREATE TABLE b09_Usuario (
+	us_id       SERIAL,
+	us_email    email,
+	us_password TEXT NOT NULL,
+	CONSTRAINT pk_user PRIMARY KEY (us_id),
+	CONSTRAINT sk_user UNIQUE (us_email)
+);
+
+/*
 CREATE TABLE b09_Usuario (
 	user_id SERIAL,
 	user_login varchar(20) NOT NULL,
@@ -96,6 +129,7 @@ CREATE TABLE b09_Usuario (
 	CONSTRAINT pk_usuario PRIMARY KEY (user_id),
 	CONSTRAINT sk_usuario UNIQUE (user_login)
 );
+*/
 
 CREATE TABLE b10_Perfil (
 	perf_id SERIAL,
@@ -147,13 +181,13 @@ CREATE TABLE b13_rel_tr_cur (
 );
 
 CREATE TABLE b14_rel_us_pf (
-	rel_user_login varchar(80) NOT NULL,
+	rel_us_email varchar(80) NOT NULL,
 	rel_perf_name varchar(20) NOT NULL,
 	rel_us_pf_date_in TIMESTAMP,
 	rel_us_pf_date_out TIMESTAMP,
-	CONSTRAINT pk_rel_us_pf PRIMARY KEY (rel_user_login, rel_perf_name),
-	CONSTRAINT fk_user_login FOREIGN KEY (rel_user_login)
-		REFERENCES b09_Usuario(user_login)
+	CONSTRAINT pk_rel_us_pf PRIMARY KEY (rel_us_email, rel_perf_name),
+	CONSTRAINT fk_us_email FOREIGN KEY (rel_us_email)
+		REFERENCES b09_Usuario(us_email)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_perf_name FOREIGN KEY (rel_perf_name)
@@ -238,16 +272,16 @@ CREATE TABLE b19_rel_mod_cur (
 
 CREATE TABLE b20_rel_pes_us (
 	rel_pes_cpf varchar(11) NOT NULL,
-	rel_user_login varchar(20) NOT NULL,
+	rel_us_email varchar(20) NOT NULL,
 	rel_pes_us_date_in TIMESTAMP NOT NULL,
 	rel_pes_us_date_out TIMESTAMP,
-	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_user_login),
+	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_us_email),
 	CONSTRAINT fk_pes_cpf FOREIGN KEY (rel_pes_cpf)
 		REFERENCES b01_Pessoa(pes_cpf)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
-	CONSTRAINT fk_user_login FOREIGN KEY (rel_user_login)
-		REFERENCES b09_Usuario(user_login)
+	CONSTRAINT fk_us_email FOREIGN KEY (rel_us_email)
+		REFERENCES b09_Usuario(us_email)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
