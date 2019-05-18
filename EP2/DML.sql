@@ -183,66 +183,66 @@ INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
 	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai30', "30email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 /* Disciplinas */
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 0', 'MAC0100', 1, 1);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 1', 'MAC0101', 2, 2);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 2', 'MAC0102', 3, 3);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 3', 'MAC0103', 4, 4);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 4', 'MAC0104', 5, 5);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 5', 'MAC0105', 6, 6);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 6', 'MAC0106', 7, 7);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 7', 'MAC0107', 8, 8);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 8', 'MAC0108', 9, 9);
 
-INSERT INTO b05_Disciplina (dis_code, dis_name, dis_class_creds, dis_work_creds)
+INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 9', 'MAC0109', 10, 10);
 
 /* Curso */
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('000', 'Bacharelado Generico 0', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '21email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (0, 'Bacharelado Generico 0', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '21email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('001', 'Bacharelado Generico 1', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '22email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (1, 'Bacharelado Generico 1', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '22email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('002', 'Bacharelado Generico 2', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '23email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (2, 'Bacharelado Generico 2', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '23email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('003', 'Bacharelado Generico 3', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '24email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (3, 'Bacharelado Generico 3', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '24email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('004', 'Bacharelado Generico 4', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '25email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (4, 'Bacharelado Generico 4', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '25email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('005', 'Bacharelado Generico 5', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '26email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (5, 'Bacharelado Generico 5', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '26email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('006', 'Bacharelado Generico 6', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '27email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (6, 'Bacharelado Generico 6', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '27email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('007', 'Bacharelado Generico 7', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '28email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (7, 'Bacharelado Generico 7', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '28email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('008', 'Bacharelado Generico 8', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '29email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (8, 'Bacharelado Generico 8', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '29email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES ('009', 'Bacharelado Generico 9', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '30email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (9, 'Bacharelado Generico 9', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '30email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 /* Trilha */
 INSERT INTO b07_Trilha (tr_name)
@@ -367,3 +367,313 @@ INSERT INTO b10_Perfil (perf_name, perf_desc)
 
 INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Perfil Inovador 10', 'Perfil usado por usuarios que inovam');
+
+/* Servicos */
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0000, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0001, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0002, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0003, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0004, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0005, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0006, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0007, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0008, 'Servico que permite tudo', true, true, true, true);
+
+INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
+	VALUES (0009, 'Servico que permite tudo', true, true, true, true);
+
+/* rel trilha modulo */
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 0', 1, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 1', 2, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 2', 3, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 3', 4, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 4', 5, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 5', 6, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 6', 7, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 7', 8, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 8', 9, true);
+
+INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
+	VALUES ('Especializacao Generica 8', 10, false);
+
+/* rel trilha curso */
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 0', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 0');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 1', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 1');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 2', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 2');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 3', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 3');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 4', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 4');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 5', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 5');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 6', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 6');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 7', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 7');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 8', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 8');
+
+INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
+	VALUES ('Especializacao Generica 9', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 9');
+
+/* rel user perfil*/
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('1_user@gmail.com', 'Perfil Inovador 1', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('2_user@gmail.com', 'Perfil Inovador 2', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('3_user@gmail.com', 'Perfil Inovador 3', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('4_user@gmail.com', 'Perfil Inovador 4', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('5_user@gmail.com', 'Perfil Inovador 5', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('6_user@gmail.com', 'Perfil Inovador 6', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('7_user@gmail.com', 'Perfil Inovador 7', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('8_user@gmail.com', 'Perfil Inovador 8', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('9_user@gmail.com', 'Perfil Inovador 9', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
+	VALUES ('9_user@gmail.com', 'Perfil Inovador 10', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+
+/* rel perfil servico */
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 1', 0000);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 2', 0001);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 3', 0002);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 4', 0003);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 5', 0004);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 6', 0005);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 7', 0006);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 8', 0007);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 9', 0008);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Perfil Inovador 10', 0009);
+
+/* rel prof disciplina */
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('1', 'MAC0100', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('2', 'MAC0101', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('3', 'MAC0102', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('4', 'MAC0103', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('5', 'MAC0104', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('6', 'MAC0105', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('7', 'MAC0106', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('8', 'MAC0107', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('9', 'MAC0108', 1, 2019);
+
+INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
+	VALUES ('10', 'MAC0109', 1, 2019);
+
+/* rel aluno disc */
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('11', 'MAC0100', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('12', 'MAC0101', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('13', 'MAC0102', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('14', 'MAC0103', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('15', 'MAC0104', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('16', 'MAC0105', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('17', 'MAC0106', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('18', 'MAC0107', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('19', 'MAC0108', 1, 2019);
+
+INSERT INTO  b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
+	VALUES ('20', 'MAC0109', 1, 2019);
+
+/* rel modulo disciplina */
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0100', 1);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0101', 2);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0102', 3);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0103', 4);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0104', 5);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0105', 6);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0106', 7);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0107', 8);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0108', 9);
+
+INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
+	VALUES ('MAC0109', 10);
+
+/* rel modulo curso */
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (0, 0);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (1, 1);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (2, 2);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (3, 3);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (4, 4);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (5, 5);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (6, 6);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (7, 7);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (8, 8);
+
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (9, 9);
+
+/* rel pessoa usuario */
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão1', '1_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2', '2_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3', '3_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão4', '4_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão5', '5_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão6', '6_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão7', '7_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão8', '8_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão9', '9_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
+	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10', '10_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
