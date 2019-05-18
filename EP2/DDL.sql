@@ -9,7 +9,6 @@ CREATE TABLE b01_Pessoa (
 CREATE TABLE b02_Professor (
 	prof_id SERIAL,
 	prof_nusp varchar(9) NOT NULL,
-	prof_dept varchar(3),
 	prof_cpf varchar(11),
 	CONSTRAINT pk_professor PRIMARY KEY (prof_id),
 	CONSTRAINT sk_professor UNIQUE (prof_nusp),
@@ -63,6 +62,8 @@ CREATE TABLE b06_Curso (
 	cur_code integer NOT NULL,
 	cur_name varchar(60),
 	adm_cpf varchar(11),
+	ad_cur_date_in TIMESTAMP,
+	ad_cur_date_out TIMESTAMP,
 	CONSTRAINT pk_curso PRIMARY KEY (cur_id),
 	CONSTRAINT sk_curso UNIQUE (cur_code),
 	CONSTRAINT fk_adm FOREIGN KEY (adm_cpf)
