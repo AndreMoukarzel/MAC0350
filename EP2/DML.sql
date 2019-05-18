@@ -91,96 +91,96 @@ INSERT INTO b01_Pessoa (pes_cpf, pes_name)
 
 /* Insercao em Professor */
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('1', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão1');
+	VALUES ('1', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão1'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('2', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2');
+	VALUES ('2', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('3', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3');
+	VALUES ('3', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('4', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão4');
+	VALUES ('4', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão4'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('5', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão5');
+	VALUES ('5', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão5'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('6', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão6');
+	VALUES ('6', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão6'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('7', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão7');
+	VALUES ('7', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão7'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('8', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão8');
+	VALUES ('8', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão8'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('9', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão9');
+	VALUES ('9', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão9'));
 
 INSERT INTO b02_Professor (prof_nusp, prof_cpf)
-	VALUES ('10', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10');
+	VALUES ('10', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10'));
 
 /* Insercao em Aluno */
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('11', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão11');
+	VALUES ('11', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão11'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('12', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão12');
+	VALUES ('12', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão12'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('13', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão13');
+	VALUES ('13', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão13'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('14', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão14');
+	VALUES ('14', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão14'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('15', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão15');
+	VALUES ('15', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão15'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('16', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai16');
+	VALUES ('16', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai16'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('17', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai17');
+	VALUES ('17', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai17'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('18', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai18');
+	VALUES ('18', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai18'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('19', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai19');
+	VALUES ('19', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai19'));
 
 INSERT INTO b03_Aluno (al_nusp, al_cpf)
-	VALUES ('20', SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai20');
+	VALUES ('20', (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai20'));
 
 /* Insercao em Administrador */
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai21', "21email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai21'), '21email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai22', "22email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai22'), '22email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai23', "23email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai23'), '23email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai24', "24email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai24'), '24email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai25', "25email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai25'), '25email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai26', "26email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai26'), '26email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai27', "27email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai27'), '27email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai28', "28email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai28'), '28email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai29', "29email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai29'), '29email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
-INSERT INTO b04_Administrador (al_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai30', "30email@gmail", '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai30'), '30email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 /* Disciplinas */
 INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
@@ -214,35 +214,35 @@ INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 	VALUES ('Disciplina 9', 'MAC0109', 10, 10);
 
 /* Curso */
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (0, 'Bacharelado Generico 0', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '21email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (0, 'Bacharelado Generico 0', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '21email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (1, 'Bacharelado Generico 1', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '22email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (1, 'Bacharelado Generico 1', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '22email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (2, 'Bacharelado Generico 2', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '23email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (2, 'Bacharelado Generico 2', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '23email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (3, 'Bacharelado Generico 3', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '24email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (3, 'Bacharelado Generico 3', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '24email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (4, 'Bacharelado Generico 4', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '25email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (4, 'Bacharelado Generico 4', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '25email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (5, 'Bacharelado Generico 5', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '26email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (5, 'Bacharelado Generico 5', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '26email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (6, 'Bacharelado Generico 6', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '27email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (6, 'Bacharelado Generico 6', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '27email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (7, 'Bacharelado Generico 7', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '28email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (7, 'Bacharelado Generico 7', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '28email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (8, 'Bacharelado Generico 8', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '29email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (8, 'Bacharelado Generico 8', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '29email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
-INSERT INTO b06_ Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (9, 'Bacharelado Generico 9', SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '30email@gmail', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
+	VALUES (9, 'Bacharelado Generico 9', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '30email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 /* Trilha */
 INSERT INTO b07_Trilha (tr_name)
@@ -432,34 +432,34 @@ INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
 
 /* rel trilha curso */
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 0', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 0');
+	VALUES ('Especializacao Generica 0', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 0'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 1', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 1');
+	VALUES ('Especializacao Generica 1', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 1'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 2', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 2');
+	VALUES ('Especializacao Generica 2', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 2'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 3', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 3');
+	VALUES ('Especializacao Generica 3', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 3'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 4', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 4');
+	VALUES ('Especializacao Generica 4', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 4'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 5', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 5');
+	VALUES ('Especializacao Generica 5', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 5'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 6', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 6');
+	VALUES ('Especializacao Generica 6', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 6'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 7', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 7');
+	VALUES ('Especializacao Generica 7', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 7'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 8', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 8');
+	VALUES ('Especializacao Generica 8', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 8'));
 
 INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
-	VALUES ('Especializacao Generica 9', SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 9');
+	VALUES ('Especializacao Generica 9', (SELECT cur_code FROM b06_Curso WHERE cur_name = 'Bacharelado Generico 9'));
 
 /* rel user perfil*/
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
@@ -618,9 +618,6 @@ INSERT INTO  b18_rel_dis_mod (rel_dis_code, rel_mod_code)
 
 /* rel modulo curso */
 INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
-	VALUES (0, 0);
-
-INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
 	VALUES (1, 1);
 
 INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
@@ -647,36 +644,39 @@ INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
 INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
 	VALUES (9, 9);
 
+INSERT INTO  b19_rel_mod_cur (rel_mod_code, rel_cur_code)
+	VALUES (10, 0);
+
 /* rel pessoa usuario */
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão1', '1_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão1'), '1_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2', '2_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2'), '2_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3', '3_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3'), '3_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão4', '4_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão4'), '4_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão5', '5_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão5'), '5_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão6', '6_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão6'), '6_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão7', '7_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão7'), '7_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão8', '8_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão8'), '8_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão9', '9_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão9'), '9_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10', '10_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10'), '10_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 /* Oferecimento */
 INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
