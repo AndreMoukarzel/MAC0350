@@ -677,3 +677,127 @@ INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
 	VALUES (SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10', '10_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+
+/* Oferecimento */
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('1', 'MAC0100', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('2', 'MAC0101', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('3', 'MAC0102', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('4', 'MAC0103', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('5', 'MAC0104', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('6', 'MAC0105', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('7', 'MAC0106', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('8', 'MAC0107', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('9', 'MAC0108', 2019, 1, 45);
+
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	VALUES ('10', 'MAC0109', 2019, 1, 45);
+
+/* rel aluno oferecimento */
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('1', 'MAC0100', '11', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('2', 'MAC0101', '12', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('3', 'MAC0102', '13', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('4', 'MAC0103', '14', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('5', 'MAC0104', '15', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('6', 'MAC0105', '16', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('7', 'MAC0106', '17', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('8', 'MAC0107', '18', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('9', 'MAC0108', '19', 0.0, 0.0);
+
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	VALUES ('10', 'MAC0109', '20', 0.0, 0.0);
+
+/* tabelas de serviços */
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0000, 'b02_Professor');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0001, 'b02_Professor');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0002, 'b02_Professor');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0003, 'b02_Professor');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0004, 'b03_Aluno');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0005, 'b03_Aluno');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0006, 'b03_Aluno');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0007, 'b04_Administrador');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0008, 'b04_Administrador');
+
+INSERT INTO  b23_serv_tables (serv_code, serv_table)
+	VALUES (0009, 'b04_Administrador');
+
+/* horarios do oferecimento */
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('1', 'MAC0100', '01:02:03', '05:02:03', 2);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('2', 'MAC0101', '01:02:03', '05:02:03', 3);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('3', 'MAC0102', '01:02:03', '05:02:03', 4);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('4', 'MAC0103', '01:02:03', '05:02:03', 5);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('5', 'MAC0104', '01:02:03', '05:02:03', 6);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('6', 'MAC0105', '01:02:03', '05:02:03', 7);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('7', 'MAC0106', '01:02:03', '05:02:03', 1);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('8', 'MAC0107', '01:02:03', '05:02:03', 2);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('9', 'MAC0108', '01:02:03', '05:02:03', 3);
+
+INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+	VALUES ('10', 'MAC0109', '01:02:03', '05:02:03', 4);
