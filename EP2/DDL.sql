@@ -16,7 +16,6 @@ CREATE ROLE dba
 CREATE SCHEMA IF NOT EXISTS admins;
 GRANT admins TO dba;
 
-
 DROP DOMAIN IF EXISTS email CASCADE;
 CREATE DOMAIN email AS citext
 	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
@@ -26,7 +25,7 @@ CREATE TABLE b01_Pessoa (
 	pes_cpf varchar(11) NOT NULL,
 	pes_name varchar(200),
 	CONSTRAINT pk_pessoa PRIMARY KEY (pes_id),
-	CONSTRAINT sk_pessoa UNIQUE (pes_cpf),
+	CONSTRAINT sk_pessoa UNIQUE (pes_cpf)
 );
 
 CREATE TABLE b02_Professor (
@@ -180,7 +179,7 @@ CREATE TABLE b13_rel_tr_cur (
 );
 
 CREATE TABLE b14_rel_us_pf (
-	rel_us_email varchar(80) NOT NULL,
+	rel_us_email email NOT NULL,
 	rel_perf_name varchar(20) NOT NULL,
 	rel_us_pf_date_in TIMESTAMP,
 	rel_us_pf_date_out TIMESTAMP,
@@ -271,7 +270,7 @@ CREATE TABLE b19_rel_mod_cur (
 
 CREATE TABLE b20_rel_pes_us (
 	rel_pes_cpf varchar(11) NOT NULL,
-	rel_us_email varchar(20) NOT NULL,
+	rel_us_email email NOT NULL,
 	rel_pes_us_date_in TIMESTAMP NOT NULL,
 	rel_pes_us_date_out TIMESTAMP,
 	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_us_email),
