@@ -74,7 +74,6 @@ CREATE TABLE b05_Disciplina (
 	dis_name varchar(80),
 	dis_class_creds integer,
 	dis_work_creds integer,
-	dis_ideal_period integer,
 	CONSTRAINT pk_disciplina PRIMARY KEY (dis_id),
 		CONSTRAINT sk_disciplina UNIQUE (dis_code)
 
