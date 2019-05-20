@@ -4,3 +4,5 @@ DÚVIDAS E SOFRIMENTO
 	como criar a função insert_student() do enunciado
 
 2.	Nosso DML e DML_CLEAN estão corretos?
+
+3.	Precisamos implementar algo além das funções insert_bla(), como verificar quando o usuario loga, etc?
