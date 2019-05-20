@@ -175,7 +175,7 @@ CREATE TABLE b14_rel_us_pf (
 	rel_us_pf_date_out TIMESTAMP,
 	CONSTRAINT pk_rel_us_pf PRIMARY KEY (rel_us_email, rel_perf_name),
 	CONSTRAINT fk_us_email FOREIGN KEY (rel_us_email)
-		REFERENCES b09_Usuario(us_email)
+		REFERENCES users(us_email)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_perf_name FOREIGN KEY (rel_perf_name)
@@ -269,7 +269,7 @@ CREATE TABLE b20_rel_pes_us (
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_us_email FOREIGN KEY (rel_us_email)
-		REFERENCES b09_Usuario(us_email)
+		REFERENCES users(us_email)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
