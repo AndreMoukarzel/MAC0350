@@ -4,3 +4,5 @@ DÚVIDAS E SOFRIMENTO
 	como criar a função insert_student() do enunciado
 
 2.	Nosso DML e DML_CLEAN estão corretos?
+
+3.	No DML_CLEAN tem como iterar nas tabelas dando o DROP TABLE?
