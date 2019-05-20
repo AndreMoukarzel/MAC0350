@@ -10,3 +10,5 @@ DÚVIDAS E SOFRIMENTO
 4.	Precisamos implementar algo além das funções insert_bla(), como verificar quando o usuario loga, etc?
 
 5.	O que exatamente faz o check_password()?
+
+6.	Qual o sentido de declarar a linguagem?
