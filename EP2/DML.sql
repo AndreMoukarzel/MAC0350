@@ -307,34 +307,34 @@ INSERT INTO b08_Modulo (mod_code, mod_name, mod_cred_min)
 	VALUES (10, 'Modulo Legal 9', 20);
 
 /* Usuario */
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('1_user@gmail.com', '123456780');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('2_user@gmail.com', '123456781');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('3_user@gmail.com', '123456782');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('4_user@gmail.com', '123456783');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('5_user@gmail.com', '123456784');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('6_user@gmail.com', '123456785');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('7_user@gmail.com', '123456786');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('8_user@gmail.com', '123456787');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('9_user@gmail.com', '123456788');
 
-INSERT INTO b09_Usuario (us_email, us_password)
+INSERT INTO users (us_email, us_password)
 	VALUES ('10_user@gmail.com', '123456789');
 
 /* Perfil */

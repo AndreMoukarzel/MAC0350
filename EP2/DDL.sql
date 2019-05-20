@@ -111,23 +111,13 @@ CREATE TABLE b08_Modulo (
 );
 
 DROP TABLE IF EXISTS users;
-CREATE TABLE b09_Usuario (
+CREATE TABLE users (
 	us_id       SERIAL,
 	us_email    email,
 	us_password TEXT NOT NULL,
 	CONSTRAINT pk_user PRIMARY KEY (us_id),
 	CONSTRAINT sk_user UNIQUE (us_email)
 );
-
-/*
-CREATE TABLE b09_Usuario (
-	user_id SERIAL,
-	user_login varchar(20) NOT NULL,
-	user_password varchar(20) NOT NULL,
-	CONSTRAINT pk_usuario PRIMARY KEY (user_id),
-	CONSTRAINT sk_usuario UNIQUE (user_login)
-);
-*/
 
 CREATE TABLE b10_Perfil (
 	perf_id SERIAL,
