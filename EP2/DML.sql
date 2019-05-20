@@ -308,34 +308,34 @@ INSERT INTO b08_Modulo (mod_code, mod_name, mod_cred_min)
 
 /* Usuario */
 INSERT INTO users (us_email, us_password)
-	VALUES ('1_user@gmail.com', '123456780');
+	VALUES ('1_user@gmail.com', crypt('123456780', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('2_user@gmail.com', '123456781');
+	VALUES ('2_user@gmail.com', crypt('123456781', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('3_user@gmail.com', '123456782');
+	VALUES ('3_user@gmail.com', crypt('123456782', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('4_user@gmail.com', '123456783');
+	VALUES ('4_user@gmail.com', crypt('123456783', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('5_user@gmail.com', '123456784');
+	VALUES ('5_user@gmail.com', crypt('123456784', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('6_user@gmail.com', '123456785');
+	VALUES ('6_user@gmail.com', crypt('123456785', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('7_user@gmail.com', '123456786');
+	VALUES ('7_user@gmail.com', crypt('123456786', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('8_user@gmail.com', '123456787');
+	VALUES ('8_user@gmail.com', crypt('123456787', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('9_user@gmail.com', '123456788');
+	VALUES ('9_user@gmail.com', crypt('123456788', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('10_user@gmail.com', '123456789');
+	VALUES ('10_user@gmail.com', crypt('123456789', gen_salt('bf')));
 
 /* Perfil */
 INSERT INTO b10_Perfil (perf_name, perf_desc)
