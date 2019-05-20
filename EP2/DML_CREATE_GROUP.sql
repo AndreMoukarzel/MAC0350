@@ -6,3 +6,5 @@ DÚVIDAS E SOFRIMENTO
 2.	Nosso DML e DML_CLEAN estão corretos?
 
 3.	No DML_CLEAN tem como iterar nas tabelas dando o DROP TABLE?
+
+4.	Precisamos implementar algo além das funções insert_bla(), como verificar quando o usuario loga, etc?
