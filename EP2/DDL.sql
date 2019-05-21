@@ -130,11 +130,8 @@ CREATE TABLE b10_Perfil (
 CREATE TABLE b11_Servico (
 	serv_id SERIAL,
 	serv_code integer NOT NULL,
-	serv_desc varchar(50),
-	serv_per_create boolean,
-	serv_per_read boolean,
-	serv_per_update boolean,
-	serv_per_delete boolean,
+	serv_name varchar(50) NOT NULL,
+	serv_desc varchar(280),
 	CONSTRAINT pk_servico PRIMARY KEY (serv_id),
 	CONSTRAINT sk_servico UNIQUE (serv_code)
 );
@@ -312,17 +309,7 @@ CREATE TABLE b22_rel_al_of (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE b23_serv_tables (
-	serv_code integer NOT NULL,
-	serv_table varchar(20) NOT NULL,
-	CONSTRAINT pk_serv_tables PRIMARY KEY (serv_code, serv_table),
-	CONSTRAINT fk_serv FOREIGN KEY (serv_code)
-		REFERENCES b11_Servico(serv_code)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE
-);
-
-CREATE TABLE b24_of_times (
+CREATE TABLE b23_of_times (
 	prof_nusp varchar(9) NOT NULL,
 	dis_code varchar(7) NOT NULL,
 	time_in TIME NOT NULL,
