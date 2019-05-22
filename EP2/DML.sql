@@ -369,35 +369,35 @@ INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Perfil Inovador 10', 'Perfil usado por usuarios que inovam');
 
 /* Servicos */
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0000, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0001, 'serv1()', 'primeiro serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0001, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0002, 'serv2()', 'segundo serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0002, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0003, 'serv3()', 'terceiro serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0003, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0004, 'serv4()', 'quarto serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0004, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0005, 'serv5()', 'quinto serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0005, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0006, 'serv6()', 'sexto serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0006, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0007, 'serv7()', 'setimo serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0007, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0008, 'serv8()', 'oitavo serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0008, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0009, 'serv9()', 'nono serviço');
 
-INSERT INTO b11_Servico (serv_code, serv_desc, serv_per_create, serv_per_read, serv_per_update, serv_per_delete)
-	VALUES (0009, 'Servico que permite tudo', true, true, true, true);
+INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
+	VALUES (0010, 'serv10()', 'decimo serviço');
 
 /* rel trilha modulo */
 INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
@@ -494,34 +494,34 @@ INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_
 
 /* rel perfil servico */
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 1', 0000);
+	VALUES ('Perfil Inovador 1', 0001);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 2', 0001);
+	VALUES ('Perfil Inovador 2', 0002);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 3', 0002);
+	VALUES ('Perfil Inovador 3', 0003);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 4', 0003);
+	VALUES ('Perfil Inovador 4', 0004);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 5', 0004);
+	VALUES ('Perfil Inovador 5', 0005);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 6', 0005);
+	VALUES ('Perfil Inovador 6', 0006);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 7', 0006);
+	VALUES ('Perfil Inovador 7', 0007);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 8', 0007);
+	VALUES ('Perfil Inovador 8', 0008);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 9', 0008);
+	VALUES ('Perfil Inovador 9', 0009);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 10', 0009);
+	VALUES ('Perfil Inovador 10', 0010);
 
 /* rel prof disciplina */
 INSERT INTO  b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
@@ -740,64 +740,34 @@ INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_
 INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
 	VALUES ('10', 'MAC0109', '20', 0.0, 0.0);
 
-/* tabelas de serviços */
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0000, 'b02_Professor');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0001, 'b02_Professor');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0002, 'b02_Professor');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0003, 'b02_Professor');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0004, 'b03_Aluno');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0005, 'b03_Aluno');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0006, 'b03_Aluno');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0007, 'b04_Administrador');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0008, 'b04_Administrador');
-
-INSERT INTO  b23_serv_tables (serv_code, serv_table)
-	VALUES (0009, 'b04_Administrador');
 
 /* horarios do oferecimento */
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('1', 'MAC0100', '01:02:03', '05:02:03', 2);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('2', 'MAC0101', '01:02:03', '05:02:03', 3);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('3', 'MAC0102', '01:02:03', '05:02:03', 4);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('4', 'MAC0103', '01:02:03', '05:02:03', 5);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('5', 'MAC0104', '01:02:03', '05:02:03', 6);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('6', 'MAC0105', '01:02:03', '05:02:03', 7);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('7', 'MAC0106', '01:02:03', '05:02:03', 1);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('8', 'MAC0107', '01:02:03', '05:02:03', 2);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('9', 'MAC0108', '01:02:03', '05:02:03', 3);
 
-INSERT INTO  b24_of_times (prof_nusp, dis_code, time_in, time_out, day)
+INSERT INTO  b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
 	VALUES ('10', 'MAC0109', '01:02:03', '05:02:03', 4);
