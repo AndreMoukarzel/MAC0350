@@ -30,6 +30,30 @@ def print_function(table, id, col, types)
 	print "COMMIT;\n\n"
 end
 
+def select_function(table, id, col, types)
+	if id == nil then id = "FIX" end
+	func_name = table.slice(/(b\d\d_)?(\w+)/,1)
+	primary_key = col.shift
+	primary_key_type = types.shift
+	col.each_with_index do |x,i|
+		print "BEGIN;\n"
+		print "CREATE OR REPLACE FUNCTION select_#{func_name}#{x}(prim_key #{primary_key_type})\n" 
+		print "RETURNS #{types[i]} AS\n" 
+		print "$$\n"
+		print "DECLARE\n" 
+		print "value #{types[i]};\n" 
+		print "BEGIN\n" 
+		print "\tSELECT #{x} INTO value\n" 
+		print "\tFROM #{table}\n"
+		print "\tWHERE #{primary_key} = $1;\n"
+		print "\tRETURN value;\n"
+	 	print "END;\n"
+		print "$$\n"
+		print "LANGUAGE plpgsql;\n"
+		print "COMMIT;\n\n"
+	end
+end
+
 def main()
 	ddl = File.read("DDL.sql")
 	ddl.gsub! "\n", " "
@@ -57,7 +81,7 @@ def main()
 				col_type.append(ttype)
 			end
 		end
-		print_function(table_name, id, col, col_type)
+		select_function(table_name, id, col, col_type)
 	end
 end
 
