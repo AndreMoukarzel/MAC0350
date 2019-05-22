@@ -679,34 +679,34 @@ INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_
 	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão10'), '10_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 /* Oferecimento */
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('1', 'MAC0100', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('2', 'MAC0101', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('3', 'MAC0102', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('4', 'MAC0103', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('5', 'MAC0104', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('6', 'MAC0105', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('7', 'MAC0106', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('8', 'MAC0107', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('9', 'MAC0108', 2019, 1, 45);
 
-INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ('10', 'MAC0109', 2019, 1, 45);
 
 /* rel aluno oferecimento */

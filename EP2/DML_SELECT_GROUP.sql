@@ -447,13 +447,13 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION select_b21_rel_rel_oferecimento_year(prim_key varchar(9), sec_key varchar(7))
+CREATE OR REPLACE FUNCTION select_b21_rel_oferecimento_year(prim_key varchar(9), sec_key varchar(7))
 RETURNS integer AS
 $$
 DECLARE
 value integer;
 BEGIN
-	SELECT rel_rel_oferecimento_year INTO value
+	SELECT rel_oferecimento_year INTO value
 	FROM b21_Oferecimento
 	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2;
 	RETURN value;

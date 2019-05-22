@@ -274,7 +274,7 @@ CREATE TABLE b20_rel_pes_us (
 CREATE TABLE b21_Oferecimento (
 	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
-	rel_rel_oferecimento_year integer,
+	rel_oferecimento_year integer,
 	rel_oferecimento_semester integer,
 	rel_oferecimento_class integer,
 	CONSTRAINT pk_oferecimento PRIMARY KEY (rel_prof_nusp, rel_dis_code),

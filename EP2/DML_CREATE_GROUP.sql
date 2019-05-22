@@ -347,7 +347,7 @@ $$
 DECLARE
 id prof_dis_key; /*mesmos valores*/
 BEGIN
-	INSERT INTO b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
+	INSERT INTO b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ($1, $2, $3, $4, $5)
 	RETURNING rel_prof_nusp, rel_dis_code into id.
 	RETURN id;

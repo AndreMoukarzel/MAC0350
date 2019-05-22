@@ -975,7 +975,7 @@ DECLARE
 id prof_dis_key;
 BEGIN
 	UPDATE b21_Oferecimento
-	SET rel_rel_oferecimento_year = new
+	SET rel_oferecimento_year = new
 	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
 	RETURNING rel_prof_nusp, rel_dis_code into id;
 	RETURN id;
