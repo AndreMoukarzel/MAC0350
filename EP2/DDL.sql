@@ -55,7 +55,7 @@ CREATE TABLE b03_Aluno (
 CREATE TABLE b04_Administrador (
 	adm_id SERIAL,
 	adm_cpf varchar(11),
-	adm_email varchar(40) NOT NULL,
+	adm_email email NOT NULL,
 	adm_dat_in TIMESTAMP NOT NULL,
 	adm_dat_out TIMESTAMP,
 	CONSTRAINT pk_administrador PRIMARY KEY (adm_id),

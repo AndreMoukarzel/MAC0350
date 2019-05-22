@@ -47,7 +47,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION create_Administrador(arg0 varchar(11), arg1 varchar(40), arg2 TIMESTAMP, arg3 TIMESTAMP)
+CREATE OR REPLACE FUNCTION create_Administrador(arg0 varchar(11), arg1 email, arg2 TIMESTAMP, arg3 TIMESTAMP)
 RETURNS int AS
 $$
 DECLARE

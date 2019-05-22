@@ -153,34 +153,34 @@ INSERT INTO b03_Aluno (al_nusp, al_cpf)
 
 /* Insercao em Administrador */
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai21'), '21email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai21'), '21email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai22'), '22email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai22'), '22email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai23'), '23email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai23'), '23email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai24'), '24email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai24'), '24email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai25'), '25email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai25'), '25email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai26'), '26email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai26'), '26email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai27'), '27email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai27'), '27email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai28'), '28email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai28'), '28email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai29'), '29email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai29'), '29email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai30'), '30email@gmail', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Mai30'), '30email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
 
 /* Disciplinas */
 INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
@@ -215,34 +215,34 @@ INSERT INTO b05_Disciplina (dis_name, dis_code, dis_class_creds, dis_work_creds)
 
 /* Curso */
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (0, 'Bacharelado Generico 0', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '21email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (0, 'Bacharelado Generico 0', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '21email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (1, 'Bacharelado Generico 1', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '22email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (1, 'Bacharelado Generico 1', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '22email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (2, 'Bacharelado Generico 2', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '23email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (2, 'Bacharelado Generico 2', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '23email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (3, 'Bacharelado Generico 3', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '24email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (3, 'Bacharelado Generico 3', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '24email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (4, 'Bacharelado Generico 4', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '25email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (4, 'Bacharelado Generico 4', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '25email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (5, 'Bacharelado Generico 5', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '26email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (5, 'Bacharelado Generico 5', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '26email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (6, 'Bacharelado Generico 6', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '27email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (6, 'Bacharelado Generico 6', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '27email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (7, 'Bacharelado Generico 7', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '28email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (7, 'Bacharelado Generico 7', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '28email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (8, 'Bacharelado Generico 8', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '29email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (8, 'Bacharelado Generico 8', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '29email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 INSERT INTO b06_Curso (cur_code, cur_name, adm_cpf, ad_cur_date_in, ad_cur_date_out)
-	VALUES (9, 'Bacharelado Generico 9', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '30email@gmail'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
+	VALUES (9, 'Bacharelado Generico 9', (SELECT adm_cpf FROM b04_Administrador WHERE adm_email = '30email@gmail.com'), '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 
 /* Trilha */
 INSERT INTO b07_Trilha (tr_name)

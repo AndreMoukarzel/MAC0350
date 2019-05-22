@@ -48,10 +48,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION select_b04_adm_email(prim_key varchar(11))
-RETURNS varchar(40) AS
+RETURNS email AS
 $$
 DECLARE
-value varchar(40);
+value email;
 BEGIN
 	SELECT adm_email INTO value
 	FROM b04_Administrador
