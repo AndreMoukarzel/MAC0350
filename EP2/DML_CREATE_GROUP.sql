@@ -62,6 +62,91 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/*
+Funções create_new_Cargo:
+Criam tanto a pessoa (se precisar) quanto a especialização
+*/
+
+BEGIN;
+CREATE OR REPLACE FUNCTION create_new_Professor(cpf varchar(11), nome varchar(200), nusp varchar(9))
+RETURNS int AS
+$$
+DECLARE
+id int;
+BEGIN
+	SELECT pes_id INTO id 
+	FROM b01_Pessoa
+	WHERE pes_cpf = $1 AND pes_name = $2;
+
+	/* FOUND diz se o query acima retornou algo*/
+	IF NOT FOUND THEN
+		INSERT INTO b01_Pessoa (pes_cpf, pes_name)
+		VALUES ($1, $2);
+	END IF;
+
+	INSERT INTO b02_Professor (prof_nusp, prof_cpf)
+	VALUES ($3, $1)
+	RETURNING prof_id into id;
+
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION create_new_Aluno(cpf varchar(11), nome varchar(200), nusp varchar(9))
+RETURNS int AS
+$$
+DECLARE
+id int;
+BEGIN
+	SELECT pes_id INTO id 
+	FROM b01_Pessoa
+	WHERE pes_cpf = $1 AND pes_name = $2;
+
+	/* FOUND diz se o query acima retornou algo*/
+	IF NOT FOUND THEN
+		INSERT INTO b01_Pessoa (pes_cpf, pes_name)
+		VALUES ($1, $2);
+	END IF;
+
+	INSERT INTO b03_Aluno (al_nusp, al_cpf)
+	VALUES ($3, $1)
+	RETURNING al_id into id;
+
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION create_new_Admin(cpf varchar(11), nome varchar(200), email email, dat_in TIMESTAMP, dat_out TIMESTAMP)
+RETURNS int AS
+$$
+DECLARE
+id int;
+BEGIN
+	SELECT pes_id INTO id 
+	FROM b01_Pessoa
+	WHERE pes_cpf = $1 AND pes_name = $2;
+
+	/* FOUND diz se o query acima retornou algo*/
+	IF NOT FOUND THEN
+		INSERT INTO b01_Pessoa (pes_cpf, pes_name)
+		VALUES ($1, $2);
+	END IF;
+
+	INSERT INTO b04_Administrador (adm_cpf, adm_email, adm_dat_in, adm_dat_out)
+	VALUES ($1, $3, $4, $5)
+	RETURNING adm_id into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 BEGIN;
 CREATE OR REPLACE FUNCTION create_Disciplina(arg0 varchar(7), arg1 varchar(80), arg2 integer, arg3 integer)
 RETURNS int AS
