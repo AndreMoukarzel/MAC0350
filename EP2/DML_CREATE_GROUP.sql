@@ -122,7 +122,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION create_new_Admin(cpf varchar(11), nome varchar(200), email email, dat_in TIMESTAMP, dat_out TIMESTAMP)
+CREATE OR REPLACE FUNCTION create_new_Administrador(cpf varchar(11), nome varchar(200), email email, dat_in TIMESTAMP, dat_out TIMESTAMP)
 RETURNS int AS
 $$
 DECLARE
