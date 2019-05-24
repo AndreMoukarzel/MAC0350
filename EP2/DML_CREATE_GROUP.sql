@@ -464,18 +464,18 @@ LANGUAGE plpgsql;
 COMMIT;
 
 DROP TYPE IF EXISTS of_times_key CASCADE;
-CREATE TYPE of_times_key AS (c1 varchar(9), c2 varchar(7), c3 TIME, c4 integer);
+CREATE TYPE of_times_key AS (c1 varchar(9), c2 varchar(7), c3 integer, c4 integer, c5 TIME, c6 integer);
 
 BEGIN;
-CREATE OR REPLACE FUNCTION create_of_times(arg0 varchar(9), arg1 varchar(7), arg2 TIME, arg3 TIME, arg4 integer)
+CREATE OR REPLACE FUNCTION create_of_times(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer, arg4 TIME, arg5 TIME, arg6 integer)
 RETURNS of_times_key AS
 $$
 DECLARE
 id of_times_key;
 BEGIN
-	INSERT INTO b23_of_times (prof_nusp, dis_code, time_in, time_out, day)
-	VALUES ($1, $2, $3, $4, $5)
-	RETURNING prof_nusp, dis_code, time_in, day into id;
+	INSERT INTO b23_of_times (prof_nusp, dis_code, year, semester, time_in, time_out, day)
+	VALUES ($1, $2, $3, $4, $5, $6, $7)
+	RETURNING prof_nusp, dis_code, year, semester, time_in, day into id;
 	RETURN id;
 END;
 $$

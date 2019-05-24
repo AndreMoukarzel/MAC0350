@@ -463,7 +463,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION select_b22_rel_al_of_presence(prim_key varchar(9), sec_key varchar(7), tec_key varchar(9))
+CREATE OR REPLACE FUNCTION select_b22_rel_al_of_presence(prim_key varchar(9), sec_key varchar(7), tec_key varchar(9), qua_key integer, pen_key integer)
 RETURNS float(24) AS
 $$
 DECLARE
@@ -471,7 +471,7 @@ value float(24);
 BEGIN
 	SELECT rel_al_of_presence INTO value
 	FROM b22_rel_al_of
-	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2 AND rel_al_nusp = $3;
+	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2 AND rel_al_nusp = $3 AND rel_al_of_year = $4 AND rel_al_of_semester = $5;
 	RETURN value;
 END;
 $$
@@ -479,7 +479,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION select_b23_time_out(prim_key varchar(9), sec_key varchar(7), tec_key TIME, qua_key integer)
+CREATE OR REPLACE FUNCTION select_b23_time_out(prim_key varchar(9), sec_key varchar(7), tec_key integer, qua_key integer, pen_key TIME, sex_key integer)
 RETURNS TIME AS
 $$
 DECLARE
@@ -487,7 +487,7 @@ value TIME;
 BEGIN
 	SELECT time_out INTO value
 	FROM b23_of_times
-	WHERE prof_nusp = $1 AND dis_code = $2 AND time_in = $3 AND day = $4;
+	WHERE prof_nusp = $1 AND dis_code = $2 AND rel_al_of_year = $3 AND rel_al_of_semester = $4 AND time_in = $5 AND day = $6;
 	RETURN value;
 END;
 $$

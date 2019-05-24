@@ -274,8 +274,8 @@ CREATE TABLE b20_rel_pes_us (
 CREATE TABLE b21_Oferecimento (
 	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
-	rel_oferecimento_year integer,
-	rel_oferecimento_semester integer,
+	rel_oferecimento_year integer NOT NULL,
+	rel_oferecimento_semester integer NOT NULL,
 	rel_oferecimento_class integer,
 	CONSTRAINT pk_oferecimento PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester),
 	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
@@ -292,9 +292,11 @@ CREATE TABLE b22_rel_al_of (
 	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
 	rel_al_nusp varchar(9) NOT NULL,
+	rel_al_of_year integer NOT NULL,
+	rel_al_of_semester integer NOT NULL,
 	rel_al_of_grade float(24),
 	rel_al_of_presence float(24),
-	CONSTRAINT pk_rel_al_of PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_al_nusp),
+	CONSTRAINT pk_rel_al_of PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester),
 	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
@@ -312,10 +314,12 @@ CREATE TABLE b22_rel_al_of (
 CREATE TABLE b23_of_times (
 	prof_nusp varchar(9) NOT NULL,
 	dis_code varchar(7) NOT NULL,
+	year integer NOT NULL,
+	semester integer NOT NULL,
 	time_in TIME NOT NULL,
 	time_out TIME NOT NULL,
 	day integer,
-	CONSTRAINT pk_of_times PRIMARY KEY (prof_nusp, dis_code, time_in, day),
+	CONSTRAINT pk_of_times PRIMARY KEY (prof_nusp, dis_code, year, semester, time_in, day),
 	CONSTRAINT fk_prof FOREIGN KEY (prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE

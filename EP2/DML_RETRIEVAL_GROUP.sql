@@ -1,4 +1,20 @@
-/* Selectiona todos os professores que oferecem materia nesse ano e semestre*/
+/* FUNÇÃO BASE
+BEGIN;
+CREATE OR REPLACE FUNCTION func()
+RETURNS TABLE() AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT 
+		FROM 
+		WHERE;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+*/
+
+/* Selectiona todos os professores e disciplinas oferecidas nesse ano e semestre*/
 BEGIN;
 CREATE OR REPLACE FUNCTION working_profs(semestre integer, ano integer)
 RETURNS TABLE(Nome varchar(11), Nusp varchar(9), Disc_Code varchar(7), Disciplina varchar(80)) AS
@@ -11,6 +27,21 @@ BEGIN
 		INNER JOIN b21_oferecimento on prof_nusp = rel_prof_nusp 
 		INNER JOIN b05_disciplina on rel_dis_code = dis_code
 		WHERE rel_oferecimento_semester = $1 and rel_oferecimento_year = $2;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+/* Selectiona todos os alunos de determinado oferecimento */
+BEGIN;
+CREATE OR REPLACE FUNCTION func()
+RETURNS TABLE() AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT 
+		FROM 
+		WHERE;
 END;
 $$
 LANGUAGE plpgsql;
