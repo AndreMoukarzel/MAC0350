@@ -934,7 +934,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Oferecimento_prof_nusp(key1 varchar(9), key2 varchar(7), new varchar(9))
+CREATE OR REPLACE FUNCTION update_Oferecimento_prof_nusp(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new varchar(9))
 RETURNS prof_dis_key AS
 $$
 DECLARE
@@ -942,8 +942,8 @@ id prof_dis_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_prof_nusp = new
-	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
-	RETURNING rel_prof_nusp, rel_dis_code into id;
+	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_oferecimento_year = key3 AND rel_oferecimento_semester = key4
+	RETURNING rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester into id;
 	RETURN id;
 END;
 $$
@@ -951,7 +951,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Oferecimento_dis_code(key1 varchar(9), key2 varchar(7), new varchar(7))
+CREATE OR REPLACE FUNCTION update_Oferecimento_dis_code(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new varchar(7))
 RETURNS prof_dis_key AS
 $$
 DECLARE
@@ -959,8 +959,8 @@ id prof_dis_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_dis_code = new
-	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
-	RETURNING rel_prof_nusp, rel_dis_code into id;
+	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_oferecimento_year = key3 AND rel_oferecimento_semester = key4
+	RETURNING rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester into id;
 	RETURN id;
 END;
 $$
@@ -968,7 +968,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Oferecimento_year(key1 varchar(9), key2 varchar(7), new integer)
+CREATE OR REPLACE FUNCTION update_Oferecimento_year(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new integer)
 RETURNS prof_dis_key AS
 $$
 DECLARE
@@ -976,8 +976,8 @@ id prof_dis_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_oferecimento_year = new
-	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
-	RETURNING rel_prof_nusp, rel_dis_code into id;
+	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_oferecimento_year = key3 AND rel_oferecimento_semester = key4
+	RETURNING rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester into id;
 	RETURN id;
 END;
 $$
@@ -985,7 +985,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Oferecimento_semester(key1 varchar(9), key2 varchar(7), new integer)
+CREATE OR REPLACE FUNCTION update_Oferecimento_semester(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new integer)
 RETURNS prof_dis_key AS
 $$
 DECLARE
@@ -993,8 +993,8 @@ id prof_dis_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_oferecimento_semester = new
-	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
-	RETURNING rel_prof_nusp, rel_dis_code into id;
+	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_oferecimento_year = key3 AND rel_oferecimento_semester = key4
+	RETURNING rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester into id;
 	RETURN id;
 END;
 $$
@@ -1002,7 +1002,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Oferecimento_class(key1 varchar(9), key2 varchar(7), new integer)
+CREATE OR REPLACE FUNCTION update_Oferecimento_class(key1 varchar(9), key2 varchar(7), key3 int, key4 int,  new integer)
 RETURNS prof_dis_key AS
 $$
 DECLARE
@@ -1010,8 +1010,8 @@ id prof_dis_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_oferecimento_class = new
-	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
-	RETURNING rel_prof_nusp, rel_dis_code into id;
+	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_oferecimento_year = key3 AND rel_oferecimento_semester = key4
+	RETURNING rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester into id;
 	RETURN id;
 END;
 $$
