@@ -361,7 +361,7 @@ id prof_dis_key; /* mesmos valores*/
 BEGIN
 	INSERT INTO b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
 	VALUES ($1, $2, $3, $4)
-	RETURNING rel_al_nusp, rel_dis_code into id.
+	RETURNING rel_al_nusp, rel_dis_code into id;
 	RETURN id;
 END;
 $$
@@ -380,7 +380,7 @@ id dis_mod_key;
 BEGIN
 	INSERT INTO b18_rel_dis_mod (rel_dis_code, rel_mod_code)
 	VALUES ($1, $2)
-	RETURNING rel_dis_code, rel_mod_code into id.
+	RETURNING rel_dis_code, rel_mod_code into id;
 	RETURN id;
 END;
 $$
@@ -399,7 +399,7 @@ id mod_cur_key;
 BEGIN
 	INSERT INTO b19_rel_mod_cur (rel_mod_code, rel_cur_code)
 	VALUES ($1, $2)
-	RETURNING rel_mod_code, rel_cur_code into id.
+	RETURNING rel_mod_code, rel_cur_code into id;
 	RETURN id;
 END;
 $$
@@ -418,12 +418,15 @@ id pes_us_key;
 BEGIN
 	INSERT INTO b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
 	VALUES ($1, $2, $3, $4)
-	RETURNING rel_pes_cpf, rel_us_email into id.
+	RETURNING rel_pes_cpf, rel_us_email into id;
 	RETURN id;
 END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
+
+DROP TYPE IF EXISTS al_of_key CASCADE;
+CREATE TYPE of_key AS (c1 varchar(9), c2 varchar(7), c3 integer, c4 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_Oferecimento(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer, arg4 integer)
@@ -434,7 +437,7 @@ id prof_dis_key; /*mesmos valores*/
 BEGIN
 	INSERT INTO b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ($1, $2, $3, $4, $5)
-	RETURNING rel_prof_nusp, rel_dis_code into id.
+	RETURNING rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester into id;
 	RETURN id;
 END;
 $$

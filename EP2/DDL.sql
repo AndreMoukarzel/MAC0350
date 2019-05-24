@@ -277,7 +277,7 @@ CREATE TABLE b21_Oferecimento (
 	rel_oferecimento_year integer,
 	rel_oferecimento_semester integer,
 	rel_oferecimento_class integer,
-	CONSTRAINT pk_oferecimento PRIMARY KEY (rel_prof_nusp, rel_dis_code),
+	CONSTRAINT pk_oferecimento PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester),
 	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
