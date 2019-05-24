@@ -431,55 +431,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION select_b21_rel_dis_code(prim_key varchar(9))
-RETURNS varchar(7) AS
-$$
-DECLARE
-value varchar(7);
-BEGIN
-	SELECT rel_dis_code INTO value
-	FROM b21_Oferecimento
-	WHERE rel_prof_nusp = $1;
-	RETURN value;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
-CREATE OR REPLACE FUNCTION select_b21_rel_oferecimento_year(prim_key varchar(9), sec_key varchar(7))
-RETURNS integer AS
-$$
-DECLARE
-value integer;
-BEGIN
-	SELECT rel_oferecimento_year INTO value
-	FROM b21_Oferecimento
-	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2;
-	RETURN value;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
-CREATE OR REPLACE FUNCTION select_b21_rel_oferecimento_semester(prim_key varchar(9), sec_key varchar(7))
-RETURNS integer AS
-$$
-DECLARE
-value integer;
-BEGIN
-	SELECT rel_oferecimento_semester INTO value
-	FROM b21_Oferecimento
-	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2;
-	RETURN value;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
-CREATE OR REPLACE FUNCTION select_b21_rel_oferecimento_class(prim_key varchar(9), sec_key varchar(7))
+CREATE OR REPLACE FUNCTION select_b21_rel_oferecimento_class(prim_key varchar(9), sec_key varchar(7), tec_key integer, qua_key integer)
 RETURNS integer AS
 $$
 DECLARE
@@ -487,7 +439,7 @@ value integer;
 BEGIN
 	SELECT rel_oferecimento_class INTO value
 	FROM b21_Oferecimento
-	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2;
+	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2 AND rel_oferecimento_year = $3 AND rel_oferecimento_semester = $4;
 	RETURN value;
 END;
 $$
