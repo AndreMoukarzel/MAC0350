@@ -370,34 +370,34 @@ INSERT INTO b10_Perfil (perf_name, perf_desc)
 
 /* Servicos */
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0001, 'serv1()', 'primeiro serviço');
+	VALUES (0001, 'create_Pessoa()', 'cria uma pessoa');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0002, 'serv2()', 'segundo serviço');
+	VALUES (0002, 'create_Professor()', 'cria um professor');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0003, 'serv3()', 'terceiro serviço');
+	VALUES (0003, 'create_Aluno()', 'cria um aluno');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0004, 'serv4()', 'quarto serviço');
+	VALUES (0004, 'create_Administrador()', 'cria um administrador');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0005, 'serv5()', 'quinto serviço');
+	VALUES (0005, 'create_new_Professor()', 'cria um professor e, se necessário, a pessoa correspondente');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0006, 'serv6()', 'sexto serviço');
+	VALUES (0006, 'create_new_Aluno()', 'cria um aluno e, se necessário, a pessoa correspondente');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0007, 'serv7()', 'setimo serviço');
+	VALUES (0007, 'create_new_Administrador()', 'cria um administrador e, se necessário, a pessoa correspondente');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0008, 'serv8()', 'oitavo serviço');
+	VALUES (0008, 'create_Disciplina()', 'cria uma disciplina');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0009, 'serv9()', 'nono serviço');
+	VALUES (0009, 'create_Curso()', 'cria um novo curso');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0010, 'serv10()', 'decimo serviço');
+	VALUES (0010, 'create_Trilha()', 'cria trilha');
 
 /* rel trilha modulo */
 INSERT INTO b12_rel_tr_mod (rel_tr_name, rel_mod_code, rel_tr_mod_mandatory)
