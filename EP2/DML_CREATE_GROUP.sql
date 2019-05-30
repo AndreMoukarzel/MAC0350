@@ -430,10 +430,10 @@ CREATE TYPE of_key AS (c1 varchar(9), c2 varchar(7), c3 integer, c4 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_Oferecimento(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer, arg4 integer)
-RETURNS prof_dis_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id prof_dis_key; /*mesmos valores*/
+id of_key;
 BEGIN
 	INSERT INTO b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester, rel_oferecimento_class)
 	VALUES ($1, $2, $3, $4, $5)

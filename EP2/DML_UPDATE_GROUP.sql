@@ -935,10 +935,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Oferecimento_prof_nusp(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new varchar(9))
-RETURNS prof_dis_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id prof_dis_key;
+id of_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_prof_nusp = new
@@ -952,10 +952,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Oferecimento_dis_code(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new varchar(7))
-RETURNS prof_dis_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id prof_dis_key;
+id of_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_dis_code = new
@@ -969,10 +969,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Oferecimento_year(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new integer)
-RETURNS prof_dis_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id prof_dis_key;
+id of_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_oferecimento_year = new
@@ -986,10 +986,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Oferecimento_semester(key1 varchar(9), key2 varchar(7), key3 int, key4 int, new integer)
-RETURNS prof_dis_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id prof_dis_key;
+id of_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_oferecimento_semester = new
@@ -1003,10 +1003,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Oferecimento_class(key1 varchar(9), key2 varchar(7), key3 int, key4 int,  new integer)
-RETURNS prof_dis_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id prof_dis_key;
+id of_key;
 BEGIN
 	UPDATE b21_Oferecimento
 	SET rel_oferecimento_class = new
