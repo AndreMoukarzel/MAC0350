@@ -479,6 +479,40 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são o código de um curso */
+/* Retorna todos os módulos desse curso */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Modulos_from_Curso(codigo integer)
+RETURNS TABLE(Codigo integer, Nome_modulo varchar(60), Creditos_Minimos integer)
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b08.mod_code, b08.mod_name, b08.mod_cred_min
+		FROM b08_Modulo as b08
+		INNER JOIN b19_rel_mod_cur as b19 ON b19.rel_mod_code = b08.mod_code
+		WHERE rel_cur_code = $1
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+/* Os argumentos são o codigo de um módulo */
+/* Retorna todos os cursos que contêm esse módulo */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Cursos_with_Modulo(codigo integer)
+RETURNS TABLE(Codigo integer, Nome_curso varchar(60))
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b06.cur_code, b06.cur_name
+		FROM b06_Curso as b06
+		INNER JOIN b19_rel_mod_cur as b19 ON b19.rel_cur_code = b06.cur_code
+		WHERE rel_mod_code = $1
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 /* Os argumentos são a chave de um Disciplina */
 /* Retorna as Disciplinas que são requisito da Disciplina referida */
 BEGIN;
