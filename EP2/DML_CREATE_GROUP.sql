@@ -481,3 +481,22 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
+
+DROP TYPE IF EXISTS rel_dis_dis_key CASCADE;
+CREATE TYPE rel_dis_dis_key AS (c1 varchar(7), c2 varchar(7));
+
+BEGIN;
+CREATE OR REPLACE FUNCTION create_rel_dis_dis(arg0 varchar(7), arg1 varchar(7))
+RETURNS rel_dis_dis_key AS
+$$
+DECLARE
+id rel_dis_dis_key;
+BEGIN
+	INSERT INTO b24_rel_dis_dis (dis_code, dis_req_code)
+	VALUES ($1, $2)
+	RETURNING dis_code, dis_req_code into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
