@@ -385,11 +385,26 @@ BEGIN
 	RETURN QUERY
 		SELECT b05.dis_name, b01.pes_name
 		FROM b22_rel_al_of as b22
-		INNER JOIN b05_Disciplina as b05 ON b22.dis_code = b05.dis_code
-		INNER JOIN b21_Oferecimento as b21 ON b21.dis_code = b22.dis_code
-		INNER JOIN b02_Professor as b02 ON b22.prof_nusp = b02.prof_nusp
+		INNER JOIN b05_Disciplina as b05 ON b22.rel_dis_code = b05.dis_code
+		INNER JOIN b21_Oferecimento as b21 ON b21.rel_dis_code = b22.rel_dis_code
+		INNER JOIN b02_Professor as b02 ON b22.rel_prof_nusp = b02.prof_nusp
 		INNER JOIN b01_Pessoa as b01 ON b02.prof_cpf = b01.pes_cpf
 		WHERE  al_nusp = $1 AND rel_oferecimento_year = $2 AND rel_oferecimento_semester = $3
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Disciplinas(nusp varchar(9), ano integer, semestre integer)
+RETURNS TABLE(Nome_disciplina varchar(80), creditos_aula integer, creditos_trabalho integer)
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b05.dis_name, b05.dis_class_creds, b05.dis_work_creds
+		FROM b05_Disciplina as b05
+		INNER JOIN b17_rel_al_dis as b17 ON b05.dis_code = b17.rel_dis_code
+		WHERE rel_al_nusp = $1 AND plan_year = $2 AND plan_semester = $3
 END;
 $$
 LANGUAGE plpgsql;
