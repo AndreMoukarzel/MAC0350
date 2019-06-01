@@ -262,6 +262,66 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Dada uma pessoa, retorna o usuario dela */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_user(cpf varchar(11))
+RETURNS TABLE(Email email) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT us_email
+		FROM b20_rel_pes_us
+		INNER JOIN users ON rel_us_email = us_email
+		WHERE rel_pes_cpf = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+/* Dada um usuario, retorna a info da pessoa */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_pes(mail email)
+RETURNS TABLE(CPF varchar(11), Nome varchar(200)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT pes_cpf, pes_name
+		FROM b20_rel_pes_us
+		INNER JOIN b01_Pessoa ON rel_pes_cpf = pes_cpf
+		WHERE rel_us_email = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION get_admin(cur_code integer)
+RETURNS TABLE(CPF varchar(11), Email email) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b04.adm_cpf, b04.adm_email
+		FROM b04_Administrador as b04
+		INNER JOIN b06_Curso as b06 ON b04.adm_cpf = b06.adm_cpf
+		WHERE b06.cur_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Curso(cpf varchar(11))
+RETURNS TABLE(Codigo integer, Nome varchar(60)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b06.cur_code, b06.cur_name
+		FROM b06_Curso as b06
+		WHERE adm_cpf = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
