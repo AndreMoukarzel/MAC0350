@@ -230,6 +230,22 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Retorna todos os serviços de um perfil */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_servs(name varchar(20))
+RETURNS TABLE(Nome varchar(50), Descricao varchar(280)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT serv_name, serv_desc
+		FROM b15_rel_pf_se
+		INNER JOIN b11_Servico ON rel_serv_code = serv_code
+		WHERE rel_perf_name = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
 RETURNS varchar(200) AS
