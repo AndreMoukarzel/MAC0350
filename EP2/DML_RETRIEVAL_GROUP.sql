@@ -426,6 +426,20 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
+CREATE OR REPLACE FUNCTION get_requisitos(code varchar(7))
+RETURNS TABLE(Requisitos varchar(7)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT dis_req_code
+		FROM b24_rel_dis_dis
+		WHERE dis_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
 RETURNS varchar(200) AS
 $$
