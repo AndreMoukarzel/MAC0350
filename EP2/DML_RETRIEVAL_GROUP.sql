@@ -446,6 +446,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um Modulo */
+/* Retorna as Trilhas relacionados a tal Modulo */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Trilha_from_modulo(mod integer)
 RETURNS TABLE(Nome varchar(80)) AS
@@ -460,6 +462,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de uma Trilha */
+/* Retorna os Modulos relacionados a tal Trilha */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Modulo(name varchar(80))
 RETURNS TABLE(Codigo integer, Nome varchar(40), Creditos_Minimos integer) AS
