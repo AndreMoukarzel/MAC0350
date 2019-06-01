@@ -14,7 +14,9 @@ LANGUAGE plpgsql;
 COMMIT;
 */
 
-/* Selectiona todos os professores e disciplinas oferecidas nesse ano e semestre*/
+/* Os argumentos são um ano e semestre */
+/* Retorna o nome e nusp de todos os professores lecionando neste ano e semestre, assim como o código e nome das disciplinas */
+/* que o respectivo professor lecionou em tal ano e semestre */
 BEGIN;
 CREATE OR REPLACE FUNCTION working_profs(semestre integer, ano integer)
 RETURNS TABLE(Nome varchar(11), Nusp varchar(9), Disc_Code varchar(7), Disciplina varchar(80)) AS
@@ -32,7 +34,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Selectiona todos os alunos de determinado oferecimento */
+/* Os argumentos são a chave do Oferecimento */
+/* Retorna todos os Alunos de determinado Oferecimento */
 BEGIN;
 CREATE OR REPLACE FUNCTION assigned_students(prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer)
 RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nome varchar(200), Nusp varchar(9)) AS
@@ -57,7 +60,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* nota de um aluno */
+/* Os argumentos são as chaves de um Aluno e Oferecimento */
+/* Retorna a nota do Aluno no Oferecimento especificado */
 BEGIN;
 CREATE OR REPLACE FUNCTION aluno_grade(al_nusp varchar(9), prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer)
 RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Nota float(24)) AS
@@ -76,7 +80,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* presença de um aluno */
+/* Os argumentos são as chaves de um Aluno e Oferecimento */
+/* Retorna o nusp e presença do Aluno no Oferecimento especificado, assim como o código e nome da Disciplina */
 BEGIN;
 CREATE OR REPLACE FUNCTION aluno_attendance(al_nusp varchar(9), prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer)
 RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Attendance float(24)) AS
@@ -95,7 +100,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* se um aluno passou */
+/* Os argumentos são as chaves de um Aluno e Oferecimento */
+/* Retorna verdadeiro caso o Aluno tenha tido nota maior ou igual a 5 e presença maior que 70%, e falso caso contrário */
 BEGIN;
 CREATE OR REPLACE FUNCTION aluno_aproved(al_nusp varchar(9), prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer)
 RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Aprovado boolean) AS
@@ -119,7 +125,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* todos alunos com nota maior que X */
+/* Os argumentos são a chave de um Oferecimento e um valor nota_min */
+/* Retorna o nusp nota do Aluno no Oferecimento especificado, assim como o código e nome da Disciplina */
 BEGIN;
 CREATE OR REPLACE FUNCTION aproved_students(prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer, nota_min float(24))
 RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Nota float(24)) AS
@@ -145,7 +152,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Verifica quais trilhas foram completadas */
+/* Os argumentos são a chave de um Aluno */
+/* Retorna as trilhas completadas pelo Aluno */
 BEGIN;
 CREATE OR REPLACE FUNCTION check_trilhas(al_nusp varchar(9))
 RETURNS TABLE(Trilha varchar(80), Completa boolean) AS
@@ -198,7 +206,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Verifica se um aluno pode fazer determinada materia */
+/* Os argumentos são as chaves de um Aluno e Oferecimento */
+/* Retorna o código da Disciplina e se o Aluno cumpriu seus requerimentos (true) ou não (false) */
 BEGIN;
 CREATE OR REPLACE FUNCTION check_disc(al_nusp varchar(9), dis_code varchar(7))
 RETURNS TABLE(Disciplina varchar(7), Disponivel boolean) AS
@@ -230,7 +239,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Retorna todos os serviços de um perfil */
+/* Os argumentos são a chave de um Perfil */
+/* Retorna todos os nomes e descrições dos Serviços disponíveis ao Perfil */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_servs(name varchar(20))
 RETURNS TABLE(Nome varchar(50), Descricao varchar(280)) AS
@@ -246,7 +256,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Retorna todos os perfis de um user */
+/* Os argumentos são a chave de um Usuário */
+/* Retorna os nomes e descrições dos Perfis disponíveis ao Usuário */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_perfs(mail email)
 RETURNS TABLE(Nome varchar(20), Descricao varchar(100)) AS
