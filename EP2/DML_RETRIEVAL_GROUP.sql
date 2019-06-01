@@ -395,6 +395,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são as chaves de um Aluno, um ano e um semestre */
+/* Retorna o nome das disciplinas planejadas pelo tal Aluno no ano e semestre específicado, e os créditos que elas fornecem */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Disciplinas(nusp varchar(9), ano integer, semestre integer)
 RETURNS TABLE(Nome_disciplina varchar(80), creditos_aula integer, creditos_trabalho integer)
