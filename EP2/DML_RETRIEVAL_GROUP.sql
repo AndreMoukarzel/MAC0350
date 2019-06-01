@@ -396,6 +396,8 @@ LANGUAGE plpgsql;
 COMMIT;
 
 
+/* Os argumentos são a chave de uma Trilha */
+/* Retorna os Cursos relacionados a tal Trilha */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Curso_from_Trilha(tr varchar(80))
 RETURNS TABLE(Codigo integer, Nome varchar(60)) AS
@@ -411,6 +413,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um Curso */
+/* Retorna as Trilhas relacionados a tal Curso */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Trilha(curso integer)
 RETURNS TABLE(Nome varchar(80)) AS
