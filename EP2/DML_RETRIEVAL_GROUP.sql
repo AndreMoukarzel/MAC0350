@@ -324,7 +324,26 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um perfil */
+/* Retorna os usuários com tal perfil */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_users(perf_name varchar(20))
+RETURNS TABLE(Email email) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT us_email
+		FROM b14_rel_us_pf
+		INNER JOIN users ON rel_us_email = us_email
+		WHERE rel_perf_name = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
 
+
+/* Os argumentos são a chave de um Curso */
+/* Retorna os administradores que administram tal Curso */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_admin(cur_code integer)
 RETURNS TABLE(CPF varchar(11), Email email) AS
@@ -340,6 +359,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um Administrador */
+/* Retorna os Cursos administrados por tal Administrador */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Curso(cpf varchar(11))
 RETURNS TABLE(Codigo integer, Nome varchar(60)) AS
@@ -353,6 +374,27 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
+
+/* Os argumentos são as chaves de um Aluno, um ano e um semestre */
+/* Retorna o nome das disciplinas cursadas pelo tal Aluno no ano e semestre específicado, e o nome do professor que as lecionou */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Oferecimentos(nusp varchar(9), ano integer, semestre integer)
+RETURNS TABLE(Nome_disciplina varchar(80), Nome_professor varchar(200)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b05.dis_name, b01.pes_name
+		FROM b22_rel_al_of as b22
+		INNER JOIN b05_Disciplina as b05 ON b22.dis_code = b05.dis_code
+		INNER JOIN b21_Oferecimento as b21 ON b21.dis_code = b22.dis_code
+		INNER JOIN b02_Professor as b02 ON b22.prof_nusp = b02.prof_nusp
+		INNER JOIN b01_Pessoa as b01 ON b02.prof_cpf = b01.pes_cpf
+		WHERE  al_nusp = $1 AND rel_oferecimento_year = $2 AND rel_oferecimento_semester = $3
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Curso_from_Trilha(tr varchar(80))
