@@ -12,7 +12,7 @@ DROP TABLE b13_rel_tr_cur;
 DROP TABLE b12_rel_tr_mod;
 DROP TABLE b11_Servico;
 DROP TABLE b10_Perfil;
-DROP TABLE b09_Usuario;
+DROP TABLE users;
 DROP TABLE b08_Modulo;
 DROP TABLE b07_Trilha; 
 DROP TABLE b06_Curso;
