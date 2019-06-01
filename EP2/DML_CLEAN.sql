@@ -1,4 +1,5 @@
-DELETE FROM b23_of_times;  
+DELETE FROM b24_rel_dis_dis;
+DELETE FROM b23_of_times;
 DELETE FROM b22_rel_al_of;
 DELETE FROM b21_Oferecimento;
 DELETE FROM b20_rel_pes_us;

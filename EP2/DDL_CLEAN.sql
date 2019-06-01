@@ -1,3 +1,4 @@
+DROP TABLE b24_rel_dis_dis;  
 DROP TABLE b23_of_times;  
 DROP TABLE b22_rel_al_of;
 DROP TABLE b21_Oferecimento;

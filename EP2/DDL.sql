@@ -329,3 +329,17 @@ CREATE TABLE b23_of_times (
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
+
+CREATE TABLE b24_rel_dis_dis (
+	dis_code varchar(7) NOT NULL,
+	dis_req_code varchar(7) NOT NULL,
+	CONSTRAINT pk_rel_dis_dis PRIMARY KEY (dis_code, dis_req_code),
+	CONSTRAINT fk_dis FOREIGN KEY (dis_code)
+		REFERENCES b05_Disciplina(dis_code)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_req_dis FOREIGN KEY (dis_req_code)
+		REFERENCES b05_Disciplina(dis_code)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);

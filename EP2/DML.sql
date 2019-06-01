@@ -771,3 +771,13 @@ INSERT INTO  b23_of_times (prof_nusp, dis_code, year, semester, time_in, time_ou
 
 INSERT INTO  b23_of_times (prof_nusp, dis_code, year, semester, time_in, time_out, day)
 	VALUES ('10', 'MAC0109', 2019, 1, '01:02:03', '05:02:03', 4);
+
+/* Pre requisitos de matricula */
+INSERT INTO b24_rel_dis_dis (dis_code, dis_req_code)
+	VALUES ('MAC0102','MAC0100');
+
+INSERT INTO b24_rel_dis_dis (dis_code, dis_req_code)
+	VALUES ('MAC0102','MAC0101');
+
+INSERT INTO b24_rel_dis_dis (dis_code, dis_req_code)
+	VALUES ('MAC0109','MAC0108');
