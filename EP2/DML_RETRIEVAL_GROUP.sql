@@ -108,8 +108,8 @@ RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Apr
 $$
 BEGIN
 	RETURN QUERY
-		SELECT dis.dis_code, dis_name, al_nusp, 
-		CASE WHEN rel_al_of_grade >= 5 THEN true
+		SELECT dis.dis_code, dis_name, rel_al_nusp, 
+		CASE WHEN rel_al_of_grade >= 5 and rel_al_of_attendance >= 0.7 THEN true
 			ELSE false
 			END as aproved
 		FROM b22_rel_al_of
@@ -117,9 +117,7 @@ BEGIN
 		WHERE rel_al_nusp = $1 and rel_prof_nusp = $2 
 			and rel_dis_code = $3
 			and rel_al_of_semester = $4
-			and rel_al_of_year = $5
-			and rel_al_of_grade >= 5
-			and rel_al_of_attendance >= 0.7;
+			and rel_al_of_year = $5;
 END;
 $$
 LANGUAGE plpgsql;
@@ -389,7 +387,7 @@ BEGIN
 		INNER JOIN b21_Oferecimento as b21 ON b21.rel_dis_code = b22.rel_dis_code
 		INNER JOIN b02_Professor as b02 ON b22.rel_prof_nusp = b02.prof_nusp
 		INNER JOIN b01_Pessoa as b01 ON b02.prof_cpf = b01.pes_cpf
-		WHERE  al_nusp = $1 AND rel_oferecimento_year = $2 AND rel_oferecimento_semester = $3
+		WHERE rel_al_nusp = $1 AND rel_oferecimento_year = $2 AND rel_oferecimento_semester = $3;
 END;
 $$
 LANGUAGE plpgsql;
@@ -399,14 +397,14 @@ COMMIT;
 /* Retorna o nome das disciplinas planejadas pelo tal Aluno no ano e semestre específicado, e os créditos que elas fornecem */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Disciplinas(nusp varchar(9), ano integer, semestre integer)
-RETURNS TABLE(Nome_disciplina varchar(80), creditos_aula integer, creditos_trabalho integer)
+RETURNS TABLE(Nome_disciplina varchar(80), creditos_aula integer, creditos_trabalho integer) AS
 $$
 BEGIN
 	RETURN QUERY
 		SELECT b05.dis_name, b05.dis_class_creds, b05.dis_work_creds
 		FROM b05_Disciplina as b05
 		INNER JOIN b17_rel_al_dis as b17 ON b05.dis_code = b17.rel_dis_code
-		WHERE rel_al_nusp = $1 AND plan_year = $2 AND plan_semester = $3
+		WHERE rel_al_nusp = $1 AND plan_year = $2 AND plan_semester = $3;
 END;
 $$
 LANGUAGE plpgsql;
@@ -482,15 +480,15 @@ COMMIT;
 /* Os argumentos são o código de um curso */
 /* Retorna todos os módulos desse curso */
 BEGIN;
-CREATE OR REPLACE FUNCTION get_Modulos_from_Curso(codigo integer)
-RETURNS TABLE(Codigo integer, Nome_modulo varchar(60), Creditos_Minimos integer)
+CREATE OR REPLACE FUNCTION get_Modulos_from_Curso(codigo1 integer)
+RETURNS TABLE(Codigo integer, Nome_modulo varchar(60), Creditos_Minimos integer) AS
 $$
 BEGIN
 	RETURN QUERY
 		SELECT b08.mod_code, b08.mod_name, b08.mod_cred_min
 		FROM b08_Modulo as b08
 		INNER JOIN b19_rel_mod_cur as b19 ON b19.rel_mod_code = b08.mod_code
-		WHERE rel_cur_code = $1
+		WHERE rel_cur_code = $1;
 END;
 $$
 LANGUAGE plpgsql;
@@ -499,15 +497,15 @@ COMMIT;
 /* Os argumentos são o codigo de um módulo */
 /* Retorna todos os cursos que contêm esse módulo */
 BEGIN;
-CREATE OR REPLACE FUNCTION get_Cursos_with_Modulo(codigo integer)
-RETURNS TABLE(Codigo integer, Nome_curso varchar(60))
+CREATE OR REPLACE FUNCTION get_Cursos_with_Modulo(codigo2 integer)
+RETURNS TABLE(Codigo integer, Nome_curso varchar(60)) AS
 $$
 BEGIN
 	RETURN QUERY
 		SELECT b06.cur_code, b06.cur_name
 		FROM b06_Curso as b06
 		INNER JOIN b19_rel_mod_cur as b19 ON b19.rel_cur_code = b06.cur_code
-		WHERE rel_mod_code = $1
+		WHERE rel_mod_code = $1;
 END;
 $$
 LANGUAGE plpgsql;
@@ -539,7 +537,7 @@ $$
 BEGIN
 	RETURN QUERY
 		SELECT rel_dis_code
-		FROM b18_rel_tr_cur
+		FROM b18_rel_dis_mod
 		WHERE rel_mod_code = $1;
 END;
 $$
@@ -549,13 +547,13 @@ COMMIT;
 /* Os argumentos são a chave de uma Disciplina */
 /* Retorna os Modulos relacionados a tal Disciplina */
 BEGIN;
-CREATE OR REPLACE FUNCTION get_Disciplina(dis varchar(7))
+CREATE OR REPLACE FUNCTION get_Modulo_Disciplina(dis varchar(7))
 RETURNS TABLE(Codigo integer) AS
 $$
 BEGIN
 	RETURN QUERY
 		SELECT rel_mod_code
-		FROM b18_rel_tr_cur
+		FROM b18_rel_dis_mod
 		WHERE rel_dis_code = $1;
 END;
 $$
@@ -1011,7 +1009,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION select_b22_rel_al_of_grade(prim_key varchar(9), sec_key varchar(7), tec_key varchar(9))
+CREATE OR REPLACE FUNCTION select_b22_rel_al_of_grade(prim_key varchar(9), sec_key varchar(7), tec_key varchar(9), qua_key integer, pen_key integer)
 RETURNS float(24) AS
 $$
 DECLARE
@@ -1019,7 +1017,7 @@ value float(24);
 BEGIN
 	SELECT rel_al_of_grade INTO value
 	FROM b22_rel_al_of
-	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2 AND rel_al_nusp = $3;
+	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2 AND rel_al_nusp = $3 AND rel_al_of_year = $4 AND rel_al_of_semester = $5;
 	RETURN value;
 END;
 $$
@@ -1051,7 +1049,7 @@ value TIME;
 BEGIN
 	SELECT time_out INTO value
 	FROM b23_of_times
-	WHERE prof_nusp = $1 AND dis_code = $2 AND rel_al_of_year = $3 AND rel_al_of_semester = $4 AND time_in = $5 AND day = $6;
+	WHERE prof_nusp = $1 AND dis_code = $2 AND year = $3 AND semester = $4 AND time_in = $5 AND day = $6;
 	RETURN value;
 END;
 $$

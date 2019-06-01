@@ -720,7 +720,7 @@ INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_
 	VALUES ('3', 'MAC0102', '13', 2019, 1, 0.0, 0.0);
 
 INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
-	VALUES ('4', 'MAC0103', '14', 2019, 1, 9.0, 0.0);
+	VALUES ('4', 'MAC0103', '14', 2019, 1, 9.0, 8.0);
 
 INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('5', 'MAC0104', '15', 2019, 1, 0.0, 0.0);
