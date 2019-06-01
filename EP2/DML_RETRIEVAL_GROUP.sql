@@ -324,6 +324,23 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um perfil */
+/* Retorna os usuários com tal perfil */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_users(perf_name varchar(20))
+RETURNS TABLE(Email email) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT us_email
+		FROM b14_rel_us_pf
+		INNER JOIN users ON rel_us_email = us_email
+		WHERE rel_perf_name = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 
 BEGIN;
 CREATE OR REPLACE FUNCTION get_admin(cur_code integer)
