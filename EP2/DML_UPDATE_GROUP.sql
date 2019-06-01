@@ -1189,7 +1189,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Disciplina_Disciplina_disc_code(key1 varchar(7), key2 varchar(7), new varchar(7))
+CREATE OR REPLACE FUNCTION update_Disciplina_Disciplina_dis_code(key1 varchar(7), key2 varchar(7), new varchar(7))
 RETURNS rel_dis_dis_key AS
 $$
 DECLARE
@@ -1206,7 +1206,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Disciplina_Disciplina_disc_req_code(key1 varchar(7), key2 varchar(7), new varchar(7))
+CREATE OR REPLACE FUNCTION update_Disciplina_Disciplina_dis_req_code(key1 varchar(7), key2 varchar(7), new varchar(7))
 RETURNS rel_dis_dis_key AS
 $$
 DECLARE
