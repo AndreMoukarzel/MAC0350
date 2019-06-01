@@ -429,6 +429,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um Disciplina */
+/* Retorna as Disciplinas que são requisito da Disciplina referida */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_requisitos(code varchar(7))
 RETURNS TABLE(Requisitos varchar(7)) AS
