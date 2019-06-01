@@ -307,6 +307,24 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um serviço */
+/* Retorna os nomes de perfis que tem acesso a tal serviço */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_perfs(serv_code integer)
+RETURNS TABLE(Nome varchar(20)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT perf_name
+		FROM b15_rel_pf_se
+		INNER JOIN b10_Perfil ON rel_perf_name = perf_name
+		WHERE rel_serv_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+
 BEGIN;
 CREATE OR REPLACE FUNCTION get_admin(cur_code integer)
 RETURNS TABLE(CPF varchar(11), Email email) AS
