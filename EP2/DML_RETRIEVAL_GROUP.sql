@@ -446,6 +446,35 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Trilha_from_modulo(mod integer)
+RETURNS TABLE(Nome varchar(80)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT rel_tr_name
+		FROM b12_rel_tr_mod
+		WHERE rel_mod_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Modulo(name varchar(80))
+RETURNS TABLE(Codigo integer, Nome varchar(40), Creditos_Minimos integer) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT mod_code, mod_name, mod_cred_min
+		FROM b08_Modulo
+		INNER JOIN b12_rel_tr_mod on rel_mod_code = mod_code
+		WHERE rel_tr_name = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 /* Os argumentos são a chave de um Disciplina */
 /* Retorna as Disciplinas que são requisito da Disciplina referida */
 BEGIN;
@@ -494,7 +523,7 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-			 
+
 BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
 RETURNS varchar(200) AS
