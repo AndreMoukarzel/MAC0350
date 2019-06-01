@@ -111,7 +111,9 @@ BEGIN
 		WHERE rel_al_nusp = $1 and rel_prof_nusp = $2 
 			and rel_dis_code = $3
 			and rel_al_of_semester = $4
-			and rel_al_of_year = $5;
+			and rel_al_of_year = $5
+			and rel_al_of_grade >= 5
+			and rel_al_of_attendance >= 0.7;
 END;
 $$
 LANGUAGE plpgsql;
@@ -136,15 +138,16 @@ BEGIN
 		WHERE of.rel_prof_nusp = $1 and of.rel_dis_code = $2 
 			and of.rel_oferecimento_semester = $3 
 			and of.rel_oferecimento_year = $4
-			and rel.rel_al_of_grade >= $5;
+			and rel.rel_al_of_grade >= $5
+			and rel.rel_al_of_attendance >= 0.7;
 END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Verifica se você completou uma trilha */
+/* Verifica quais trilhas foram completadas */
 BEGIN;
-CREATE OR REPLACE FUNCTION check_trilha(al_nusp varchar(9))
+CREATE OR REPLACE FUNCTION check_trilhas(al_nusp varchar(9))
 RETURNS TABLE(Trilha varchar(80), Completa boolean) AS
 $$
 DECLARE
