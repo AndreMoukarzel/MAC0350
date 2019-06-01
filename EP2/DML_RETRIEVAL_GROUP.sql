@@ -141,3 +141,56 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
+
+/* Verifica se você completou uma trilha */
+BEGIN;
+CREATE OR REPLACE FUNCTION check_trilha(al_nusp varchar(9))
+RETURNS TABLE(Trilha varchar(80), Completa boolean) AS
+$$
+DECLARE
+tr record;
+mod record;
+disc record;
+creds integer;
+BEGIN
+	FOR tr IN (SELECT tr_name FROM b07_Trilha)
+	LOOP
+		FOR mod IN (SELECT mod_code, mod_cred_min FROM b12_rel_tr_mod
+						INNER JOIN b08_Modulo ON mod_code = rel_mod_code
+						WHERE rel_tr_name = tr.tr_name and rel_tr_mod_mandatory = true)
+		LOOP
+			creds := 0;
+
+			FOR disc IN (SELECT dis_code, dis_class_creds, dis_work_creds FROM b05_Disciplina as dis
+							INNER JOIN b18_rel_dis_mod as b18 ON dis.dis_code = b18.rel_dis_code
+															  and b18.rel_mod_code = mod.mod_code)
+			LOOP
+				IF EXISTS (SELECT 1 FROM b22_rel_al_of WHERE rel_al_nusp = $1 
+														and rel_dis_code = disc.dis_code
+														and rel_al_of_grade >= 5
+														and rel_al_of_attendance >= 0.7)
+				THEN
+					creds := creds + disc.dis_class_creds + disc.dis_work_creds;
+				END IF;
+
+			END LOOP;
+
+				IF creds >= mod.mod_cred_min
+
+				THEN
+					Completa := true;
+
+				ELSE
+					Completa := false;
+
+				END IF;
+
+				Trilha := tr.tr_name;
+				RETURN NEXT;
+		END LOOP;
+
+	END LOOP;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
