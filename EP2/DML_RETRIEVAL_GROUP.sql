@@ -342,6 +342,8 @@ LANGUAGE plpgsql;
 COMMIT;
 
 
+/* Os argumentos são a chave de um Curso */
+/* Retorna os administradores que administram tal Curso */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_admin(cur_code integer)
 RETURNS TABLE(CPF varchar(11), Email email) AS
@@ -357,6 +359,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são a chave de um Administrador */
+/* Retorna os Crusos administrados por tal Administrador */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Curso(cpf varchar(11))
 RETURNS TABLE(Codigo integer, Nome varchar(60)) AS
