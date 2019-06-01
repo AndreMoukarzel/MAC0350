@@ -355,6 +355,35 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
+CREATE OR REPLACE FUNCTION get_Curso_from_Trilha(tr varchar(80))
+RETURNS TABLE(Codigo integer, Nome varchar(60)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT b06.cur_code, b06.cur_name
+		FROM b06_Curso as b06
+		INNER JOIN b13_rel_tr_cur on b06.cur_code = rel_cur_code
+		WHERE rel_tr_name = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Trilha(curso integer)
+RETURNS TABLE(Nome varchar(80)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT rel_tr_name
+		FROM b13_rel_tr_cur
+		WHERE rel_cur_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
 RETURNS varchar(200) AS
 $$
