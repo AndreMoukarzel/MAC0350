@@ -443,6 +443,39 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+				 
+/* Os argumentos são a chave de um Modulo */
+/* Retorna as Disciplinas relacionados a tal Modulo */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Disciplina(mod integer)
+RETURNS TABLE(Nome varchar(7)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT rel_dis_code
+		FROM b18_rel_tr_cur
+		WHERE rel_mod_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+			   
+/* Os argumentos são a chave de uma Disciplina */
+/* Retorna os Modulos relacionados a tal Disciplina */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_Disciplina(dis varchar(7))
+RETURNS TABLE(Codigo integer) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT rel_mod_code
+		FROM b18_rel_tr_cur
+		WHERE rel_dis_code = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+			 
 BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
 RETURNS varchar(200) AS
