@@ -246,6 +246,23 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Retorna todos os perfis de um user */
+BEGIN;
+CREATE OR REPLACE FUNCTION get_perfs(mail email)
+RETURNS TABLE(Nome varchar(20), Descricao varchar(100)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT perf_name, perf_desc
+		FROM b14_rel_us_pf
+		INNER JOIN b10_Perfil ON rel_perf_name = perf_name
+		WHERE rel_us_email = $1;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+
 BEGIN;
 CREATE OR REPLACE FUNCTION select_b01_pes_name(prim_key varchar(11))
 RETURNS varchar(200) AS
