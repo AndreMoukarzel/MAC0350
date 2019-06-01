@@ -273,7 +273,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Dada uma pessoa, retorna o usuario dela */
+/* Os argumentos são a chave de uma Pessoa */
+/* Retorna o Usuario da Pessoa */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_user(cpf varchar(11))
 RETURNS TABLE(Email email) AS
@@ -289,7 +290,8 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-/* Dada um usuario, retorna a info da pessoa */
+/* Os argumentos são a chave de um Usuario */
+/* Retorna o CPF e nome da Pessoa relacionada ao Usuário especificado */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_pes(mail email)
 RETURNS TABLE(CPF varchar(11), Nome varchar(200)) AS
