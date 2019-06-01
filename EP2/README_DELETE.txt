@@ -1,24 +1,24 @@
-delete_Pessoa(key varchar(11))
-delete_Professor(key varchar(9))
-delete_Aluno(key varchar(9))
-delete_Administrador(key varchar(11))
-delete_Disciplina(key varchar(7))
-delete_Curso(key integer)
-delete_Trilha(key varchar(80))
-delete_Modulo(key integer)
-delete_user(key email)
-delete_Perfil(key varchar(20))
-delete_Servico(key integer)
-delete_tr_mod(key1 varchar(80), key2 integer)
-delete_tr_cur(key1 varchar(80), key2 integer)
-delete_us_pf(key1 email, key2 varchar(20))
-delete_pf_se(key1 varchar(20), key2 integer)
-delete_prof_dis(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer)
-delete_al_dis(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer)
-delete_dis_mod(key1 varchar(7), key2 integer)
-delete_mod_cur(key1 integer, key2 integer)
-delete_pes_us(key1 varchar(11), key2 email)
-delete_Oferecimento(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer)
-delete_al_of(key1 varchar(9), key2 varchar(7), key3 varchar(9))
-delete_of_times(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer, key5 TIME, key6 integer)
-delete_dis_dis(key1 varchar(7), key2 varchar(7))
+select * from delete_Pessoa('98179721000');
+select * from delete_Professor('1');
+select * from delete_Aluno('11');
+select * from delete_Administrador('98179721000');
+select * from delete_Disciplina('MAC0100');
+select * from delete_Curso(0);
+select * from delete_Trilha('Especializacao Generica 0');
+select * from delete_Modulo(1);
+select * from delete_user('1_user@gmail.com');
+select * from delete_Perfil('Perfil Inovador 1');
+select * from delete_Servico(0001);
+select * from delete_tr_mod('Especializacao Generica 0', 1);
+select * from delete_tr_cur('Especializacao Generica 0', 0);
+select * from delete_us_pf('1_user@gmail.com', 'Perfil Inovador 1');
+select * from delete_pf_se('Perfil Inovador 1', 0001);
+select * from delete_prof_dis('1', 'MAC0100', 1, 2019);
+select * from delete_al_dis('11', 'MAC0100', 1, 2019);
+select * from delete_dis_mod('MAC0100', 1);
+select * from delete_mod_cur(1, 1);
+select * from delete_pes_us('98179721000', '1_user@gmail.com');
+select * from delete_Oferecimento('1', 'MAC0100', 2019, 1);
+select * from delete_al_of('1', 'MAC0100', '11');
+select * from delete_of_times('1', 'MAC0100', 2019, 1, '01:02:03', 2);
+select * from delete_dis_dis('MAC0102', 'MAC0100');
