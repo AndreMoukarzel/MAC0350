@@ -360,7 +360,7 @@ LANGUAGE plpgsql;
 COMMIT;
 
 /* Os argumentos são a chave de um Administrador */
-/* Retorna os Crusos administrados por tal Administrador */
+/* Retorna os Cursos administrados por tal Administrador */
 BEGIN;
 CREATE OR REPLACE FUNCTION get_Curso(cpf varchar(11))
 RETURNS TABLE(Codigo integer, Nome varchar(60)) AS
@@ -375,8 +375,10 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+/* Os argumentos são as chaves de um Aluno, um ano e um semestre */
+/* Retorna o nome das disciplinas cursadas pelo tal Aluno no ano e semestre específicado, e o nome do professor que as lecionou */
 BEGIN;
-CREATE OR REPLACE FUNCTION get_Oferercimentos(nusp varchar(9), ano integer, semestre integer)
+CREATE OR REPLACE FUNCTION get_Oferecimentos(nusp varchar(9), ano integer, semestre integer)
 RETURNS TABLE(Nome_disciplina varchar(80), Nome_professor varchar(200)) AS
 $$
 BEGIN
