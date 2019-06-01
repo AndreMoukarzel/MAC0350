@@ -463,13 +463,13 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION select_b22_rel_al_of_presence(prim_key varchar(9), sec_key varchar(7), tec_key varchar(9), qua_key integer, pen_key integer)
+CREATE OR REPLACE FUNCTION select_b22_rel_al_of_attendance(prim_key varchar(9), sec_key varchar(7), tec_key varchar(9), qua_key integer, pen_key integer)
 RETURNS float(24) AS
 $$
 DECLARE
 value float(24);
 BEGIN
-	SELECT rel_al_of_presence INTO value
+	SELECT rel_al_of_attendance INTO value
 	FROM b22_rel_al_of
 	WHERE rel_prof_nusp = $1 AND rel_dis_code = $2 AND rel_al_nusp = $3 AND rel_al_of_year = $4 AND rel_al_of_semester = $5;
 	RETURN value;

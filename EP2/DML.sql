@@ -710,34 +710,34 @@ INSERT INTO  b21_Oferecimento (rel_prof_nusp, rel_dis_code, rel_oferecimento_yea
 	VALUES ('10', 'MAC0109', 2019, 1, 45);
 
 /* rel aluno oferecimento */
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('1', 'MAC0100', '11', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('2', 'MAC0101', '12', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('3', 'MAC0102', '13', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('4', 'MAC0103', '14', 2019, 1, 9.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('5', 'MAC0104', '15', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('6', 'MAC0105', '16', 2019, 1, 8.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('7', 'MAC0106', '17', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('8', 'MAC0107', '18', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('9', 'MAC0108', '19', 2019, 1, 0.0, 0.0);
 
-INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_presence)
+INSERT INTO  b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ('10', 'MAC0109', '20', 2019, 1, 5.0, 0.0);
 
 

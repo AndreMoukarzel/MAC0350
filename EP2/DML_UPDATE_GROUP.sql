@@ -1087,14 +1087,14 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Aluno_Oferecimento_presence(key1 varchar(9), key2 varchar(7), key3 varchar(9), new float(24))
+CREATE OR REPLACE FUNCTION update_Aluno_Oferecimento_attendance(key1 varchar(9), key2 varchar(7), key3 varchar(9), new float(24))
 RETURNS al_of_key AS
 $$
 DECLARE
 id al_of_key;
 BEGIN
 	UPDATE b22_rel_al_of
-	SET rel_al_of_presence = new
+	SET rel_al_of_attendance = new
 	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_al_nusp = key3
 	RETURNING rel_prof_nusp, rel_dis_code, rel_al_nusp into id;
 	RETURN id;

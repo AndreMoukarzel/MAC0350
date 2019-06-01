@@ -454,7 +454,7 @@ $$
 DECLARE
 id al_of_key;
 BEGIN
-	INSERT INTO b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_presence)
+	INSERT INTO b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_attendance)
 	VALUES ($1, $2, $3, $4, $5)
 	RETURNING rel_prof_nusp, rel_dis_code, rel_al_nusp into id;
 	RETURN id;

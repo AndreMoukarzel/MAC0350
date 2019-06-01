@@ -78,12 +78,12 @@ COMMIT;
 
 /* presença de um aluno */
 BEGIN;
-CREATE OR REPLACE FUNCTION aluno_presence(al_nusp varchar(9), prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer)
-RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Presence float(24)) AS
+CREATE OR REPLACE FUNCTION aluno_attendance(al_nusp varchar(9), prof_nusp varchar(9), dis_code varchar(7), semestre integer, ano integer)
+RETURNS TABLE(Disc_Code varchar(7), Disciplina varchar(80), Nusp varchar(9), Attendance float(24)) AS
 $$
 BEGIN
 	RETURN QUERY
-		SELECT dis.dis_code, dis_name, al_nusp, rel_al_of_presence
+		SELECT dis.dis_code, dis_name, al_nusp, rel_al_of_attendance
 		FROM b22_rel_al_of
 		INNER JOIN b05_disciplina as dis on rel_dis_code = dis.dis_code
 		WHERE rel_al_nusp = $1 and rel_prof_nusp = $2 
