@@ -197,3 +197,35 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
+
+/* Verifica se um aluno pode fazer determinada materia */
+BEGIN;
+CREATE OR REPLACE FUNCTION check_disc(al_nusp varchar(9), dis_code varchar(7))
+RETURNS TABLE(Disciplina varchar(7), Disponivel boolean) AS
+$$
+DECLARE
+disp boolean;
+req record;
+creds integer;
+BEGIN
+	Disciplina := $2;
+	disp := true;
+	FOR req IN (SELECT dis_req_code FROM b24_rel_dis_dis as b24 WHERE b24.dis_code = $2)
+	LOOP
+
+		IF NOT EXISTS (SELECT 1 FROM b22_rel_al_of WHERE rel_al_nusp = $1 
+													and rel_dis_code = req.dis_req_code
+													and rel_al_of_grade >= 5
+													and rel_al_of_attendance >= 0.7)
+		THEN
+			disp := false;
+			EXIT;
+		END IF;
+
+	END LOOP;
+	Disponivel := disp;
+	RETURN NEXT;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
