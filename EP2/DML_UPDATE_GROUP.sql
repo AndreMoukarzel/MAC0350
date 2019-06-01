@@ -1187,3 +1187,37 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION update_Disciplina_Disciplina_disc_code(key1 varchar(7), key2 varchar(7), new varchar(7))
+RETURNS rel_dis_dis_key AS
+$$
+DECLARE
+id rel_dis_dis_key;
+BEGIN
+	UPDATE b24_rel_dis_dis
+	SET dis_code = new
+	WHERE dis_code = key1 AND dis_req_code = key2
+	RETURNING  dis_code, dis_req_code into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION update_Disciplina_Disciplina_disc_code(key1 varchar(7), key2 varchar(7), new varchar(7))
+RETURNS rel_dis_dis_key AS
+$$
+DECLARE
+id rel_dis_dis_key;
+BEGIN
+	UPDATE b24_rel_dis_dis
+	SET dis_req_code = new
+	WHERE dis_code = key1 AND dis_req_code = key2
+	RETURNING  dis_code, dis_req_code into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
