@@ -5,7 +5,7 @@ Gabriel Sarti Massukado, NUSP 10284177
 
 ####### EXEMPLOS DE CHAMADAS DE FUNÇÕES #######
 
-CREATE
+/* CREATE */
 
 select * from create_Pessoa('98179721000', 'João');
 select * from create_Professor('1', '98179721000');
@@ -35,7 +35,7 @@ select * from create_rel_al_of('1', 'MAC0100', '11', 2019, 1, 0.0, 0.0);
 select * from create_of_times('1', 'MAC0100', 2019, 1, '01:02:03', '05:02:03', 2);
 select * from create_rel_dis_dis('MAC0102', 'MAC0100');
 
-RETRIEVE
+/* RETRIEVE */
 
 select * from working_profs(1, 2019);
 select * from assigned_students('1', 'MAC0100', 1, 2019);
@@ -96,7 +96,7 @@ select * from select_b22_rel_al_of_grade('1', 'MAC0100', '11', 2019, 1);
 select * from select_b22_rel_al_of_attendance('1', 'MAC0100', '11', 2019, 1);
 select * from select_b23_time_out('1', 'MAC0100', 2019, 1, '01:02:03', 2);
 
-UPDATE
+/* UPDATE */
 
 select * from update_Pessoa_cpf('98179721000', '98179721001');
 select * from update_Pessoa_name('98179721001', 'Jose');
@@ -171,7 +171,7 @@ select * from update_Oferecimento_Times_day('01', 'MAC0101', '01:02:04', 2, 3);
 select * from update_Disciplina_Disciplina_dis_code('MAC0102', 'MAC0100', 'MAC0103');
 select * from update_Disciplina_Disciplina_dis_req_code('MAC0103','MAC0100', 'MAC0101');
 
-DELETE
+/* DELETE */
 
 select * from delete_Pessoa('98179721000');
 select * from delete_Professor('1');
