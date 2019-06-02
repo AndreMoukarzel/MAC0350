@@ -832,40 +832,6 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_rel_Pessoa_Usuario_pes_cpf(key1 varchar(11), key2 email, new varchar(11))
-RETURNS pes_us_key AS
-$$
-DECLARE
-id pes_us_key;
-BEGIN
-	UPDATE b20_rel_pes_us
-	SET rel_pes_cpf = new
-	WHERE rel_pes_cpf= key1 AND rel_us_email = key2
-	RETURNING rel_pes_cpf, rel_us_email into id;
-	RETURN id;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
-CREATE OR REPLACE FUNCTION update_rel_Pessoa_Usuario_us_email(key1 varchar(11), key2 email, new email)
-RETURNS pes_us_key AS
-$$
-DECLARE
-id pes_us_key;
-BEGIN
-	UPDATE b20_rel_pes_us
-	SET rel_us_email = new
-	WHERE rel_pes_cpf= key1 AND rel_us_email = key2
-	RETURNING rel_pes_cpf, rel_us_email into id;
-	RETURN id;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
 CREATE OR REPLACE FUNCTION update_rel_Pessoa_Usuario_date_in(key1 varchar(11), key2 email, new TIMESTAMP)
 RETURNS pes_us_key AS
 $$
