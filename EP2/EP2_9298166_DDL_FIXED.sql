@@ -31,7 +31,7 @@ CREATE TABLE b01_Pessoa (
 CREATE TABLE b02_Professor (
 	prof_id SERIAL,
 	prof_nusp varchar(9) NOT NULL,
-	prof_cpf varchar(11),
+	prof_cpf varchar(11) NOT NULL,
 	CONSTRAINT pk_professor PRIMARY KEY (prof_id),
 	CONSTRAINT sk_professor UNIQUE (prof_nusp),
 	CONSTRAINT fk_pessoa FOREIGN KEY (prof_cpf)
@@ -43,7 +43,7 @@ CREATE TABLE b02_Professor (
 CREATE TABLE b03_Aluno (
 	al_id SERIAL,
 	al_nusp varchar(9) NOT NULL,
-	al_cpf varchar(11),
+	al_cpf varchar(11) NOT NULL,
 	CONSTRAINT pk_aluno PRIMARY KEY (al_id),
 	CONSTRAINT sk_aluno UNIQUE (al_nusp),
 	CONSTRAINT fk_pessoa FOREIGN KEY (al_cpf)
@@ -54,7 +54,7 @@ CREATE TABLE b03_Aluno (
 
 CREATE TABLE b04_Administrador (
 	adm_id SERIAL,
-	adm_cpf varchar(11),
+	adm_cpf varchar(11) NOT NULL,
 	adm_email email NOT NULL,
 	adm_dat_in TIMESTAMP NOT NULL,
 	adm_dat_out TIMESTAMP,
@@ -82,7 +82,7 @@ CREATE TABLE b06_Curso (
 	cur_id SERIAL,
 	cur_code integer NOT NULL,
 	cur_name varchar(60),
-	adm_cpf varchar(11),
+	adm_cpf varchar(11) NOT NULL,
 	ad_cur_date_in TIMESTAMP,
 	ad_cur_date_out TIMESTAMP,
 	CONSTRAINT pk_curso PRIMARY KEY (cur_id),
