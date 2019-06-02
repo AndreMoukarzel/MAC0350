@@ -420,14 +420,14 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION create_rel_al_of(arg0 varchar(9), arg1 varchar(7), arg2 varchar(9), arg3 float(24), arg4 float(24))
+CREATE OR REPLACE FUNCTION create_rel_al_of(arg0 varchar(9), arg1 varchar(7), arg2 varchar(9),arg3 integer, arg4 integer, arg5 float(24), arg6 float(24))
 RETURNS al_of_key AS
 $$
 DECLARE
 id al_of_key;
 BEGIN
-	INSERT INTO b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_grade, rel_al_of_attendance)
-	VALUES ($1, $2, $3, $4, $5)
+	INSERT INTO b22_rel_al_of (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester, rel_al_of_grade, rel_al_of_attendance)
+	VALUES ($1, $2, $3, $4, $5, $6, $7)
 	RETURNING rel_prof_nusp, rel_dis_code, rel_al_nusp into id;
 	RETURN id;
 END;

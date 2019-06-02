@@ -380,7 +380,7 @@ DROP TYPE IF EXISTS of_key CASCADE;
 CREATE TYPE of_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
 
 DROP TYPE IF EXISTS al_of_key CASCADE;
-CREATE TYPE al_of_key AS (key1 varchar(9), key2 varchar(7), key3 varchar(9));
+CREATE TYPE al_of_key AS (key1 varchar(9), key2 varchar(7), key3 varchar(9), key4 integer, key5 integer);
 
 DROP TYPE IF EXISTS of_times_key CASCADE;
 CREATE TYPE of_times_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer, key5 TIME, key6 integer);
