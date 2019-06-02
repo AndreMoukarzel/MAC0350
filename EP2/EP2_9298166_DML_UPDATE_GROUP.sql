@@ -50,23 +50,6 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Professor_cpf(key varchar(9), new varchar(11))
-RETURNS int AS
-$$
-DECLARE
-id int;
-BEGIN
-	UPDATE b02_Professor
-	SET prof_cpf = new
-	WHERE prof_nusp = key
-	RETURNING prof_id into id;
-	RETURN id;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
 CREATE OR REPLACE FUNCTION update_Aluno_nusp(key varchar(9), new varchar(11))
 RETURNS int AS
 $$
@@ -81,24 +64,7 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
-COMMIT;
-
-BEGIN;
-CREATE OR REPLACE FUNCTION update_Aluno_cpf(key varchar(9), new varchar(11))
-RETURNS int AS
-$$
-DECLARE
-id int;
-BEGIN
-	UPDATE b03_Aluno
-	SET al_cpf = new
-	WHERE al_nusp = key
-	RETURNING al_id into id;
-	RETURN id;
-END;
-$$
-LANGUAGE plpgsql;
-COMMIT;
+COMMIT
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Administrador_cpf(key email, new varchar(11))
