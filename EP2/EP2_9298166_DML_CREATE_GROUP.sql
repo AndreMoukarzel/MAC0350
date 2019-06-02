@@ -259,10 +259,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-
-DROP TYPE IF EXISTS tr_mod_key CASCADE;
-CREATE TYPE tr_mod_key AS (c1 varchar(80), c2 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_tr_mod(arg0 varchar(80), arg1 integer, arg2 boolean)
 RETURNS tr_mod_key AS
@@ -281,10 +277,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_tr_cur(arg0 varchar(80), arg1 integer)
-RETURNS tr_mod_key AS
+RETURNS tr_cur_key AS
 $$
 DECLARE
-id tr_mod_key; /* A chave tem os mesmos tipos */
+id tr_cur_key;
 BEGIN
 	INSERT INTO b13_rel_tr_cur (rel_tr_name, rel_cur_code)
 	VALUES ($1, $2)
@@ -294,9 +290,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS us_pf_key CASCADE;
-CREATE TYPE us_pf_key AS (c1 email, c2 varchar(20));
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_us_pf(arg0 email, arg1 varchar(20), arg2 TIMESTAMP, arg3 TIMESTAMP)
@@ -314,9 +307,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS pf_se_key CASCADE;
-CREATE TYPE pf_se_key AS (c1 varchar(20), c2 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_pf_se(arg0 varchar(20), arg1 integer)
 RETURNS pf_se_key AS
@@ -333,9 +323,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS prof_dis_key CASCADE;
-CREATE TYPE prof_dis_key AS (c1 varchar(9), c2 varchar(7));
-
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_prof_dis(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer)
 RETURNS prof_dis_key AS
@@ -345,7 +332,7 @@ id prof_dis_key;
 BEGIN
 	INSERT INTO b16_rel_prof_dis (rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year)
 	VALUES ($1, $2, $3, $4)
-	RETURNING rel_prof_nusp, rel_dis_code into id;
+	RETURNING rel_prof_nusp, rel_dis_code, rel_prof_disc_semester, rel_prof_disc_year into id;
 	RETURN id;
 END;
 $$
@@ -354,22 +341,19 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_al_dis(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer)
-RETURNS prof_dis_key AS
+RETURNS al_dis_key AS
 $$
 DECLARE
-id prof_dis_key; /* mesmos valores*/
+id al_dis_key;
 BEGIN
 	INSERT INTO b17_rel_al_dis (rel_al_nusp, rel_dis_code, plan_semester, plan_year)
 	VALUES ($1, $2, $3, $4)
-	RETURNING rel_al_nusp, rel_dis_code into id;
+	RETURNING rel_al_nusp, rel_dis_code, plan_semester, plan_year into id;
 	RETURN id;
 END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS dis_mod_key CASCADE;
-CREATE TYPE dis_mod_key AS (c1 varchar(7), c2 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_dis_mod(arg0 varchar(7), arg1 integer)
@@ -387,9 +371,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS mod_cur_key CASCADE;
-CREATE TYPE mod_cur_key AS (c1 integer, c2 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_mod_cur(arg0 integer, arg1 integer)
 RETURNS mod_cur_key AS
@@ -405,9 +386,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS pes_us_key CASCADE;
-CREATE TYPE pes_us_key AS (c1 varchar(11), c2 email);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_pes_us(arg0 varchar(11), arg1 email, arg2 TIMESTAMP, arg3 TIMESTAMP)
@@ -425,9 +403,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS al_of_key CASCADE;
-CREATE TYPE of_key AS (c1 varchar(9), c2 varchar(7), c3 integer, c4 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION create_Oferecimento(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer, arg4 integer)
 RETURNS of_key AS
@@ -443,9 +418,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS al_of_key CASCADE;
-CREATE TYPE al_of_key AS (c1 varchar(9), c2 varchar(7), c3 varchar(9));
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_al_of(arg0 varchar(9), arg1 varchar(7), arg2 varchar(9), arg3 float(24), arg4 float(24))
@@ -463,9 +435,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS of_times_key CASCADE;
-CREATE TYPE of_times_key AS (c1 varchar(9), c2 varchar(7), c3 integer, c4 integer, c5 TIME, c6 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION create_of_times(arg0 varchar(9), arg1 varchar(7), arg2 integer, arg3 integer, arg4 TIME, arg5 TIME, arg6 integer)
 RETURNS of_times_key AS
@@ -481,9 +450,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS rel_dis_dis_key CASCADE;
-CREATE TYPE rel_dis_dis_key AS (c1 varchar(7), c2 varchar(7));
 
 BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_dis_dis(arg0 varchar(7), arg1 varchar(7))

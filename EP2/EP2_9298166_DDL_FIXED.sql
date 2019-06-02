@@ -20,6 +20,9 @@ DROP DOMAIN IF EXISTS email CASCADE;
 CREATE DOMAIN email AS citext
 	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
 
+
+/* Create tables */
+
 CREATE TABLE b01_Pessoa (
 	pes_id SERIAL,
 	pes_cpf varchar(11) NOT NULL,
@@ -343,3 +346,44 @@ CREATE TABLE b24_rel_dis_dis (
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
+
+/* Create types to be used in functions */
+
+DROP TYPE IF EXISTS tr_mod_key CASCADE;
+CREATE TYPE tr_mod_key AS (key1 varchar(80), key2 integer);
+
+DROP TYPE IF EXISTS tr_cur_key CASCADE;
+CREATE TYPE tr_cur_key AS (key1 varchar(80), key2 integer);
+
+DROP TYPE IF EXISTS us_pf_key CASCADE;
+CREATE TYPE us_pf_key AS (key1 email, key2 varchar(20));
+
+DROP TYPE IF EXISTS pf_se_key CASCADE;
+CREATE TYPE pf_se_key AS (key1 varchar(20), key2 integer);
+
+DROP TYPE IF EXISTS prof_dis_key CASCADE;
+CREATE TYPE prof_dis_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
+
+DROP TYPE IF EXISTS al_dis_key CASCADE;
+CREATE TYPE al_dis_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
+
+DROP TYPE IF EXISTS dis_mod_key CASCADE;
+CREATE TYPE dis_mod_key AS (key1 varchar(7), key2 integer);
+
+DROP TYPE IF EXISTS mod_cur_key CASCADE;
+CREATE TYPE mod_cur_key AS (key1 integer, key2 integer);
+
+DROP TYPE IF EXISTS pes_us_key CASCADE;
+CREATE TYPE pes_us_key AS (key1 varchar(11), key2 email);
+
+DROP TYPE IF EXISTS of_key CASCADE;
+CREATE TYPE of_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
+
+DROP TYPE IF EXISTS al_of_key CASCADE;
+CREATE TYPE al_of_key AS (key1 varchar(9), key2 varchar(7), key3 varchar(9));
+
+DROP TYPE IF EXISTS of_times_key CASCADE;
+CREATE TYPE of_times_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer, key5 TIME, key6 integer);
+
+DROP TYPE IF EXISTS dis_dis_key CASCADE;
+CREATE TYPE dis_dis_key AS (key1 varchar(7), key2 varchar(7));

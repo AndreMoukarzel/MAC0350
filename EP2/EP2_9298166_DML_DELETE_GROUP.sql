@@ -174,9 +174,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS tr_mod_key CASCADE;
-CREATE TYPE tr_mod_key AS (key1 varchar(80), key2 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_tr_mod(key1 varchar(80), key2 integer)
 RETURNS tr_mod_key AS
@@ -192,9 +189,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS tr_cur_key CASCADE;
-CREATE TYPE tr_cur_key AS (key1 varchar(80), key2 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_tr_cur(key1 varchar(80), key2 integer)
@@ -212,9 +206,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS us_pf_key CASCADE;
-CREATE TYPE us_pf_key AS (key1 email, key2 varchar(20));
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_us_pf(key1 email, key2 varchar(20))
 RETURNS us_pf_key AS
@@ -230,9 +221,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS pf_se_key CASCADE;
-CREATE TYPE pf_se_key AS (key1 varchar(20), key2 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_pf_se(key1 varchar(20), key2 integer)
@@ -250,9 +238,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS prof_dis_key CASCADE;
-CREATE TYPE prof_dis_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_prof_dis(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer)
 RETURNS prof_dis_key AS
@@ -268,9 +253,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS al_dis_key CASCADE;
-CREATE TYPE al_dis_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_al_dis(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer)
@@ -288,9 +270,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS dis_mod_key CASCADE;
-CREATE TYPE dis_mod_key AS (key1 varchar(7), key2 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_dis_mod(key1 varchar(7), key2 integer)
 RETURNS dis_mod_key AS
@@ -306,9 +285,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS mod_cur_key CASCADE;
-CREATE TYPE mod_cur_key AS (key1 integer, key2 integer);
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_mod_cur(key1 integer, key2 integer)
@@ -326,9 +302,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS pes_us_key CASCADE;
-CREATE TYPE pes_us_key AS (key1 varchar(11), key2 email);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_pes_us(key1 varchar(11), key2 email)
 RETURNS pes_us_key AS
@@ -345,15 +318,12 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS Oferecimento_key CASCADE;
-CREATE TYPE Oferecimento_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_Oferecimento(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer)
-RETURNS Oferecimento_key AS
+RETURNS of_key AS
 $$
 DECLARE
-id Oferecimento_key;
+id of_key;
 BEGIN
 	DELETE FROM b21_Oferecimento
 	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2 AND rel_oferecimento_year = key3 AND rel_oferecimento_semester = key4
@@ -363,9 +333,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS al_of_key CASCADE;
-CREATE TYPE al_of_key AS (key1 varchar(9), key2 varchar(7), key3 varchar(9));
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_al_of(key1 varchar(9), key2 varchar(7), key3 varchar(9))
@@ -383,9 +350,6 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-DROP TYPE IF EXISTS of_times_key CASCADE;
-CREATE TYPE of_times_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer, key5 TIME, key6 integer);
-
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_of_times(key1 varchar(9), key2 varchar(7), key3 integer, key4 integer, key5 TIME, key6 integer)
 RETURNS of_times_key AS
@@ -401,9 +365,6 @@ END;
 $$
 LANGUAGE plpgsql;
 COMMIT;
-
-DROP TYPE IF EXISTS dis_dis_key CASCADE;
-CREATE TYPE dis_dis_key AS (key1 varchar(7), key2 varchar(7));
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_dis_dis(key1 varchar(7), key2 varchar(7))
