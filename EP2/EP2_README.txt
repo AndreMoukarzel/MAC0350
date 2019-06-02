@@ -1,9 +1,9 @@
-André Ferrari Moukarzel, NUSP 9298166
-Arthur Vieira Barbosa, NUSP 6482041
-Matheus Lima Cunha, NUSP 10297755
-Gabriel Sarti Massukado, NUSP 10284177
+/* André Ferrari Moukarzel, NUSP 9298166 */
+/* Arthur Vieira Barbosa, NUSP 6482041 */
+/* Matheus Lima Cunha, NUSP 10297755 */
+/* Gabriel Sarti Massukado, NUSP 10284177 */
 
-####### EXEMPLOS DE CHAMADAS DE FUNÇÕES #######
+/* EXEMPLOS DE CHAMADAS DE FUNÇÕES */
 
 /* CREATE */
 
@@ -11,10 +11,10 @@ select * from create_Pessoa('98179721000', 'João');
 select * from create_Professor('1', '98179721000');
 select * from create_Aluno('11', '98179721000');
 select * from create_Administrador('98179721000', '21email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
-select * from create_new_Professor('98179721000', 'João', '1');
-select * from create_new_Aluno('98179721000', 'João', '11');
-select * from create_new_Administrador('98179721000', 'João', '21email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
-select * from create_Disciplina('Disciplina 0', 'MAC0100', 1, 1);
+select * from create_new_Professor('98179721005', 'Jose', '5');
+select * from create_new_Aluno('98179721007', 'Jairo', '111');
+select * from create_new_Administrador('98179721009', 'Jeronimo', '29email@gmail.com', '2008-01-01 00:00:01', '3008-01-01 00:00:01');
+select * from create_Disciplina('MAC0100', 'Disciplina 0', 1, 1);
 select * from create_Curso(0, 'Bacharelado Generico 0', '98179721000', '2009-01-01 00:00:01', '2018-01-01 00:00:01');
 select * from create_Trilha('Especializacao Generica 0');
 select * from create_Modulo(1, 'Modulo Legal 0', 2);
@@ -33,6 +33,7 @@ select * from create_rel_pes_us('98179721000', '1_user@gmail.com', '2010-01-01 0
 select * from create_Oferecimento('1', 'MAC0100', 2019, 1, 45);
 select * from create_rel_al_of('1', 'MAC0100', '11', 2019, 1, 0.0, 0.0);
 select * from create_of_times('1', 'MAC0100', 2019, 1, '01:02:03', '05:02:03', 2);
+select * from create_Disciplina('MAC0102', 'Disciplina 2', 1, 1);
 select * from create_rel_dis_dis('MAC0102', 'MAC0100');
 
 /* RETRIEVE */
