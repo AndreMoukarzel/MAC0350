@@ -28,7 +28,7 @@ select * from create_rel_pf_se('Perfil Inovador 1', 0001);
 select * from create_rel_prof_dis('1', 'MAC0100', 1, 2019);
 select * from create_rel_al_dis('11', 'MAC0100', 1, 2019);
 select * from create_rel_dis_mod('MAC0100', 1);
-select * from create_rel_mod_cur(1, 1);
+select * from create_rel_mod_cur(1, 0);
 select * from create_rel_pes_us('98179721000', '1_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 select * from create_Oferecimento('1', 'MAC0100', 2019, 1, 45);
 select * from create_rel_al_of('1', 'MAC0100', '11', 2019, 1, 0.0, 0.0);
