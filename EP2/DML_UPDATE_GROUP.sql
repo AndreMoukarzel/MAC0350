@@ -50,6 +50,23 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
+CREATE OR REPLACE FUNCTION update_Professor_cpf(key varchar(9), new varchar(11))
+RETURNS int AS
+$$
+DECLARE
+id int;
+BEGIN
+	UPDATE b02_Professor
+	SET prof_cpf = new
+	WHERE prof_nusp = key
+	RETURNING prof_id into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION update_Aluno_nusp(key varchar(9), new varchar(11))
 RETURNS int AS
 $$
@@ -64,7 +81,24 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
-COMMIT
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION update_Aluno_cpf(key varchar(9), new varchar(11))
+RETURNS int AS
+$$
+DECLARE
+id int;
+BEGIN
+	UPDATE b03_Aluno
+	SET al_cpf = new
+	WHERE al_nusp = key
+	RETURNING al_id into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION update_Administrador_cpf(key email, new varchar(11))
@@ -825,6 +859,40 @@ BEGIN
 	SET rel_cur_code = new
 	WHERE rel_mod_code = key1 AND rel_cur_code = key2
 	RETURNING rel_mod_code, rel_cur_code into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION update_rel_Pessoa_Usuario_pes_cpf(key1 varchar(11), key2 email, new varchar(11))
+RETURNS pes_us_key AS
+$$
+DECLARE
+id pes_us_key;
+BEGIN
+	UPDATE b20_rel_pes_us
+	SET rel_pes_cpf = new
+	WHERE rel_pes_cpf= key1 AND rel_us_email = key2
+	RETURNING rel_pes_cpf, rel_us_email into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
+CREATE OR REPLACE FUNCTION update_rel_Pessoa_Usuario_us_email(key1 varchar(11), key2 email, new email)
+RETURNS pes_us_key AS
+$$
+DECLARE
+id pes_us_key;
+BEGIN
+	UPDATE b20_rel_pes_us
+	SET rel_us_email = new
+	WHERE rel_pes_cpf= key1 AND rel_us_email = key2
+	RETURNING rel_pes_cpf, rel_us_email into id;
 	RETURN id;
 END;
 $$

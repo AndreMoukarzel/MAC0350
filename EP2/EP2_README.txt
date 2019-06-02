@@ -101,7 +101,9 @@ select * from select_b23_time_out('1', 'MAC0100', 2019, 1, '01:02:03', 2);
 
 select * from update_Pessoa_cpf('98179721000', '98179721001');
 select * from update_Pessoa_name('98179721001', 'Jose');
+select * from update_Professor_cpf('2', '12345678912');
 select * from update_Professor_nusp('10', '100');
+select * from update_Aluno_cpf('111', '12345678913');
 select * from update_Aluno_nusp('11', '110');
 select * from update_Administrador_email('21email@gmail.com', '210email@gmail.com');
 select * from update_Administrador_dat_in('210email@gmail.com', '2008-01-01 00:00:02');
@@ -147,6 +149,8 @@ select * from update_rel_Disciplina_Modulo_dis_code('MAC0100', 1, 'MAC0101');
 select * from update_rel_Disciplina_Modulo_dis_code('MAC0101', 1, 2);
 select * from update_rel_Modulo_Curso_mod_code(1, 1, 2);
 select * from update_rel_Modulo_Curso_cur_code(2, 1, 2);
+select * from update_rel_Pessoa_Usuario_pes_cpf('98179721000', '1_user@gmail.com', '98179721001');
+select * from update_rel_Pessoa_Usuario_us_email('98179721001', '1_user@gmail.com', '01_user@gmail.com');
 select * from update_rel_Pessoa_Usuario_date_in('98179721001', '01_user@gmail.com', '2010-01-01 00:00:02');
 select * from update_rel_Pessoa_Usuario_date_out('98179721001','01_user@gmail.com', '2020-01-01 00:00:02');
 select * from update_Oferecimento_prof_nusp('1', 'MAC0100', 2019, 1, '01');
