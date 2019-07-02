@@ -14,15 +14,20 @@ db = SQLAlchemy(app)
 def hello():
 	return "Hello World!"
 
-@app.route("/name/<name>")
-def get_book_name(name):
-	return "name : {}".format(name)
-
-@app.route("/details")
-def get_book_details():
-	author=request.args.get('author')
-	published=request.args.get('published')
-	return "Author : {}, Published: {}".format(author,published)
+@app.route("/add_p")
+def add_p():
+    name=request.args.get('name')
+    cpf=request.args.get('cpf')
+    try:
+        pessoa=B01Pessoa(
+            pes_name=name,
+            pes_cpf=cpf,
+        )
+        db.session.add(pessoa)
+        db.session.commit()
+        return "Pessoa added. pes_id={}".format(pessoa.pes_id)
+    except Exception as e:
+	    return(str(e))
 
 @app.route("/getall")
 def get_all():
