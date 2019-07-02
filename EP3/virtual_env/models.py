@@ -1,241 +1,291 @@
-from app import db
+# coding: utf-8
+from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, String, Table, Text, Time
+from sqlalchemy.schema import FetchedValue
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql.sqltypes import NullType
+from flask_sqlalchemy import SQLAlchemy
 
-class Pessoa(db.Model):
+
+db = SQLAlchemy()
+
+
+class B01Pessoa(db.Model):
     __tablename__ = 'b01_pessoa'
+    __table_args__ = {'schema': 'public'}
 
-    pes_id = db.Column(db.Integer, primary_key=True)
-    pes_cpf = db.Column(db.String(), nullable=False)
-    pes_name = db.Column(db.String())
+    pes_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    pes_cpf = db.Column(db.String(11), nullable=False, unique=True)
+    pes_name = db.Column(db.String(200))
 
-    def __init__(self, cpf, name):
-        self.pes_cpf = cpf
-        self.pes_name = name
 
-    def __repr__(self):
-        return '<id {}>'.format(self.pes_id)
-    
-    def serialize(self):
-        return {
-            'id': self.pes_id,
-            'cpf': self.pes_cpf,
-            'name': self.pes_name
-        }
-
-class Professor(db.Model):
+class B02Professor(db.Model):
     __tablename__ = 'b02_professor'
+    __table_args__ = {'schema': 'public'}
 
-    prof_id = db.Column(db.Integer, primary_key=True)
-    prof_nusp = db.Column(db.String(), nullable=False)
-    prof_cpf = db.Column(db.String(), db.ForeignKey('Pessoa.pes_id'), nullable=False)
+    prof_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    prof_nusp = db.Column(db.String(9), nullable=False, unique=True)
+    prof_cpf = db.Column(db.ForeignKey('public.b01_pessoa.pes_cpf', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
 
-    def __init__(self, nusp, cpf):
-        self.prof_nusp = nusp
-        self.prof_cpf = cpf
+    b01_pessoa = db.relationship('B01Pessoa', primaryjoin='B02Professor.prof_cpf == B01Pessoa.pes_cpf', backref='b02_professors')
 
-    def __repr__(self):
-        return '<id {}>'.format(self.prof_id)
-    
-    def serialize(self):
-        return {
-            'id': self.prof_id,
-            'cpf': self.prof_cpf,
-            'nusp': self.prof_nusp
-        }
 
-class Aluno(db.Model):
+class B03Aluno(db.Model):
     __tablename__ = 'b03_aluno'
+    __table_args__ = {'schema': 'public'}
 
-    al_id = db.Column(db.Integer, primary_key=True)
-    al_nusp = db.Column(db.String(), nullable=False)
-    al_cpf = db.Column(db.String(), db.ForeignKey('Pessoa.pes_cpf'), nullable=False)  
+    al_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    al_nusp = db.Column(db.String(9), nullable=False, unique=True)
+    al_cpf = db.Column(db.ForeignKey('public.b01_pessoa.pes_cpf', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
 
-    def __init__(self, nusp, cpf):
-        self.al_nusp = nusp
-        self.al_cpf = cpf
+    b01_pessoa = db.relationship('B01Pessoa', primaryjoin='B03Aluno.al_cpf == B01Pessoa.pes_cpf', backref='b03_alunoes')
 
-    def __repr__(self):
-        return '<id {}>'.format(self.al_id)
-    
-    def serialize(self):
-        return {
-            'id': self.al_id,
-            'cpf': self.al_cpf,
-            'nusp': self.al_nusp
-        }
 
-class Administrador(db.Model):
+class B04Administrador(db.Model):
     __tablename__ = 'b04_administrador'
+    __table_args__ = {'schema': 'public'}
 
-    adm_id = db.Column(db.Integer, primary_key=True)
-    adm_cpf = db.Column(db.String(), db.ForeignKey('Pessoa.pes_cpf'), nullable=False)
-    adm_email = db.Column(db.String(), nullable=False)
-    adm_dat_in = db.Column(db.DateTime(), nullable=False)
-    adm_dat_out = db.Column(db.DateTime()) 
+    adm_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    adm_cpf = db.Column(db.ForeignKey('public.b01_pessoa.pes_cpf', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, unique=True)
+    adm_email = db.Column(db.String(99), unique=True)
+    adm_dat_in = db.Column(db.DateTime, nullable=False)
+    adm_dat_out = db.Column(db.DateTime)
 
-    def __init__(self, nusp, email, dat_in, dat_out):
-        self.adm_cpf = cpf
-        self.adm_email = email
-        self.adm_dat_in = dat_in
-        self.adm_dat_out = dat_out
+    b01_pessoa = db.relationship('B01Pessoa', uselist=False, primaryjoin='B04Administrador.adm_cpf == B01Pessoa.pes_cpf', backref='b04_administradors')
 
-    def __repr__(self):
-        return '<id {}>'.format(self.adm_id)
-    
-    def serialize(self):
-        return {
-            'id': self.adm_id,
-            'cpf': self.adm_cpf,
-            'email': self.adm_email,
-            'adm_dat_in': self.adm_dat_in,
-            'adm_dat_out': self.adm_dat_out
-        }
 
-class Disciplina(db.Model):
+class B05Disciplina(db.Model):
     __tablename__ = 'b05_disciplina'
+    __table_args__ = {'schema': 'public'}
 
-    dis_id = db.Column(db.Integer, primary_key=True)
-    dis_code = db.Column(db.String(), nullable=False)
-    dis_name = db.Column(db.String())
+    dis_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    dis_code = db.Column(db.String(7), nullable=False, unique=True)
+    dis_name = db.Column(db.String(80))
     dis_class_creds = db.Column(db.Integer)
     dis_work_creds = db.Column(db.Integer)
 
-    def __init__(self, code, name, class_creds, work_creds):
-        self.dis_code = code
-        self.dis_name = name
-        self.dis_class_creds = class_creds
-        self.dis_work_creds = work_creds
+    b08_modulo = db.relationship('B08Modulo', secondary='public.b18_rel_dis_mod', backref='b05_disciplinas')
+    # parents = db.relationship(
+    #     'B05Disciplina',
+    #     secondary='public.b24_rel_dis_dis',
+    #     primaryjoin='B05Disciplina.dis_code == b24_rel_dis_dis.c.dis_code',
+    #     secondaryjoin='B05Disciplina.dis_code == b24_rel_dis_dis.c.dis_req_code',
+    #     backref='b05_disciplinas'
+    # )
 
-    def __repr__(self):
-        return '<id {}>'.format(self.dis_id)
 
-    def serialize(self):
-        return{
-            'id': self.dis_id,
-            'code': self.dis_code,
-            'name': self.dis_name,
-            'class_creds': self.dis_class_creds,
-            'work_creds': self.dis_work_creds
-        }
-
-class Curso(db.Model):
+class B06Curso(db.Model):
     __tablename__ = 'b06_curso'
+    __table_args__ = {'schema': 'public'}
 
-    cur_id = db.Column(db.Integer, primary_key=True)
-    cur_code = db.Column(db.Integer, nullable=False)
-    cur_name = db.Column(db.String())
-    adm_cpf = db.Column(db.String(), db.ForeignKey('Administrador.adm_cpf'), nullable=False)
-    ad_cur_date_in = db.Column(db.DateTime())
-    ad_cur_date_out = db.Column(db.DateTime())
+    cur_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    cur_code = db.Column(db.Integer, nullable=False, unique=True)
+    cur_name = db.Column(db.String(60))
+    adm_cpf = db.Column(db.ForeignKey('public.b04_administrador.adm_cpf', ondelete='CASCADE', onupdate='CASCADE'), nullable=False)
+    ad_cur_date_in = db.Column(db.DateTime)
+    ad_cur_date_out = db.Column(db.DateTime)
 
-    def __init__(self, code, name, adm_cpf, date_in, date_out):
-        self.cur_code = code
-        self.cur_name = name
-        self.adm_cpf = adm_cpf
-        self.ad_cur_date_in = date_in
-        self.ad_cur_date_out = date_out
+    b04_administrador = db.relationship('B04Administrador', primaryjoin='B06Curso.adm_cpf == B04Administrador.adm_cpf', backref='b06_cursoes')
+    b07_trilha = db.relationship('B07Trilha', secondary='public.b13_rel_tr_cur', backref='b06_cursoes')
+    b08_modulo = db.relationship('B08Modulo', secondary='public.b19_rel_mod_cur', backref='b06_cursoes')
 
-    def __repr__(self):
-        return '<id {}>'.format(self.cur_id)
 
-    def serialize(self):
-        return{
-            'id': self.cur_id,
-            'code': self.cur_code,
-            'name': self.cur_name,
-            'adm_cpf': self.adm_cpf,
-            'ad_cur_date_in': self.ad_cur_date_in,
-            'ad_cur_date_out': self.ad_cur_date_out
-        }
-
-class Trilha(db.Model):
+class B07Trilha(db.Model):
     __tablename__ = 'b07_trilha'
+    __table_args__ = {'schema': 'public'}
 
-    tr_id = db.Column(db.Integer, primary_key=True)
-    tr_name = db.Column(db.String(), nullable=False)
+    tr_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    tr_name = db.Column(db.String(80), nullable=False, unique=True)
 
-    def __init__(self, name):
-        self.tr_name = name
 
-    def __repr__(self):
-        return '<id {}>'.format(self.tr_id)
-
-    def serialize(self):
-        return{
-            'id': self.tr_id,
-            'name': self.tr_name
-        }
-
-class Modulo(db.Model):
+class B08Modulo(db.Model):
     __tablename__ = 'b08_modulo'
+    __table_args__ = (
+        db.CheckConstraint('mod_cred_min > 0'),
+        {'schema': 'public'}
+    )
 
-    mod_id = db.Column(db.Integer, primary_key=True)
-    mod_code = db.Column(db.Integer, nullable=False)
-    mod_name = db.Column(db.String())
+    mod_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    mod_code = db.Column(db.Integer, nullable=False, unique=True)
+    mod_name = db.Column(db.String(40))
     mod_cred_min = db.Column(db.Integer)
 
-    def __init__(self, code, name, cred_min):
-        self.mod_code = code
-        self.mod_name = name
-        self.mod_cred_min = cred_min
 
-    def __repr__(self):
-        return '<id {}>'.format(self.mod_id)
-
-class Users(db.Model):
-    __tablename__ = 'users'
-
-    us_id = db.Column(db.Integer, primary_key=True)
-    us_email = db.Column(db.String())
-    us_password = db.Column(db.String(), nullable=False)
-
-    def __init__(self, email, password):
-        self.us_email = email
-        self.us_password = password
-
-    def __repr__(self):
-        return '<id {}>'.format(self.us_id)
-
-class Perfil(db.Model):
+class B10Perfil(db.Model):
     __tablename__ = 'b10_perfil'
+    __table_args__ = {'schema': 'public'}
 
-    perf_id = db.Column(db.Integer, primary_key=True)
-    perf_name = db.Column(db.String(), nullable=False)
-    perf_desc = db.Column(db.String())
+    perf_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    perf_name = db.Column(db.String(20), nullable=False, unique=True)
+    perf_desc = db.Column(db.String(100))
 
-    def __init__(self, name, desc):
-        self.perf_name = name
-        self.perf_desc = desc
+    b11_servico = db.relationship('B11Servico', secondary='public.b15_rel_pf_se', backref='b10_perfils')
 
-    def __repr__(self):
-        return '<id {}>'.format(self.perf_id)
 
-class Servico(db.Model):
+class B11Servico(db.Model):
     __tablename__ = 'b11_servico'
+    __table_args__ = {'schema': 'public'}
 
-    serv_id = db.Column(db.Integer, primary_key=True)
-    serv_code = db.Column(db.Integer, nullable=False)
-    serv_name = db.Column(db.String(), nullable=False)
-    serv_desc = db.Column(db.String())
+    serv_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    serv_code = db.Column(db.Integer, nullable=False, unique=True)
+    serv_name = db.Column(db.String(50), nullable=False)
+    serv_desc = db.Column(db.String(280))
 
-    def __init__(self, code, name, desc):
-        self.serv_code = code
-        self.serv_name = name
-        self.serv_desc = desc
 
-    def __repr__(self):
-        return '<id {}>'.format(self.serv_id)
-
-class Rel_Tr_Mod(db.Model):
+class B12RelTrMod(db.Model):
     __tablename__ = 'b12_rel_tr_mod'
+    __table_args__ = {'schema': 'public'}
 
-    rel_tr_name = db.Column(db.String(), db.ForeignKey('Trilha.tr_name'), primary_key=True)
-    rel_mod_code = db.Column(db.Integer, db.ForeignKey('Modulo.mod_code'), primary_key=True)
-    rel_tr_mod_mandatory = db.Column(db.Boolean())
+    rel_tr_name = db.Column(db.ForeignKey('public.b07_trilha.tr_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_mod_code = db.Column(db.ForeignKey('public.b08_modulo.mod_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_tr_mod_mandatory = db.Column(db.Boolean)
 
-    def __init__(self, tr_name, mod_code, mandatory):
-        self.rel_tr_name = tr_name
-        self.rel_mod_code = mod_code
-        self.rel_tr_mod_mandatory = mandatory
+    b08_modulo = db.relationship('B08Modulo', primaryjoin='B12RelTrMod.rel_mod_code == B08Modulo.mod_code', backref='b12_rel_tr_mods')
+    b07_trilha = db.relationship('B07Trilha', primaryjoin='B12RelTrMod.rel_tr_name == B07Trilha.tr_name', backref='b12_rel_tr_mods')
 
-    def __repr__(self):
-        return '<id {} {}>'.format(self.rel_tr_name, self.rel_mod_code)
+
+t_b13_rel_tr_cur = db.Table(
+    'b13_rel_tr_cur',
+    db.Column('rel_tr_name', db.ForeignKey('public.b07_trilha.tr_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    db.Column('rel_cur_code', db.ForeignKey('public.b06_curso.cur_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    schema='public'
+)
+
+
+class B14RelUsPf(db.Model):
+    __tablename__ = 'b14_rel_us_pf'
+    __table_args__ = {'schema': 'public'}
+
+    rel_us_email = db.Column(db.ForeignKey('public.users.us_email', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_perf_name = db.Column(db.ForeignKey('public.b10_perfil.perf_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_us_pf_date_in = db.Column(db.DateTime)
+    rel_us_pf_date_out = db.Column(db.DateTime)
+
+    b10_perfil = db.relationship('B10Perfil', primaryjoin='B14RelUsPf.rel_perf_name == B10Perfil.perf_name', backref='b14_rel_us_pfs')
+    user = db.relationship('User', primaryjoin='B14RelUsPf.rel_us_email == User.us_email', backref='b14_rel_us_pfs')
+
+
+t_b15_rel_pf_se = db.Table(
+    'b15_rel_pf_se',
+    db.Column('rel_perf_name', db.ForeignKey('public.b10_perfil.perf_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    db.Column('rel_serv_code', db.ForeignKey('public.b11_servico.serv_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    schema='public'
+)
+
+
+class B16RelProfDi(db.Model):
+    __tablename__ = 'b16_rel_prof_dis'
+    __table_args__ = {'schema': 'public'}
+
+    rel_prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_prof_disc_semester = db.Column(db.Integer)
+    rel_prof_disc_year = db.Column(db.Integer)
+
+    b05_disciplina = db.relationship('B05Disciplina', primaryjoin='B16RelProfDi.rel_dis_code == B05Disciplina.dis_code', backref='b16_rel_prof_dis')
+    b02_professor = db.relationship('B02Professor', primaryjoin='B16RelProfDi.rel_prof_nusp == B02Professor.prof_nusp', backref='b16_rel_prof_dis')
+
+
+class B17RelAlDi(db.Model):
+    __tablename__ = 'b17_rel_al_dis'
+    __table_args__ = {'schema': 'public'}
+
+    rel_al_nusp = db.Column(db.ForeignKey('public.b03_aluno.al_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    plan_semester = db.Column(db.Integer)
+    plan_year = db.Column(db.Integer)
+
+    b03_aluno = db.relationship('B03Aluno', primaryjoin='B17RelAlDi.rel_al_nusp == B03Aluno.al_nusp', backref='b17_rel_al_dis')
+    b05_disciplina = db.relationship('B05Disciplina', primaryjoin='B17RelAlDi.rel_dis_code == B05Disciplina.dis_code', backref='b17_rel_al_dis')
+
+
+t_b18_rel_dis_mod = db.Table(
+    'b18_rel_dis_mod',
+    db.Column('rel_dis_code', db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    db.Column('rel_mod_code', db.ForeignKey('public.b08_modulo.mod_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    schema='public'
+)
+
+
+t_b19_rel_mod_cur = db.Table(
+    'b19_rel_mod_cur',
+    db.Column('rel_mod_code', db.ForeignKey('public.b08_modulo.mod_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    db.Column('rel_cur_code', db.ForeignKey('public.b06_curso.cur_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    schema='public'
+)
+
+
+class B20RelPesU(db.Model):
+    __tablename__ = 'b20_rel_pes_us'
+    __table_args__ = {'schema': 'public'}
+
+    rel_pes_cpf = db.Column(db.ForeignKey('public.b01_pessoa.pes_cpf', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_us_email = db.Column(db.ForeignKey('public.users.us_email', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_pes_us_date_in = db.Column(db.DateTime, nullable=False)
+    rel_pes_us_date_out = db.Column(db.DateTime)
+
+    b01_pessoa = db.relationship('B01Pessoa', primaryjoin='B20RelPesU.rel_pes_cpf == B01Pessoa.pes_cpf', backref='b20_rel_pes_us')
+    user = db.relationship('User', primaryjoin='B20RelPesU.rel_us_email == User.us_email', backref='b20_rel_pes_us')
+
+
+class B21Oferecimento(db.Model):
+    __tablename__ = 'b21_oferecimento'
+    __table_args__ = {'schema': 'public'}
+
+    rel_prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_oferecimento_year = db.Column(db.Integer, primary_key=True, nullable=False)
+    rel_oferecimento_semester = db.Column(db.Integer, primary_key=True, nullable=False)
+    rel_oferecimento_class = db.Column(db.Integer)
+
+    b05_disciplina = db.relationship('B05Disciplina', primaryjoin='B21Oferecimento.rel_dis_code == B05Disciplina.dis_code', backref='b21_oferecimentoes')
+    b02_professor = db.relationship('B02Professor', primaryjoin='B21Oferecimento.rel_prof_nusp == B02Professor.prof_nusp', backref='b21_oferecimentoes')
+
+
+class B22RelAlOf(db.Model):
+    __tablename__ = 'b22_rel_al_of'
+    __table_args__ = {'schema': 'public'}
+
+    rel_prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_al_nusp = db.Column(db.ForeignKey('public.b03_aluno.al_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    rel_al_of_year = db.Column(db.Integer, primary_key=True, nullable=False)
+    rel_al_of_semester = db.Column(db.Integer, primary_key=True, nullable=False)
+    rel_al_of_grade = db.Column(db.Float)
+    rel_al_of_attendance = db.Column(db.Float)
+
+    b03_aluno = db.relationship('B03Aluno', primaryjoin='B22RelAlOf.rel_al_nusp == B03Aluno.al_nusp', backref='b22_rel_al_ofs')
+    b05_disciplina = db.relationship('B05Disciplina', primaryjoin='B22RelAlOf.rel_dis_code == B05Disciplina.dis_code', backref='b22_rel_al_ofs')
+    b02_professor = db.relationship('B02Professor', primaryjoin='B22RelAlOf.rel_prof_nusp == B02Professor.prof_nusp', backref='b22_rel_al_ofs')
+
+
+class B23OfTime(db.Model):
+    __tablename__ = 'b23_of_times'
+    __table_args__ = {'schema': 'public'}
+
+    prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
+    year = db.Column(db.Integer, primary_key=True, nullable=False)
+    semester = db.Column(db.Integer, primary_key=True, nullable=False)
+    time_in = db.Column(db.Time, primary_key=True, nullable=False)
+    time_out = db.Column(db.Time, nullable=False)
+    day = db.Column(db.Integer, primary_key=True, nullable=False)
+
+    b05_disciplina = db.relationship('B05Disciplina', primaryjoin='B23OfTime.dis_code == B05Disciplina.dis_code', backref='b23_of_times')
+    b02_professor = db.relationship('B02Professor', primaryjoin='B23OfTime.prof_nusp == B02Professor.prof_nusp', backref='b23_of_times')
+
+
+t_b24_rel_dis_dis = db.Table(
+    'b24_rel_dis_dis',
+    db.Column('dis_code', db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    db.Column('dis_req_code', db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    schema='public'
+)
+
+
+class User(db.Model):
+    __tablename__ = 'users'
+    __table_args__ = {'schema': 'public'}
+
+    us_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
+    us_email = db.Column(db.String(99), unique=True)
+    us_password = db.Column(db.Text, nullable=False)
