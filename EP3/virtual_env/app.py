@@ -1,6 +1,6 @@
 import config
 from models import *
-from flask import Flask, request, render_template
+from flask import Flask, request, redirect, render_template, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -11,8 +11,47 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 @app.route("/")
-def hello():
-	return render_template('index.html')
+def index():
+	email = session.get('user_id')
+	if email is None:
+		return redirect(url_for('login'))
+
+	data = db.session.query(func.public.get_servs_from_email(email))
+
+	results = []
+	for serv in data:
+		for row in serv:
+			results.append(row)
+
+	return render_template('index.html', email=email, servs=results)
+
+@app.route("/login", methods=('GET', 'POST'))
+def login():
+	if request.method == 'POST':
+		email = request.form['email']
+		password = request.form['password']
+		error = None
+		data = db.session.query(func.public.check_login(email, password)).first()
+
+		if data is None:
+			error = 'Incorrect username/password.'
+
+		if error is None:
+			session.clear()
+			session['user_id'] = email
+			return redirect(url_for('index'))
+
+		flash(error)
+
+	return render_template('login.html')
+
+@app.route("/logout")
+def logout():
+	if session.get('user_id') is not None:
+		session.clear()
+
+	return redirect(url_for('index'))
+
 
 @app.route("/add_p")
 def add_p():
