@@ -76,6 +76,8 @@ DROP TYPE IF EXISTS pf_se_key CASCADE;
 CREATE TYPE pf_se_key AS (key1 varchar(20), key2 integer);
 
 --DML Funcoes
+
+-- CREATES
 BEGIN;
 CREATE OR REPLACE FUNCTION create_users(arg0 email, arg1 TEXT)
 RETURNS int AS
@@ -156,6 +158,7 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+-- DELETES
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_user(key email)
 RETURNS int AS
@@ -236,6 +239,7 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+-- UPDATES
 BEGIN;
 CREATE OR REPLACE FUNCTION update_users_email(key email, new email)
 RETURNS int AS
@@ -457,6 +461,7 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
+-- RETRIEVALS
 /* Os argumentos são a chave de um Perfil */
 /* Retorna todos os nomes e descrições dos Serviços disponíveis ao Perfil */
 BEGIN;
