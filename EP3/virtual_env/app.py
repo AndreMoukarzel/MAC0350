@@ -1,6 +1,6 @@
 import config
 from models import *
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -26,13 +26,30 @@ def add_p():
 		db.session.rollback()
 		return(str(e))
 
+@app.route("/work_profs")
+def work_profs():
+	semestre=request.args.get('semestre')
+	ano=request.args.get('ano')
+	try:
+		data = db.session.query(func.public.working_profs(semestre, ano))
+
+		results = [] 
+		for entry in data:
+			for info in entry:
+				results.append(info[1:len(info)-1].split(','))
+
+		return render_template('work_profs.html', results=results)
+
+	except Exception as e:
+		return(str(e))
+
 @app.route("/getall")
 def get_all():
 	try:
 		pessoas=B01Pessoa.query.all()
 		lista = ""
 		for p in pessoas:
-			lista = lista + p.pes_name + " "
+			lista = lista + p.pes_name + " <br> "
 		return lista
 	except Exception as e:
 		return(str(e))

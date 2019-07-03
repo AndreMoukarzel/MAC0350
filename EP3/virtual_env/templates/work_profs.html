@@ -1,0 +1,25 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title>Working Profs</title>
+</head>
+<body>
+
+	<table style="width:100%; font-family: arial, sans-serif; border-collapse: collapse;">
+		<tr>
+			<th> Nome </th>
+			<th> Nusp </th>
+			<th> Disc_code </th>
+			<th> Disciplina </th>
+		</tr>
+		{% for row in results %}
+		<tr>
+			{% for info in row %}
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ info }} </td>
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+
+</body>
+</html>
