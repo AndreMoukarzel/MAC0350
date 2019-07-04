@@ -1,6 +1,7 @@
 import config
+import db_operations
 from models import *
-from flask import Flask, request, redirect, render_template, session, url_for
+from flask import Flask, request, redirect, render_template, session, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -16,22 +17,19 @@ def index():
 	if email is None:
 		return redirect(url_for('login'))
 
-	data = db.session.query(func.public.get_servs_from_email(email))
-
-	results = []
-	for serv in data:
-		for row in serv:
-			results.append(row)
+	results = db_operations.get_servs_from_email(email)
 
 	return render_template('index.html', email=email, servs=results)
 
 @app.route("/login", methods=('GET', 'POST'))
 def login():
+	error = None
+
 	if request.method == 'POST':
 		email = request.form['email']
 		password = request.form['password']
-		error = None
-		data = db.session.query(func.public.check_login(email, password)).first()
+
+		data = db_operations.check_login(email, password)
 
 		if data is None:
 			error = 'Incorrect username/password.'
@@ -41,9 +39,7 @@ def login():
 			session['user_id'] = email
 			return redirect(url_for('index'))
 
-		flash(error)
-
-	return render_template('login.html')
+	return render_template('login.html', error=error)
 
 @app.route("/logout")
 def logout():
@@ -61,25 +57,16 @@ def add_p():
 	if name == '' or cpf == '':
 		return "Parametros de inserção invalidos. <br> <a href=\"/\"> Voltar </a>"
 
-	try:
-		data = db.session.query(func.public.create_Pessoa(cpf, name)).first()
-		db.session.commit()
-		return "Pessoa criada com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
-	except Exception as e:
-		db.session.rollback()
-		return(str(e))
+	return db_operations.add_p(name, cpf)
 
 @app.route("/getall_p")
 def get_all():
-	try:
-		data = B01Pessoa.query.all()
-		results = [] 
-		for entry in data:
-			results.append((entry.pes_id, entry.pes_name, entry.pes_cpf))
+	results = db_operations.get_all_p()
 
-		return render_template('getall_p.html', results=results)
-	except Exception as e:
-		return(str(e))
+	if type(results) == str:
+		return results + "<br> <a href=\"/\"> Voltar </a>"
+
+	return render_template('getall_p.html', results=results)
 
 @app.route("/work_profs")
 def work_profs():
@@ -89,18 +76,12 @@ def work_profs():
 	if semestre == '' or ano == '':
 		return "Parametros de pesquisa invalidos. <br> <a href=\"/\"> Voltar </a>"
 
-	try:
-		data = db.session.query(func.public.working_profs(semestre, ano))
+	results = db_operations.work_profs(semestre, ano)
 
-		results = [] 
-		for entry in data:
-			for info in entry:
-				results.append(info[1:len(info)-1].split(','))
+	if type(results) == str:
+		return results + "<br> <a href=\"/\"> Voltar </a>"
 
-		return render_template('work_profs.html', results=results)
-
-	except Exception as e:
-		return(str(e))
+	return render_template('work_profs.html', results=results)
 
 if __name__ == '__main__':
 	app.run()

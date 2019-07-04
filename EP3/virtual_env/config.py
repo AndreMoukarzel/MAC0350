@@ -7,6 +7,10 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/mac350"
+    SQLALCHEMY_BINDS = {
+        'pessoas': 'postgresql://localhost/pessoas',
+        'access': 'postgresql://localhost/access'
+    }
 
 
 class ProductionConfig(Config):

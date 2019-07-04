@@ -12,6 +12,7 @@ db = SQLAlchemy()
 class B01Pessoa(db.Model):
     __tablename__ = 'b01_pessoa'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'pessoas'
 
     pes_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     pes_cpf = db.Column(db.String(11), nullable=False, unique=True)
@@ -21,6 +22,7 @@ class B01Pessoa(db.Model):
 class B02Professor(db.Model):
     __tablename__ = 'b02_professor'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'pessoas'
 
     prof_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     prof_nusp = db.Column(db.String(9), nullable=False, unique=True)
@@ -32,6 +34,7 @@ class B02Professor(db.Model):
 class B03Aluno(db.Model):
     __tablename__ = 'b03_aluno'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'pessoas'
 
     al_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     al_nusp = db.Column(db.String(9), nullable=False, unique=True)
@@ -43,6 +46,7 @@ class B03Aluno(db.Model):
 class B04Administrador(db.Model):
     __tablename__ = 'b04_administrador'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'pessoas'
 
     adm_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     adm_cpf = db.Column(db.ForeignKey('public.b01_pessoa.pes_cpf', ondelete='CASCADE', onupdate='CASCADE'), nullable=False, unique=True)
@@ -113,6 +117,7 @@ class B08Modulo(db.Model):
 class B10Perfil(db.Model):
     __tablename__ = 'b10_perfil'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'access'
 
     perf_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     perf_name = db.Column(db.String(20), nullable=False, unique=True)
@@ -124,6 +129,7 @@ class B10Perfil(db.Model):
 class B11Servico(db.Model):
     __tablename__ = 'b11_servico'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'access'
 
     serv_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     serv_code = db.Column(db.Integer, nullable=False, unique=True)
@@ -154,6 +160,7 @@ t_b13_rel_tr_cur = db.Table(
 class B14RelUsPf(db.Model):
     __tablename__ = 'b14_rel_us_pf'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'access'
 
     rel_us_email = db.Column(db.ForeignKey('public.users.us_email', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_perf_name = db.Column(db.ForeignKey('public.b10_perfil.perf_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -168,6 +175,7 @@ t_b15_rel_pf_se = db.Table(
     'b15_rel_pf_se',
     db.Column('rel_perf_name', db.ForeignKey('public.b10_perfil.perf_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
     db.Column('rel_serv_code', db.ForeignKey('public.b11_servico.serv_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
+    info={'bind_key': 'access'},
     schema='public'
 )
 
@@ -281,10 +289,10 @@ t_b24_rel_dis_dis = db.Table(
     schema='public'
 )
 
-
 class User(db.Model):
     __tablename__ = 'users'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'access'
 
     us_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     us_email = db.Column(db.String(99), unique=True)
