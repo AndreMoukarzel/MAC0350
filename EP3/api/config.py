@@ -6,11 +6,13 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
-    SQLALCHEMY_DATABASE_URI = "postgresql://localhost/mac350"
+    SQLALCHEMY_DATABASE_URI = "postgresql://localhost/pessoas"
     SQLALCHEMY_BINDS = {
         'pessoas': 'postgresql://localhost/pessoas',
         'access': 'postgresql://localhost/access',
-        'curr': 'postgresql://localhost/curriculum'
+        'curr': 'postgresql://localhost/curriculum',
+        'acc_peo': 'postgresql://localhost/inter_acc_peo',
+        'peo_cur': 'postgresql://localhost/inter_peo_cur',
     }
 
 

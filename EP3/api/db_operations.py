@@ -10,6 +10,15 @@ app.config.from_object(config.DevelopmentConfig)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+def get_name_from_email(email):
+	assert(email is not None)
+	db.session.bind = db.get_engine(app, 'acc_peo')
+	data = db.session.query(func.public.get_pes(email)).first()
+
+	name = data[0][1:len(data[0])-1].split(',')[1]
+
+	return name
+
 def get_servs_from_email(email):
 	assert(email is not None)
 	db.session.bind = db.get_engine(app, 'access')

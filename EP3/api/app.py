@@ -17,9 +17,10 @@ def index():
 	if email is None:
 		return redirect(url_for('login'))
 
+	name = db_operations.get_name_from_email(email)
 	results = db_operations.get_servs_from_email(email)
 
-	return render_template('index.html', email=email, servs=results)
+	return render_template('index.html', name=name, servs=results)
 
 @app.route("/login", methods=('GET', 'POST'))
 def login():
