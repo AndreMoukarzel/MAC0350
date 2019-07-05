@@ -54,6 +54,15 @@ def add_p(name, cpf):
 		db.session.rollback()
 		return(str(e)+" <br> <a href=\"/\"> Voltar </a>")
 
+def get_p(p_id):
+	assert(p_id is not None)
+	try:
+		entry = B01Pessoa.query.filter_by(pes_id=p_id).first()
+		return (entry.pes_id, entry.pes_name, entry.pes_cpf)
+
+	except Exception as e:
+		return(str(e))
+
 def get_all_p():
 	try:
 		data = B01Pessoa.query.all()
@@ -62,6 +71,15 @@ def get_all_p():
 			results.append((entry.pes_id, entry.pes_name, entry.pes_cpf))
 
 		return results
+
+	except Exception as e:
+		return(str(e))
+
+def update_p(p_id, p_name, p_cpf):
+	try:
+		db.session.bind = db.get_engine(app, 'pessoas')
+		data = db.session.query(func.public.update_Full_Pessoa(p_id, p_name, p_cpf)).first()
+		db.session.commit()
 
 	except Exception as e:
 		return(str(e))

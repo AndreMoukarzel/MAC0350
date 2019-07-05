@@ -654,7 +654,7 @@ COMMIT;
 --DML exemplos
 /* Usuario */
 INSERT INTO users (us_email, us_password)
-	VALUES ('1_user@gmail.com', crypt('123456780', gen_salt('bf')));
+	VALUES ('admin@gmail.com', crypt('admin', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
 	VALUES ('2_user@gmail.com', crypt('123456781', gen_salt('bf')));
@@ -685,7 +685,7 @@ INSERT INTO users (us_email, us_password)
 
 /* Perfil */
 INSERT INTO b10_Perfil (perf_name, perf_desc)
-	VALUES ('Perfil Inovador 1', 'Perfil usado por usuarios que inovam');
+	VALUES ('Administrador', 'Todos os serviços ao seu dispor');
 
 INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Perfil Inovador 2', 'Perfil usado por usuarios que inovam');
@@ -716,7 +716,7 @@ INSERT INTO b10_Perfil (perf_name, perf_desc)
 
 /* Servicos */
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0001, 'create_Pessoa()', 'cria uma pessoa');
+	VALUES (0001, 'CRUD Pessoas', 'Permite criar, deletar e atualizar uma pessoa, e ver as pessoas criadas');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
 	VALUES (0002, 'create_Professor()', 'cria um professor');
@@ -747,7 +747,7 @@ INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
 
 /* rel user perfil*/
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
-	VALUES ('1_user@gmail.com', 'Perfil Inovador 1', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ('admin@gmail.com', 'Administrador', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
 	VALUES ('2_user@gmail.com', 'Perfil Inovador 2', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
@@ -778,7 +778,19 @@ INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_
 
 /* rel perfil servico */
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 1', 0001);
+	VALUES ('Administrador', 0001);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Administrador', 0002);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Administrador', 0003);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Administrador', 0004);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Administrador', 0005);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Perfil Inovador 2', 0002);

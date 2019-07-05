@@ -61,13 +61,51 @@ def add_p():
 	return db_operations.add_p(name, cpf)
 
 @app.route("/getall_p")
-def get_all():
+def getall_p():
 	results = db_operations.get_all_p()
 
 	if type(results) == str:
 		return results + "<br> <a href=\"/\"> Voltar </a>"
 
-	return render_template('getall_p.html', results=results)
+	return render_template('Pessoa/getall_p.html', results=results)
+
+@app.route("/update_p", methods=('GET', 'POST'))
+def update_p():
+	email = session.get('user_id')
+	if email is None:
+		return redirect(url_for('login'))
+
+	servs = db_operations.get_servs_from_email(email)
+
+	if type(servs) == str:
+			return servs + "<br> <a href=\"/\"> Voltar </a>"
+
+	if not 1 in servs:
+		return redirect(url_for('index')) 
+
+	pes_id = request.args.get('id')
+	if pes_id is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	if request.method == 'POST':
+		name = request.form['name']
+		cpf= request.form['cpf']
+
+		result = db_operations.update_p(pes_id, name, cpf)
+
+		if type(result) == str:
+			return result + "<br> <a href=\"/\"> Voltar </a>"
+
+		return redirect(url_for('getall_p'))
+
+	else:
+		pes_info = db_operations.get_p(pes_id)
+
+		if type(pes_info) == str:
+			return pes_info + "<br> <a href=\"/\"> Voltar </a>"
+
+		return render_template('Pessoa/update_p.html', info=pes_info)
+
 
 @app.route("/work_profs")
 def work_profs():

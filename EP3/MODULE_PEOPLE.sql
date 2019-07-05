@@ -287,6 +287,20 @@ COMMIT;
 
 -- UPDATES
 BEGIN;
+CREATE OR REPLACE FUNCTION update_Full_Pessoa(id integer, name varchar(200), cpf varchar(11))
+RETURNS int AS
+$$
+BEGIN
+	UPDATE b01_Pessoa
+	SET pes_cpf = cpf, pes_name = name
+	WHERE pes_id = id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION update_Pessoa_cpf(key varchar(11), new varchar(11))
 RETURNS int AS
 $$
