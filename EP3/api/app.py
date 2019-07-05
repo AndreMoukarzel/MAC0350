@@ -106,6 +106,28 @@ def update_p():
 
 		return render_template('Pessoa/update_p.html', info=pes_info)
 
+@app.route("/delete_p")
+def delete_p():
+	email = session.get('user_id')
+	if email is None:
+		return redirect(url_for('login'))
+
+	servs = db_operations.get_servs_from_email(email)
+
+	if type(servs) == str:
+			return servs + "<br> <a href=\"/\"> Voltar </a>"
+
+	if not 1 in servs:
+		return redirect(url_for('index')) 
+
+	pes_cpf = request.args.get('cpf')
+	if pes_cpf is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	result = db_operations.delete_p(pes_cpf)
+
+	return result
+
 
 @app.route("/work_profs")
 def work_profs():

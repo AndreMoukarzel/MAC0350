@@ -84,6 +84,16 @@ def update_p(p_id, p_name, p_cpf):
 	except Exception as e:
 		return(str(e))
 
+def delete_p(p_cpf):
+	try:
+		db.session.bind = db.get_engine(app, 'pessoas')
+		data = db.session.query(func.public.delete_Pessoa(p_cpf)).first()
+		db.session.commit()
+		return "Pessoa deletada com id = {}. <br> <a href=\"/getall_p\"> Voltar </a>".format(data[0])
+
+	except Exception as e:
+		return(str(e))
+
 def work_profs(semestre, ano):
 	assert(semestre is not None)
 	assert(ano is not None)
