@@ -20,6 +20,13 @@ DROP DOMAIN IF EXISTS email CASCADE;
 CREATE DOMAIN email AS citext
 	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
 
+--Server
+CREATE EXTENSION postgres_fdw;
+
+CREATE SERVER server_pessoas FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'localhost', dbname 'pessoas');
+
+CREATE USER MAPPING FOR CURRENT_USER SERVER server_pessoas OPTIONS (user 'dba', password '123');
+
 -- DDL
 CREATE FOREIGN TABLE b04_Administrador (
 	adm_id SERIAL,

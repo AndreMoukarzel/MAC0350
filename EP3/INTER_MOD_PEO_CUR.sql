@@ -20,21 +20,53 @@ DROP DOMAIN IF EXISTS email CASCADE;
 CREATE DOMAIN email AS citext
 	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
 
+--Server
+CREATE EXTENSION postgres_fdw;
+
+CREATE SERVER server_pessoas FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'localhost', dbname 'pessoas');
+CREATE USER MAPPING FOR CURRENT_USER SERVER server_pessoas OPTIONS (user 'dba', password '123');
+
+CREATE SERVER server_curriculum FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'localhost', dbname 'curriculum');
+CREATE USER MAPPING FOR CURRENT_USER SERVER server_curriculum OPTIONS (user 'dba', password '123');
+
 --DDL
+CREATE FOREIGN TABLE b02_Professor (
+	prof_id SERIAL,
+	prof_nusp varchar(9) NOT NULL,
+	prof_cpf varchar(11) NOT NULL
+)
+SERVER server_pessoas; 
+
+CREATE FOREIGN TABLE b03_Aluno (
+	al_id SERIAL,
+	al_nusp varchar(9) NOT NULL,
+	al_cpf varchar(11) NOT NULL
+)
+SERVER server_pessoas;
+
+CREATE FOREIGN TABLE b05_Disciplina (
+	dis_id SERIAL,
+	dis_code varchar(7) NOT NULL,
+	dis_name varchar(80),
+	dis_class_creds integer,
+	dis_work_creds integer
+)
+SERVER server_curriculum;
+
 CREATE TABLE b16_rel_prof_dis (
 	rel_prof_nusp varchar(9) NOT NULL,
 	rel_dis_code varchar(7) NOT NULL,
 	rel_prof_disc_semester integer,
 	rel_prof_disc_year integer,
-	CONSTRAINT pk_rel_prof_dis PRIMARY KEY (rel_prof_nusp, rel_dis_code),
-	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
+	CONSTRAINT pk_rel_prof_dis PRIMARY KEY (rel_prof_nusp, rel_dis_code)
+	/*CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_dis_code FOREIGN KEY (rel_dis_code)
 		REFERENCES b05_Disciplina(dis_code)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 CREATE TABLE b17_rel_al_dis (
@@ -42,15 +74,15 @@ CREATE TABLE b17_rel_al_dis (
 	rel_dis_code varchar(7) NOT NULL,
 	plan_semester integer,
 	plan_year integer,
-	CONSTRAINT pk_rel_al_dis PRIMARY KEY (rel_al_nusp, rel_dis_code),
-	CONSTRAINT fk_al_nusp FOREIGN KEY (rel_al_nusp)
+	CONSTRAINT pk_rel_al_dis PRIMARY KEY (rel_al_nusp, rel_dis_code)
+	/*CONSTRAINT fk_al_nusp FOREIGN KEY (rel_al_nusp)
 		REFERENCES b03_Aluno(al_nusp)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_dis_code FOREIGN KEY (rel_dis_code)
 		REFERENCES  b05_Disciplina(dis_code)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 CREATE TABLE b21_Oferecimento (
@@ -59,15 +91,15 @@ CREATE TABLE b21_Oferecimento (
 	rel_oferecimento_year integer NOT NULL,
 	rel_oferecimento_semester integer NOT NULL,
 	rel_oferecimento_class integer,
-	CONSTRAINT pk_oferecimento PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester),
-	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
+	CONSTRAINT pk_oferecimento PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_oferecimento_year, rel_oferecimento_semester)
+	/*CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_dis_code FOREIGN KEY (rel_dis_code)
 		REFERENCES b05_Disciplina(dis_code)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 CREATE TABLE b22_rel_al_of (
@@ -78,8 +110,8 @@ CREATE TABLE b22_rel_al_of (
 	rel_al_of_semester integer NOT NULL,
 	rel_al_of_grade float(24),
 	rel_al_of_attendance float(24),
-	CONSTRAINT pk_rel_al_of PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester),
-	CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
+	CONSTRAINT pk_rel_al_of PRIMARY KEY (rel_prof_nusp, rel_dis_code, rel_al_nusp, rel_al_of_year, rel_al_of_semester)
+	/*CONSTRAINT fk_prof_nusp FOREIGN KEY (rel_prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
@@ -90,7 +122,7 @@ CREATE TABLE b22_rel_al_of (
 	CONSTRAINT fk_al_nusp FOREIGN KEY (rel_al_nusp)
 		REFERENCES b03_Aluno(al_nusp)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 CREATE TABLE b23_of_times (
@@ -101,15 +133,15 @@ CREATE TABLE b23_of_times (
 	time_in TIME NOT NULL,
 	time_out TIME NOT NULL,
 	day integer,
-	CONSTRAINT pk_of_times PRIMARY KEY (prof_nusp, dis_code, year, semester, time_in, day),
-	CONSTRAINT fk_prof FOREIGN KEY (prof_nusp)
+	CONSTRAINT pk_of_times PRIMARY KEY (prof_nusp, dis_code, year, semester, time_in, day)
+	/*CONSTRAINT fk_prof FOREIGN KEY (prof_nusp)
 		REFERENCES b02_Professor(prof_nusp)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_dis FOREIGN KEY (dis_code)
 		REFERENCES b05_Disciplina(dis_code)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 DROP TYPE IF EXISTS prof_dis_key CASCADE;
@@ -126,6 +158,135 @@ CREATE TYPE al_of_key AS (key1 varchar(9), key2 varchar(7), key3 varchar(9), key
 
 DROP TYPE IF EXISTS of_times_key CASCADE;
 CREATE TYPE of_times_key AS (key1 varchar(9), key2 varchar(7), key3 integer, key4 integer, key5 TIME, key6 integer);
+
+--TRIGGERS
+CREATE FUNCTION check_prof_dis() RETURNS trigger AS $$
+	DECLARE 
+	dis_exist BOOLEAN;
+	prof_exist BOOLEAN;
+    BEGIN
+
+    	SELECT COUNT(*) = 1 INTO dis_exist
+		FROM b05_Disciplina
+		WHERE dis_code = NEW.rel_dis_code;
+
+		IF NOT dis_exist THEN
+			RAISE EXCEPTION 'Invalid Discipline Code';
+		END IF;
+
+		SELECT COUNT(*) = 1 INTO prof_exist
+		FROM b02_Professor
+		WHERE prof_nusp = NEW.rel_prof_nusp;
+
+		IF NOT prof_exist THEN
+			RAISE EXCEPTION 'Invalid Professor Nusp';
+		END IF;
+
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_prof_dis BEFORE INSERT OR UPDATE ON b16_rel_prof_dis
+    FOR EACH ROW EXECUTE PROCEDURE check_prof_dis();
+
+CREATE FUNCTION check_al_dis() RETURNS trigger AS $$
+	DECLARE 
+	dis_exist BOOLEAN;
+	al_exist BOOLEAN;
+    BEGIN
+
+    	SELECT COUNT(*) = 1 INTO dis_exist
+		FROM b05_Disciplina
+		WHERE dis_code = NEW.rel_dis_code;
+
+		IF NOT dis_exist THEN
+			RAISE EXCEPTION 'Invalid Discipline Code';
+		END IF;
+
+		SELECT COUNT(*) = 1 INTO al_exist
+		FROM b03_Aluno
+		WHERE al_nusp = NEW.rel_al_nusp;
+
+		IF NOT al_exist THEN
+			RAISE EXCEPTION 'Invalid Aluno Nusp';
+		END IF;
+
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_al_dis BEFORE INSERT OR UPDATE ON b17_rel_al_dis
+    FOR EACH ROW EXECUTE PROCEDURE check_al_dis();
+
+CREATE TRIGGER check_prof_dis BEFORE INSERT OR UPDATE ON b21_Oferecimento
+    FOR EACH ROW EXECUTE PROCEDURE check_prof_dis();
+
+CREATE FUNCTION check_al_prof_dis() RETURNS trigger AS $$
+	DECLARE 
+	dis_exist BOOLEAN;
+	prof_exist BOOLEAN;
+	al_exist BOOLEAN;
+    BEGIN
+
+    	SELECT COUNT(*) = 1 INTO dis_exist
+		FROM b05_Disciplina
+		WHERE dis_code = NEW.rel_dis_code;
+
+		IF NOT dis_exist THEN
+			RAISE EXCEPTION 'Invalid Discipline Code';
+		END IF;
+
+		SELECT COUNT(*) = 1 INTO prof_exist
+		FROM b02_Professor
+		WHERE prof_nusp = NEW.rel_prof_nusp;
+
+		IF NOT prof_exist THEN
+			RAISE EXCEPTION 'Invalid Professor Nusp';
+		END IF;
+
+		SELECT COUNT(*) = 1 INTO al_exist
+		FROM b03_Aluno
+		WHERE al_nusp = NEW.rel_al_nusp;
+
+		IF NOT al_exist THEN
+			RAISE EXCEPTION 'Invalid Aluno Nusp';
+		END IF;
+
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_al_prof_dis BEFORE INSERT OR UPDATE ON b22_rel_al_of
+    FOR EACH ROW EXECUTE PROCEDURE check_al_prof_dis();
+
+CREATE FUNCTION b23_check_prof_dis() RETURNS trigger AS $$
+	DECLARE 
+	dis_exist BOOLEAN;
+	prof_exist BOOLEAN;
+    BEGIN
+
+    	SELECT COUNT(*) = 1 INTO dis_exist
+		FROM b05_Disciplina
+		WHERE dis_code = NEW.dis_code;
+
+		IF NOT dis_exist THEN
+			RAISE EXCEPTION 'Invalid Discipline Code';
+		END IF;
+
+		SELECT COUNT(*) = 1 INTO prof_exist
+		FROM b02_Professor
+		WHERE prof_nusp = NEW.prof_nusp;
+
+		IF NOT prof_exist THEN
+			RAISE EXCEPTION 'Invalid Professor Nusp';
+		END IF;
+
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER b23_check_prof_dis BEFORE INSERT OR UPDATE ON b23_of_times
+    FOR EACH ROW EXECUTE PROCEDURE b23_check_prof_dis();
 
 --CREATES
 BEGIN;

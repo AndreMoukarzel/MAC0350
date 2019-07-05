@@ -1,6 +1,8 @@
 CREATE DATABASE pessoas;
 CREATE DATABASE access;
 CREATE DATABASE curriculum;
+CREATE DATABASE inter_acc_peo;
+CREATE DATABASE inter_peo_cur;
 
 \c pessoas
 \i MODULE_PEOPLE.sql
@@ -9,11 +11,10 @@ CREATE DATABASE curriculum;
 \i MODULE_ACCESS.sql
 
 \c curriculum
-
-CREATE EXTENSION postgres_fdw;
-
-CREATE SERVER server_pessoas FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'localhost', dbname 'pessoas');
-
-CREATE USER MAPPING FOR CURRENT_USER SERVER server_pessoas OPTIONS (user 'dba', password '123');
-
 \i MODULE_CURRICULUM.sql
+
+\c inter_acc_peo
+\i INTER_MOD_ACC_PEO.sql
+
+\c inter_peo_cur
+\i INTER_MOD_PEO_CUR.sql

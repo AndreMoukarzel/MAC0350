@@ -20,25 +20,78 @@ DROP DOMAIN IF EXISTS email CASCADE;
 CREATE DOMAIN email AS citext
 	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
 
+--SERVERS
+CREATE EXTENSION postgres_fdw;
+
+CREATE SERVER server_pessoas FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'localhost', dbname 'pessoas');
+CREATE USER MAPPING FOR CURRENT_USER SERVER server_pessoas OPTIONS (user 'dba', password '123');
+
+CREATE SERVER server_access FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 'localhost', dbname 'access');
+CREATE USER MAPPING FOR CURRENT_USER SERVER server_access OPTIONS (user 'dba', password '123');
+
 --DDL
+CREATE FOREIGN TABLE b01_Pessoa(
+	pes_id SERIAL,
+	pes_cpf varchar(11) NOT NULL,
+	pes_name varchar(200)
+)
+SERVER server_pessoas;
+
+CREATE FOREIGN TABLE users(
+	us_id       SERIAL,
+	us_email    email,
+	us_password TEXT NOT NULL
+)
+SERVER server_access;
+
 CREATE TABLE b20_rel_pes_us (
 	rel_pes_cpf varchar(11) NOT NULL,
 	rel_us_email email NOT NULL,
 	rel_pes_us_date_in TIMESTAMP NOT NULL,
 	rel_pes_us_date_out TIMESTAMP,
-	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_us_email),
-	CONSTRAINT fk_pes_cpf FOREIGN KEY (rel_pes_cpf)
+	CONSTRAINT pk_rel_pes_us PRIMARY KEY (rel_pes_cpf, rel_us_email)
+	/*CONSTRAINT fk_pes_cpf FOREIGN KEY (rel_pes_cpf)
 		REFERENCES b01_Pessoa(pes_cpf)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_us_email FOREIGN KEY (rel_us_email)
 		REFERENCES users(us_email)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 DROP TYPE IF EXISTS pes_us_key CASCADE;
 CREATE TYPE pes_us_key AS (key1 varchar(11), key2 email);
+
+--TRIGGERS
+CREATE FUNCTION check_pes_us() RETURNS trigger AS $$
+	DECLARE 
+	pes_exist BOOLEAN;
+	us_exist BOOLEAN;
+    BEGIN
+
+    	SELECT COUNT(*) = 1 INTO pes_exist
+		FROM b01_Pessoa
+		WHERE pes_cpf = NEW.rel_pes_cpf;
+
+		IF NOT pes_exist THEN
+			RAISE EXCEPTION 'Invalid Pessoa CPF';
+		END IF;
+
+		SELECT COUNT(*) = 1 INTO us_exist
+		FROM users
+		WHERE us_email = NEW.rel_us_email;
+
+		IF NOT us_exist THEN
+			RAISE EXCEPTION 'Invalid User Email';
+		END IF;
+
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_pes_us BEFORE INSERT OR UPDATE ON b20_rel_pes_us
+    FOR EACH ROW EXECUTE PROCEDURE check_pes_us();
 
 --CREATES
 BEGIN;
