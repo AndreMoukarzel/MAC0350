@@ -7,11 +7,10 @@ Gabriel Sarti Massukado, NUSP 10284177
 
 /***************************** REQUERIMENTOS *****************************/
 
-	É necessário ter os pacotes 
+	É necessário ter os seguintes pacotes instalados:
 		sqlalchemy 
-		e 
-		flask_sqlalchemy 
-	instalados.
+		flask_sqlalchemy
+		psycopg2 (necessário ter libpq-dev e python3-dev para instalar)
 
 	Também é necessário ter direitos de superuser no psql antes da
   execução do programa.
