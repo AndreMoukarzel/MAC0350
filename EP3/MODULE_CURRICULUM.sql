@@ -21,6 +21,16 @@ CREATE DOMAIN email AS citext
 	CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
 
 -- DDL
+CREATE FOREIGN TABLE b04_Administrador (
+	adm_id SERIAL,
+	adm_cpf varchar(11) NOT NULL,
+	adm_email email NOT NULL,
+	adm_dat_in TIMESTAMP NOT NULL,
+	adm_dat_out TIMESTAMP
+	-- Não existem constrains em FOREIGN TABLE
+)
+SERVER server_pessoas;
+
 CREATE TABLE b05_Disciplina (
 	dis_id SERIAL,
 	dis_code varchar(7) NOT NULL,
@@ -39,11 +49,11 @@ CREATE TABLE b06_Curso (
 	ad_cur_date_in TIMESTAMP,
 	ad_cur_date_out TIMESTAMP,
 	CONSTRAINT pk_curso PRIMARY KEY (cur_id),
-	CONSTRAINT sk_curso UNIQUE (cur_code),
-	CONSTRAINT fk_adm FOREIGN KEY (adm_cpf)
+	CONSTRAINT sk_curso UNIQUE (cur_code)
+	/*CONSTRAINT fk_adm FOREIGN KEY (adm_cpf)
 		REFERENCES b04_Administrador(adm_cpf)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE*/
 );
 
 CREATE TABLE b07_Trilha (
@@ -148,6 +158,27 @@ CREATE TYPE mod_cur_key AS (key1 integer, key2 integer);
 
 DROP TYPE IF EXISTS rel_dis_dis_key CASCADE;
 CREATE TYPE rel_dis_dis_key AS (key1 varchar(7), key2 varchar(7));
+
+--TRIGGERS
+CREATE FUNCTION check_admin() RETURNS trigger AS $$
+	DECLARE 
+	adm_exist BOOLEAN;
+    BEGIN
+
+    	SELECT COUNT(*) = 1 INTO adm_exist
+		FROM b04_Administrador
+		WHERE adm_cpf = NEW.adm_cpf;
+
+		IF NOT adm_exist THEN
+			RAISE EXCEPTION 'Invalid Admin CPF';
+		END IF;
+
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER curso_admin BEFORE INSERT OR UPDATE ON b06_Curso
+    FOR EACH ROW EXECUTE PROCEDURE check_admin();
 
 --CREATES
 BEGIN;
