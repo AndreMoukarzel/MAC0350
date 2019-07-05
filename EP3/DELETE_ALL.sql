@@ -1,0 +1,3 @@
+DROP DATABASE pessoas;
+DROP DATABASE access;
+DROP DATABASE curriculum;

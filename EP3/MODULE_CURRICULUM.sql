@@ -28,8 +28,7 @@ CREATE TABLE b05_Disciplina (
 	dis_class_creds integer,
 	dis_work_creds integer,
 	CONSTRAINT pk_disciplina PRIMARY KEY (dis_id),
-		CONSTRAINT sk_disciplina UNIQUE (dis_code)
-
+	CONSTRAINT sk_disciplina UNIQUE (dis_code)
 );
 
 CREATE TABLE b06_Curso (
@@ -62,6 +61,35 @@ CREATE TABLE b08_Modulo (
 	CONSTRAINT pk_modulo PRIMARY KEY (mod_id),
 	CONSTRAINT sk_modulo UNIQUE (mod_code),
 	CONSTRAINT cred_check CHECK (mod_cred_min > 0)
+);
+
+CREATE TABLE b12_rel_tr_mod (
+	rel_tr_name varchar(80) NOT NULL,
+	rel_mod_code integer NOT NULL,
+	rel_tr_mod_mandatory boolean,
+	CONSTRAINT pk_rel_tr_mod PRIMARY KEY (rel_tr_name, rel_mod_code),
+	CONSTRAINT fk_tr_name FOREIGN KEY (rel_tr_name)
+		REFERENCES b07_Trilha(tr_name)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_mod_code FOREIGN KEY (rel_mod_code)
+		REFERENCES b08_Modulo(mod_code)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
+CREATE TABLE b13_rel_tr_cur (
+	rel_tr_name varchar(80) NOT NULL,
+	rel_cur_code integer NOT NULL,
+	CONSTRAINT pk_rel_tr_cur PRIMARY KEY (rel_tr_name, rel_cur_code),
+	CONSTRAINT fk_tr_name FOREIGN KEY (rel_tr_name)
+		REFERENCES b07_Trilha(tr_name)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT fk_cur_code FOREIGN KEY (rel_cur_code)
+		REFERENCES b06_Curso(cur_code)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE b18_rel_dis_mod (
@@ -118,8 +146,8 @@ CREATE TYPE dis_mod_key AS (key1 varchar(7), key2 integer);
 DROP TYPE IF EXISTS mod_cur_key CASCADE;
 CREATE TYPE mod_cur_key AS (key1 integer, key2 integer);
 
-DROP TYPE IF EXISTS dis_dis_key CASCADE;
-CREATE TYPE dis_dis_key AS (key1 varchar(7), key2 varchar(7));
+DROP TYPE IF EXISTS rel_dis_dis_key CASCADE;
+CREATE TYPE rel_dis_dis_key AS (key1 varchar(7), key2 varchar(7));
 
 --CREATES
 BEGIN;
@@ -218,7 +246,7 @@ $$
 LANGUAGE plpgsql;
 COMMIT;
 
-EGIN;
+BEGIN;
 CREATE OR REPLACE FUNCTION create_rel_dis_mod(arg0 varchar(7), arg1 integer)
 RETURNS dis_mod_key AS
 $$
@@ -398,10 +426,10 @@ COMMIT;
 
 BEGIN;
 CREATE OR REPLACE FUNCTION delete_dis_dis(key1 varchar(7), key2 varchar(7))
-RETURNS dis_dis_key AS
+RETURNS rel_dis_dis_key AS
 $$
 DECLARE
-id dis_dis_key;
+id rel_dis_dis_key;
 BEGIN
 	DELETE FROM b24_rel_dis_dis
 	WHERE dis_code = key1 AND dis_req_code = key2

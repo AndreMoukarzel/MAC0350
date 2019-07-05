@@ -9,7 +9,8 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/mac350"
     SQLALCHEMY_BINDS = {
         'pessoas': 'postgresql://localhost/pessoas',
-        'access': 'postgresql://localhost/access'
+        'access': 'postgresql://localhost/access',
+        'curr': 'postgresql://localhost/curriculum'
     }
 
 
