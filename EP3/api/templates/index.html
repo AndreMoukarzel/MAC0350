@@ -22,6 +22,23 @@
 	<a href="/getall_p"> Ver todas as pessoas </a>
 
 	<br><br>
+	<h2>Criar Novo Curso</h2>
+
+	<form action="/add_curso">
+	  Código: <input type="number" name="code" required><br>
+	  Nome: <input type="text" name="name" required><br>
+	  CPF do Admin: <input type="text" name="cpf" required><br>
+	  Data de Início: <input type="datetime" name="timein" step="1" required><br>
+	  Data de Fim: <input type="datetime" name="timeout" step="1" required><br>
+	  <br>
+	  <input type="submit" value="Criar">
+	</form>
+
+	<br>
+
+	<a href="/getall_curso"> Ver todas as curso </a>
+
+	<br><br>
 
 	{% endif %}
 

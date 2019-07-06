@@ -180,3 +180,23 @@ def work_profs():
 
 if __name__ == '__main__':
 	app.run()
+
+
+@app.route("/add_curso")
+def add_curso():
+	block = check_permission(3)
+
+	if block is not None:
+		return block
+
+	#request.args pega args do url: /algo?name=coisa
+	code=request.args.get('code')
+	name=request.args.get('name')
+	cpf=request.args.get('cpf')
+	timein=request.args.get('timein')
+	timeout=request.args.get('timeout')
+
+	if code == '' or cpf == '':
+		return "Parametros de inserção invalidos. <br> <a href=\"/\"> Voltar </a>"
+
+	return db_operations.add_curso(code, name, cpf, timein, timeout)
