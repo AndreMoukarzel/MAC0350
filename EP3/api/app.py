@@ -495,11 +495,11 @@ def update_rel_prof_dis():
 		if type(result) == str:
 			return result + "<br> <a href=\"/\"> Voltar </a>"
 
-		return redirect(url_for('getall_rel_prof_nusp'))
+		return redirect(url_for('getall_rel_prof_dis'))
 
 	#Se não, só preencha e espere modificações
 	else:
-		rel_info = db_operations.getall_rel_prof_nusp(original_prof_nusp, original_dis_code)
+		rel_info = db_operations.get_rel_prof_dis(original_prof_nusp, original_dis_code)
 
 		if type(rel_info) == str:
 			return rel_info + "<br> <a href=\"/\"> Voltar </a>"
@@ -520,7 +520,7 @@ def delete_rel_prof_dis():
 	if prof_nusp is None or dis_code is None:
 		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
 
-	result = db_operations.delete_rel_prof_nusp(prof_nusp, dis_code, semester, year)
+	result = db_operations.delete_rel_prof_dis(prof_nusp, dis_code, semester, year)
 
 	return result
 

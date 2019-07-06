@@ -1,0 +1,35 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title>Relações entre Professor e Disciplina</title>
+</head>
+<body>
+
+	<table style="width:100%; font-family: arial, sans-serif; border-collapse: collapse;">
+		<tr>
+			<th> NUSP </th>
+			<th> Codigo da Disciplina </th>
+			<th> Semestre </th>
+			<th> Ano </th>
+		</tr>
+		{% for row in results %}
+		<tr>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[0] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[1] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[2] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[3] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd; color: #0000cc;">
+				<a href="/update_rel_prof_dis?prof_nusp={{row[0]}}&dis_code={{row[1]}}"> UPDATE </a> </td>
+			<td style="text-align: center; border: 1px solid #dddddd; color: #cc0000;">
+				<a href="/delete_rel_prof_dis?prof_nusp={{row[0]}}&dis_code={{row[1]}}&semester={{row[2]}}&year={{row[3]}}"> DELETE </a> </td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<br>
+	<br>
+
+	<a href="/"> Voltar </a>
+
+</body>
+</html>

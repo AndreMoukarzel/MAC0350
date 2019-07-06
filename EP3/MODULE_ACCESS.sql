@@ -702,7 +702,7 @@ INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Administrador', 'Todos os serviços ao seu dispor');
 
 INSERT INTO b10_Perfil (perf_name, perf_desc)
-	VALUES ('Perfil Inovador 2', 'Perfil usado por usuarios que inovam');
+	VALUES ('Webmaster', 'Pode ligar users com pessoas');
 
 INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Perfil Inovador 3', 'Perfil usado por usuarios que inovam');
@@ -742,10 +742,10 @@ INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
 	VALUES (0004, 'CRUD Perfil', 'Permite criar, deletar e atualizar um perfil, e ver os perfis criados');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0005, 'create_new_Professor()', 'cria um professor e, se necessário, a pessoa correspondente');
+	VALUES (0005, 'CRUD Rel_Pes_Us', 'Permite criar, deletar e atualizar relação pessoa e usuario, e ver as relações criadas');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0006, 'create_new_Aluno()', 'cria um aluno e, se necessário, a pessoa correspondente');
+	VALUES (0006, 'CRUD Rel_Prof_Dis', 'Permite criar, deletar e atualizar relação professor e disc, e ver as relações criadas');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
 	VALUES (0007, 'create_new_Administrador()', 'cria um administrador e, se necessário, a pessoa correspondente');
@@ -764,7 +764,7 @@ INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_
 	VALUES ('admin@gmail.com', 'Administrador', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
-	VALUES ('2_user@gmail.com', 'Perfil Inovador 2', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ('2_user@gmail.com', 'Webmaster', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
 	VALUES ('3_user@gmail.com', 'Perfil Inovador 3', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
@@ -807,7 +807,10 @@ INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Administrador', 0005);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 2', 0002);
+	VALUES ('Administrador', 0006);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Webmaster', 0005);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Perfil Inovador 3', 0003);

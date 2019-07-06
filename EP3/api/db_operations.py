@@ -342,7 +342,19 @@ def add_rel_prof_dis(prof_nusp, dis_code, semester, year):
 		db.session.rollback()
 		return (str(e)+" <br> <a href=\"/\"> Voltar </a>")
 
-def get_all_rel_prof_dis():
+def get_rel_prof_dis(nusp, dis_code):
+	assert(nusp is not None)
+	assert(dis_code is not None)
+	try:
+		#Esse é outro jeito de pegar coisas, chamando pelo model
+		#No model está definido o bind, então não precisa se preocupar com ele
+		entry = B16RelProfDi.query.filter_by(rel_prof_nusp=nusp, rel_dis_code=dis_code).first()
+		return (entry.rel_prof_nusp, entry.rel_dis_code, entry.rel_prof_disc_semester, entry.rel_prof_disc_year)
+
+	except Exception as e:
+		return(str(e))
+
+def getall_rel_prof_dis():
 	try:
 		data = B16RelProfDi.query.all()
 		results = [] 
@@ -354,10 +366,10 @@ def get_all_rel_prof_dis():
 	except Exception as e:
 		return(str(e))
 
-def update_rel_prof_dis(prof_nusp, dis_code, semester, year):
+def update_rel_prof_dis(old_nusp, old_dis_code, prof_nusp, dis_code, semester, year):
 	try:
 		db.session.bind = db.get_engine(app, 'peo_cur')
-		data = db.session.query(func.public.update_Full_rel_Professor_Disciplina(prof_nusp, dis_code, semester, year)).first()
+		data = db.session.query(func.public.update_Full_rel_Professor_Disciplina(old_nusp, old_dis_code, prof_nusp, dis_code, semester, year)).first()
 		db.session.commit()
 
 	except Exception as e:
@@ -372,7 +384,7 @@ def delete_rel_prof_dis(prof_nusp, dis_code, semester, year):
 		print(data[0])
 
 		db.session.commit()
-		return "rel_prof_dis deletado com id = {}. <br> <a href=\"/getall_curso\"> Voltar </a>".format(data[0])
+		return "rel_prof_dis deletado com id = {}. <br> <a href=\"/getall_rel_prof_dis\"> Voltar </a>".format(data[0])
 
 	except Exception as e:
 		db.session.rollback()

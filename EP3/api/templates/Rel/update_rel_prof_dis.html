@@ -1,0 +1,25 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title> Atualizar relações entre Professor e Disciplina </title>
+</head>
+<body>
+
+	<h1> Atualizar relações entre Professor e Disciplina </h1>
+
+	<form method="post">
+	  NUSP: <input type="text" name="prof_nusp" value="{{info[0]}}" required> <br>
+	  Codigo da Disciplina: <input type="text" name="dis_code" value="{{info[1]}}" required><br>
+	  Semestre: <input type="integer" name="semester" value="{{info[2]}}" required><br>
+	  Ano: <input type="integer" name="year" value="{{info[3]}}" required><br>
+	  <br>
+	  <input type="submit" value="Atualizar">
+	</form>
+
+	<br>
+	<br>
+
+	<a href="/"> Voltar </a>
+
+</body>
+</html>
