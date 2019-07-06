@@ -244,6 +244,12 @@ def update_curso():
 		if type(cur_info) == str:
 			return cur_info + "<br> <a href=\"/\"> Voltar </a>"
 
+		cur_info = list(cur_info)
+		#Datatime em html é YYYY-MM-DDTHH:MM:SS
+		cur_info[4] = str(cur_info[4]).replace(" ","T")
+		cur_info[5] = str(cur_info[5]).replace(" ","T")
+		print(cur_info[4])
+
 		return render_template('Curso/update_curso.html', info=cur_info)
 
 @app.route("/delete_curso")
