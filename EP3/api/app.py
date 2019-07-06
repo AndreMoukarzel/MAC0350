@@ -176,10 +176,6 @@ def work_profs():
 
 	return render_template('work_profs.html', results=results)
 
-if __name__ == '__main__':
-	app.run()
-
-
 @app.route("/add_curso")
 def add_curso():
 	block = check_permission(3)
@@ -199,8 +195,8 @@ def add_curso():
 
 	return db_operations.add_curso(code, name, cpf, timein, timeout)
 
-app.route("/getall_curso")
-def getall_p():
+@app.route("/getall_curso")
+def getall_curso():
 	block = check_permission(3)
 
 	if block is not None:
@@ -230,7 +226,7 @@ def update_curso():
 	if request.method == 'POST':
 		code = request.form['code']
 		name = request.form['name']
-		cpf= request.form['cpf']
+		cpf = request.form['cpf']
 		date_in = request.form['datein']
 		date_out = request.form['dateout']
 
@@ -239,7 +235,7 @@ def update_curso():
 		if type(result) == str:
 			return result + "<br> <a href=\"/\"> Voltar </a>"
 
-		return redirect(url_for('getall_p'))
+		return redirect(url_for('getall_curso'))
 
 	#Se não, só preencha e espere modificações
 	else:
@@ -264,3 +260,6 @@ def delete_curso():
 	result = db_operations.delete_curso(cur_code)
 
 	return result
+
+if __name__ == '__main__':
+	app.run()

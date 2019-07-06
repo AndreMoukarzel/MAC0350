@@ -98,6 +98,7 @@ def update_p(p_id, p_name, p_cpf):
 		db.session.commit()
 
 	except Exception as e:
+		db.session.rollback()
 		return(str(e))
 
 def delete_p(p_cpf):
@@ -140,7 +141,7 @@ def get_curso(curso_id):
 	try:
 		#Esse é outro jeito de pegar coisas, chamando pelo model
 		#No model está definido o bind, então não precisa se preocupar com ele
-		entry = B06Curso.query.filter_by(cur_id=p_id).first()
+		entry = B06Curso.query.filter_by(cur_id=curso_id).first()
 		return (entry.cur_id, entry.cur_code, entry.cur_name, entry.adm_cpf, entry.ad_cur_date_in, entry.ad_cur_date_out)
 
 	except Exception as e:
@@ -158,13 +159,14 @@ def get_all_curso():
 	except Exception as e:
 		return(str(e))
 
-def update_curso(codigo, nome, cpf, date_in, date_out):
+def update_curso(cur_id, codigo, nome, cpf, date_in, date_out):
 	try:
 		db.session.bind = db.get_engine(app, 'curr')
-		data = db.session.query(func.public.update_Full_Curso(codigo, nome, cpf, date_in, date_out)).first()
+		data = db.session.query(func.public.update_Full_Curso(cur_id, codigo, nome, str(cpf), date_in, date_out)).first()
 		db.session.commit()
 
 	except Exception as e:
+		db.session.rollback()
 		return(str(e))
 
 def delete_curso(code):
@@ -179,7 +181,7 @@ def delete_curso(code):
 		print(data_c[0])
 
 		db.session.commit()
-		return "Pessoa deletada com id = {}. <br> <a href=\"/getall_p\"> Voltar </a>".format(data_c[0])
+		return "Curso deletado com id = {}. <br> <a href=\"/getall_curso\"> Voltar </a>".format(data_c[0])
 
 	except Exception as e:
 		db.session.rollback()

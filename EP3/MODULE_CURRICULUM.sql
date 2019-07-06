@@ -549,7 +549,7 @@ COMMIT;
 
 
 BEGIN;
-CREATE OR REPLACE FUNCTION update_Full_Curso(id integer, code integer, name varchar(60), cpf varchar(11), date_in TIMESTAMP, date_out TIMESTAMP)
+CREATE OR REPLACE FUNCTION update_Full_Curso(c_id integer, code integer, name varchar(60), cpf varchar(11), date_in TIMESTAMP, date_out TIMESTAMP)
 RETURNS int AS
 $$
 DECLARE
@@ -557,7 +557,7 @@ id int;
 BEGIN
 	UPDATE b06_Curso
 	SET cur_code = code, cur_name = name, adm_cpf = cpf, ad_cur_date_in = date_in, ad_cur_date_out = date_out
-	WHERE cur_id = id;
+	WHERE cur_id = c_id;
 	RETURN id;
 END;
 $$
