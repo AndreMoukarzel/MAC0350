@@ -21,6 +21,26 @@
 
 	<a href="/getall_p"> Ver todas as pessoas </a>
 
+	{% endif %}
+
+	{% if 4 in servs %}
+	<h2>Criar Novo Perfil</h2>
+
+	<form action="/add_per">
+	  Nome: <input type="text" name="name" required><br>
+	  Descrição: <input type="text" name="desc" required><br>
+	  <br>
+	  <input type="submit" value="Criar">
+	</form>
+
+	<br>
+
+	<a href="/getall_per"> Ver todas os perfis </a>
+
+	{% endif %}
+
+	{% if 3 in servs %}
+
 	<br><br>
 	<h2>Criar Novo Curso</h2>
 

@@ -174,10 +174,6 @@ def delete_curso(code):
 		db.session.bind = db.get_engine(app, 'curr')
 		data_c = db.session.query(func.public.delete_Curso(code)).first()
 
-		#Deletar a rel também
-		#db.session.bind = db.get_engine(app, 'peo_cur')
-		#data_a = db.session.query(func.public.delete_pes_us_from_cpf(p_cpf)).first()
-
 		print(data_c[0])
 
 		db.session.commit()
@@ -203,6 +199,67 @@ def work_profs(semestre, ano):
 		return results
 
 	except Exception as e:
+		return(str(e))
+
+def add_per(name, desc):
+	assert(name is not None)
+	assert(desc is not None)
+
+	try:
+		db.session.bind = db.get_engine(app, 'access')
+		data = db.session.query(func.public.create_Perfil(name, desc)).first()
+		#commita se não deu erro
+		db.session.commit()
+		return "Perfil criada com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
+
+	except Exception as e:
+		#se deu erro, volta atrás (só precisa no caso de escrita/update)
+		db.session.rollback()
+		return (str(e)+" <br> <a href=\"/\"> Voltar </a>")
+
+def get_per(p_id):
+	assert(p_id is not None)
+	try:
+		#Esse é outro jeito de pegar coisas, chamando pelo model
+		#No model está definido o bind, então não precisa se preocupar com ele
+		entry = B10Perfil.query.filter_by(perf_id=p_id).first()
+		return (entry.perf_id, entry.perf_name, entry.perf_desc)
+
+	except Exception as e:
+		return(str(e))
+
+def get_all_per():
+	try:
+		data = B10Perfil.query.all()
+		results = [] 
+		for entry in data:
+			results.append((entry.perf_id, entry.perf_name, entry.perf_desc))
+
+		return results
+
+	except Exception as e:
+		return(str(e))
+
+def update_per(p_id, p_name, p_desc):
+	try:
+		db.session.bind = db.get_engine(app, 'access')
+		data = db.session.query(func.public.update_Full_Perfil(p_id, p_name, p_desc)).first()
+		db.session.commit()
+
+	except Exception as e:
+		db.session.rollback()
+		return(str(e))
+
+def delete_per(p_name):
+	try:
+		db.session.bind = db.get_engine(app, 'access')
+		data_p = db.session.query(func.public.delete_Perfil(p_name)).first()
+
+		db.session.commit()
+		return "Perfil deletado com id = {}. <br> <a href=\"/getall_per\"> Voltar </a>".format(data_p[0])
+
+	except Exception as e:
+		db.session.rollback()
 		return(str(e))
 
 if __name__ == '__main__':

@@ -1,0 +1,33 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title>Perfis</title>
+</head>
+<body>
+
+	<table style="width:100%; font-family: arial, sans-serif; border-collapse: collapse;">
+		<tr>
+			<th> ID </th>
+			<th> Nome </th>
+			<th> Descrição </th>
+		</tr>
+		{% for row in results %}
+		<tr>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[0] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[1] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[2] }} </td>
+			<td style="text-align: center; border: 1px solid #dddddd; color: #0000cc;">
+				<a href="/update_per?id={{row[0]}}"> UPDATE </a> </td>
+			<td style="text-align: center; border: 1px solid #dddddd; color: #cc0000;">
+				<a href="/delete_per?name={{row[1]}}"> DELETE </a> </td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<br>
+	<br>
+
+	<a href="/"> Voltar </a>
+
+</body>
+</html>

@@ -267,5 +267,84 @@ def delete_curso():
 
 	return result
 
+@app.route("/add_per")
+def add_perfil():
+	block = check_permission(4)
+
+	if block is not None:
+		return block
+
+	#request.args pega args do url: /algo?name=coisa
+	name=request.args.get('name')
+	desc=request.args.get('desc')
+
+	if name == '':
+		return "Parametros de inserção invalidos. <br> <a href=\"/\"> Voltar </a>"
+
+	return db_operations.add_per(name, desc)
+
+@app.route("/getall_per")
+def getall_perfil():
+	block = check_permission(4)
+
+	if block is not None:
+		return block
+
+	results = db_operations.get_all_per()
+
+	#No caso, se a função retornar uma string,
+	#é uma mensagem de erro
+	if type(results) == str:
+		return results + "<br> <a href=\"/\"> Voltar </a>"
+
+	return render_template('Perfil/getall_per.html', results=results)
+
+@app.route("/update_per", methods=('GET', 'POST'))
+def update_perfil():
+	block = check_permission(4)
+
+	if block is not None:
+		return block
+
+	per_id = request.args.get('id')
+	if per_id is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	#Se a pessoa preencheu o formulario, atualize
+	if request.method == 'POST':
+		name = request.form['name']
+		desc = request.form['desc']
+
+		result = db_operations.update_per(per_id, name, desc)
+
+		if type(result) == str:
+			return result + "<br> <a href=\"/\"> Voltar </a>"
+
+		return redirect(url_for('getall_perfil'))
+
+	#Se não, só preencha e espere modificações
+	else:
+		per_info = db_operations.get_per(per_id)
+
+		if type(per_info) == str:
+			return per_info + "<br> <a href=\"/\"> Voltar </a>"
+
+		return render_template('Perfil/update_per.html', info=per_info)
+
+@app.route("/delete_per")
+def delete_perfil():
+	block = check_permission(4)
+
+	if block is not None:
+		return block
+
+	per_name = request.args.get('name')
+	if per_name is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	result = db_operations.delete_per(per_name)
+
+	return result
+
 if __name__ == '__main__':
 	app.run()

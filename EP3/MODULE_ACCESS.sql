@@ -275,6 +275,20 @@ LANGUAGE plpgsql;
 COMMIT;
 
 BEGIN;
+CREATE OR REPLACE FUNCTION update_Full_Perfil(id integer, name varchar(20), p_desc varchar(100))
+RETURNS int AS
+$$
+BEGIN
+	UPDATE b10_Perfil
+	SET perf_name = name, perf_desc = p_desc
+	WHERE perf_id = id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION update_Perfil_name(key varchar(20), new varchar(20))
 RETURNS int AS
 $$
