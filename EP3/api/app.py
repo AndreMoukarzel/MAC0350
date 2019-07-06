@@ -391,7 +391,7 @@ def update_rel_pes_us():
 
 	original_cpf = request.args.get('cpf')
 	original_email = request.args.get('email')
-	if pes_id is None:
+	if original_cpf is None or original_email is None:
 		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
 
 	#Se a pessoa preencheu o formulario, atualize
@@ -410,7 +410,7 @@ def update_rel_pes_us():
 
 	#Se não, só preencha e espere modificações
 	else:
-		rel_info = db_operations.get_p(rel_id)
+		rel_info = db_operations.get_rel_pes_us(original_cpf, original_email)
 
 		if type(rel_info) == str:
 			return rel_info + "<br> <a href=\"/\"> Voltar </a>"
