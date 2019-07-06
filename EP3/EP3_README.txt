@@ -21,10 +21,5 @@ Gabriel Sarti Massukado, NUSP 10284177
 	Para a execução da API, rode os seguintes comandos na linha de comando
 enquanto na pasta raíz do projeto:
 	0) psql
-	1) CREATE DATABASE pessoas;
-	2) \c pessoas
-	3) \i MODULE_PEOPLE.sql
-	4) CREATE DATABASE access;
-	5) \c access
-	6) \i MODULE_ACCESS.sql
-	7) python3 api/app.py
+	1) \i CREATE_ALL.sql
+	2) python3 api/app.py
