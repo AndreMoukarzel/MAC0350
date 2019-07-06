@@ -267,5 +267,91 @@ def delete_curso():
 
 	return result
 
+@app.route("/add_rel_pes_us")
+def add_rel_pes_us():
+	block = check_permission(5)
+
+	if block is not None:
+		return block
+
+	#request.args pega args do url: /algo?name=coisa
+	cpf=request.args.get('cpf')
+	email=request.args.get('email')
+	date_in=request.args.get('datein')
+	date_out=request.args.get('dateout')
+
+	if cpf == '' or email == '' or date_in == '':
+		return "Parametros de inserção invalidos. <br> <a href=\"/\"> Voltar </a>"
+
+	return db_operations.add_rel_pes_us(cpf, email, date_in, date_out)
+
+@app.route("/getall_rel_pes_us")
+def getall_rel_pes_us():
+	block = check_permission(5)
+
+	if block is not None:
+		return block
+
+	results = db_operations.get_all_rel_pes_us()
+
+	#No caso, se a função retornar uma string,
+	#é uma mensagem de erro
+	if type(results) == str:
+		return results + "<br> <a href=\"/\"> Voltar </a>"
+
+	return render_template('Rel/getall_rel_pes_us.html', results=results)
+
+@app.route("/update_rel_pes_us", methods=('GET', 'POST'))
+def update_rel_pes_us():
+	block = check_permission(5)
+
+	if block is not None:
+		return block
+
+	rel_id = request.args.get('id')
+	if pes_id is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	#Se a pessoa preencheu o formulario, atualize
+	if request.method == 'POST':
+		cpf= request.form['cpf']
+		email = request.form['email']
+		date_in = request.form['datein']
+		date_out = request.form['dateout']
+
+		result = db_operations.update_rel_pes_us(rel_id, cpf, email, date_in, date_out)
+
+		if type(result) == str:
+			return result + "<br> <a href=\"/\"> Voltar </a>"
+
+		return redirect(url_for('getall_rel_pes_us'))
+
+	#Se não, só preencha e espere modificações
+	else:
+		rel_info = db_operations.get_p(rel_id)
+
+		if type(rel_info) == str:
+			return rel_info + "<br> <a href=\"/\"> Voltar </a>"
+
+		return render_template('Rel/update_rel_pes_us.html', info=rel_info)
+
+@app.route("/delete_rel_pes_us")
+def delete_rel_pes_us():
+	block = check_permission(5)
+
+	if block is not None:
+		return block
+
+	cpf=request.args.get('cpf')
+	email=request.args.get('email')
+	date_in=request.args.get('datein')
+	date_out=request.args.get('dateout')
+	if cpf is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	result = db_operations.delete_rel_pes_us(cpf)
+
+	return result
+
 if __name__ == '__main__':
 	app.run()
