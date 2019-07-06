@@ -302,10 +302,10 @@ INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_
 	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão1'), 'admin@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2'), '2_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão2'), 'webmaster@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
-	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3'), '3_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão3'), 'aluno@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b20_rel_pes_us (rel_pes_cpf, rel_us_email, rel_pes_us_date_in, rel_pes_us_date_out)
 	VALUES ((SELECT pes_cpf FROM b01_Pessoa WHERE pes_name = 'Jão4'), '4_user@gmail.com', '2010-01-01 00:00:01', '2020-01-01 00:00:01');

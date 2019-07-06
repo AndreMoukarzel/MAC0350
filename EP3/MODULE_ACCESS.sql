@@ -671,10 +671,10 @@ INSERT INTO users (us_email, us_password)
 	VALUES ('admin@gmail.com', crypt('admin', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('2_user@gmail.com', crypt('123456781', gen_salt('bf')));
+	VALUES ('webmaster@gmail.com', crypt('web', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
-	VALUES ('3_user@gmail.com', crypt('123456782', gen_salt('bf')));
+	VALUES ('aluno@gmail.com', crypt('aluno', gen_salt('bf')));
 
 INSERT INTO users (us_email, us_password)
 	VALUES ('4_user@gmail.com', crypt('123456783', gen_salt('bf')));
@@ -705,7 +705,7 @@ INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Webmaster', 'Pode ligar users com pessoas');
 
 INSERT INTO b10_Perfil (perf_name, perf_desc)
-	VALUES ('Perfil Inovador 3', 'Perfil usado por usuarios que inovam');
+	VALUES ('Aluno', 'Pode ver os Working_Profs');
 
 INSERT INTO b10_Perfil (perf_name, perf_desc)
 	VALUES ('Perfil Inovador 4', 'Perfil usado por usuarios que inovam');
@@ -764,10 +764,10 @@ INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_
 	VALUES ('admin@gmail.com', 'Administrador', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
-	VALUES ('2_user@gmail.com', 'Webmaster', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ('webmaster@gmail.com', 'Webmaster', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
-	VALUES ('3_user@gmail.com', 'Perfil Inovador 3', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
+	VALUES ('aluno@gmail.com', 'Aluno', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
 
 INSERT INTO  b14_rel_us_pf (rel_us_email, rel_perf_name, rel_us_pf_date_in, rel_us_pf_date_out)
 	VALUES ('4_user@gmail.com', 'Perfil Inovador 4', '2018-01-01 00:00:01', '2020-01-01 00:00:01');
@@ -813,7 +813,7 @@ INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Webmaster', 0005);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
-	VALUES ('Perfil Inovador 3', 0003);
+	VALUES ('Aluno', 0002);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Perfil Inovador 4', 0004);
