@@ -198,3 +198,69 @@ def add_curso():
 		return "Parametros de inserção invalidos. <br> <a href=\"/\"> Voltar </a>"
 
 	return db_operations.add_curso(code, name, cpf, timein, timeout)
+
+app.route("/getall_curso")
+def getall_p():
+	block = check_permission(3)
+
+	if block is not None:
+		return block
+
+	results = db_operations.get_all_curso()
+
+	#No caso, se a função retornar uma string,
+	#é uma mensagem de erro
+	if type(results) == str:
+		return results + "<br> <a href=\"/\"> Voltar </a>"
+
+	return render_template('Curso/getall_curso.html', results=results)
+
+@app.route("/update_curso", methods=('GET', 'POST'))
+def update_curso():
+	block = check_permission(3)
+
+	if block is not None:
+		return block
+
+	cur_id = request.args.get('id')
+	if cur_id is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	#Se a pessoa preencheu o formulario, atualize
+	if request.method == 'POST':
+		code = request.form['code']
+		name = request.form['name']
+		cpf= request.form['cpf']
+		date_in = request.form['datein']
+		date_out = request.form['dateout']
+
+		result = db_operations.update_curso(cur_id, code, name, cpf, date_in, date_out)
+
+		if type(result) == str:
+			return result + "<br> <a href=\"/\"> Voltar </a>"
+
+		return redirect(url_for('getall_p'))
+
+	#Se não, só preencha e espere modificações
+	else:
+		cur_info = db_operations.get_curso(cur_id)
+
+		if type(cur_info) == str:
+			return cur_info + "<br> <a href=\"/\"> Voltar </a>"
+
+		return render_template('Curso/update_curso.html', info=cur_info)
+
+@app.route("/delete_curso")
+def delete_curso():
+	block = check_permission(3)
+
+	if block is not None:
+		return block
+
+	cur_code = request.args.get('code')
+	if cur_code is None:
+		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
+
+	result = db_operations.delete_curso(cur_code)
+
+	return result
