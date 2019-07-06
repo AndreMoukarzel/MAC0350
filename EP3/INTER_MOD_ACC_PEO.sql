@@ -145,6 +145,23 @@ COMMIT;
 
 --UPDATES
 BEGIN;
+CREATE OR REPLACE FUNCTION update_Full_rel_Pessoa_Usuario(key1 varchar(11), key2 email, cpf varchar(11), us_email email, datein TIMESTAMP, dateout TIMESTAMP)
+RETURNS pes_us_key AS
+$$
+DECLARE
+id pes_us_key;
+BEGIN
+	UPDATE b20_rel_pes_us
+	SET rel_pes_cpf = cpf, rel_us_email = us_email, rel_pes_us_date_in = datein, rel_pes_us_date_out = dateout
+	WHERE rel_pes_cpf= key1 AND rel_us_email = key2
+	RETURNING rel_pes_cpf, rel_us_email into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION update_rel_Pessoa_Usuario_pes_cpf(key1 varchar(11), key2 email, new varchar(11))
 RETURNS pes_us_key AS
 $$
