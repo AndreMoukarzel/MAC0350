@@ -187,6 +187,70 @@ def delete_curso(code):
 		db.session.rollback()
 		return(str(e))
 
+def add_rel_pes_us(cpf, email, date_in, date_out):
+	assert(cpf is not None)
+	assert(email is not None)
+
+	try:
+		db.session.bind = db.get_engine(app, 'acc_peo')
+		data = db.session.query(func.public.create_rel_pes_us(cpf, email, date_in, date_out)).first()
+		#commita se não deu erro
+		db.session.commit()
+		return "rel_pes_us criada com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
+	
+	except Exception as e:
+		#se deu erro, volta atrás (só precisa no caso de escrita/update)
+		db.session.rollback()
+		return (str(e)+" <br> <a href=\"/\"> Voltar </a>")
+
+def get_rel_pes_us(cpf, email):
+	assert(cpf is not None)
+	assert(email is not None)
+	try:
+		#Esse é outro jeito de pegar coisas, chamando pelo model
+		#No model está definido o bind, então não precisa se preocupar com ele
+		entry = B20RelPesU.query.filter_by(rel_pes_cpf=cpf, rel_us_email=email).first()
+		return (entry.rel_pes_cpf, entry.rel_us_email, entry.rel_pes_us_date_in, entry.rel_pes_us_date_out)
+
+	except Exception as e:
+		return(str(e))
+
+def get_all_rel_pes_us():
+	try:
+		data = B20RelPesU.query.all()
+		results = [] 
+		for entry in data:
+			results.append((entry.rel_pes_cpf, entry.rel_us_email, entry.rel_pes_us_date_in, entry.rel_pes_us_date_out))
+
+		return results
+
+	except Exception as e:
+		return(str(e))
+
+def update_rel_pes_us(cpf, email, new_cpf, new_email, datein, dateout):
+	try:
+		db.session.bind = db.get_engine(app, 'acc_peo')
+		data = db.session.query(func.public.update_Full_rel_Pessoa_Usuario(cpf, email, new_cpf, new_email, datein, dateout)).first()
+		db.session.commit()
+
+	except Exception as e:
+		db.session.rollback()
+		return(str(e))
+
+def delete_rel_pes_us(cpf, email):
+	try:
+		db.session.bind = db.get_engine(app, 'acc_peo')
+		data = db.session.query(func.public.delete_pes_us(cpf, email)).first()
+
+		print(data[0])
+
+		db.session.commit()
+		return "rel_pes_us deletado com id = {}. <br> <a href=\"/getall_curso\"> Voltar </a>".format(data[0])
+
+	except Exception as e:
+		db.session.rollback()
+		return(str(e))
+
 def work_profs(semestre, ano):
 	assert(semestre is not None)
 	assert(ano is not None)
