@@ -60,6 +60,7 @@ class B04Administrador(db.Model):
 class B05Disciplina(db.Model):
     __tablename__ = 'b05_disciplina'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'curr'
 
     dis_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     dis_code = db.Column(db.String(7), nullable=False, unique=True)
@@ -80,6 +81,7 @@ class B05Disciplina(db.Model):
 class B06Curso(db.Model):
     __tablename__ = 'b06_curso'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'curr'
 
     cur_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     cur_code = db.Column(db.Integer, nullable=False, unique=True)
@@ -96,6 +98,7 @@ class B06Curso(db.Model):
 class B07Trilha(db.Model):
     __tablename__ = 'b07_trilha'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'curr'
 
     tr_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     tr_name = db.Column(db.String(80), nullable=False, unique=True)
@@ -107,6 +110,7 @@ class B08Modulo(db.Model):
         db.CheckConstraint('mod_cred_min > 0'),
         {'schema': 'public'}
     )
+    __bind_key__ = 'curr'
 
     mod_id = db.Column(db.Integer, primary_key=True, server_default=db.FetchedValue())
     mod_code = db.Column(db.Integer, nullable=False, unique=True)
@@ -140,6 +144,7 @@ class B11Servico(db.Model):
 class B12RelTrMod(db.Model):
     __tablename__ = 'b12_rel_tr_mod'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'curr'
 
     rel_tr_name = db.Column(db.ForeignKey('public.b07_trilha.tr_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_mod_code = db.Column(db.ForeignKey('public.b08_modulo.mod_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -153,7 +158,8 @@ t_b13_rel_tr_cur = db.Table(
     'b13_rel_tr_cur',
     db.Column('rel_tr_name', db.ForeignKey('public.b07_trilha.tr_name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
     db.Column('rel_cur_code', db.ForeignKey('public.b06_curso.cur_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
-    schema='public'
+    schema='public',
+    info={'bind_key': 'curr'}
 )
 
 
@@ -183,6 +189,7 @@ t_b15_rel_pf_se = db.Table(
 class B16RelProfDi(db.Model):
     __tablename__ = 'b16_rel_prof_dis'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'peo_cur'
 
     rel_prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -196,6 +203,7 @@ class B16RelProfDi(db.Model):
 class B17RelAlDi(db.Model):
     __tablename__ = 'b17_rel_al_dis'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'peo_cur'
 
     rel_al_nusp = db.Column(db.ForeignKey('public.b03_aluno.al_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -210,7 +218,8 @@ t_b18_rel_dis_mod = db.Table(
     'b18_rel_dis_mod',
     db.Column('rel_dis_code', db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
     db.Column('rel_mod_code', db.ForeignKey('public.b08_modulo.mod_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
-    schema='public'
+    schema='public',
+    info={'bind_key': 'curr'}
 )
 
 
@@ -218,13 +227,15 @@ t_b19_rel_mod_cur = db.Table(
     'b19_rel_mod_cur',
     db.Column('rel_mod_code', db.ForeignKey('public.b08_modulo.mod_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
     db.Column('rel_cur_code', db.ForeignKey('public.b06_curso.cur_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
-    schema='public'
+    schema='public',
+    info={'bind_key': 'curr'}
 )
 
 
 class B20RelPesU(db.Model):
     __tablename__ = 'b20_rel_pes_us'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'acc_peo'
 
     rel_pes_cpf = db.Column(db.ForeignKey('public.b01_pessoa.pes_cpf', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_us_email = db.Column(db.ForeignKey('public.users.us_email', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -238,6 +249,7 @@ class B20RelPesU(db.Model):
 class B21Oferecimento(db.Model):
     __tablename__ = 'b21_oferecimento'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'peo_cur'
 
     rel_prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -252,6 +264,7 @@ class B21Oferecimento(db.Model):
 class B22RelAlOf(db.Model):
     __tablename__ = 'b22_rel_al_of'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'peo_cur'
 
     rel_prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     rel_dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -269,6 +282,7 @@ class B22RelAlOf(db.Model):
 class B23OfTime(db.Model):
     __tablename__ = 'b23_of_times'
     __table_args__ = {'schema': 'public'}
+    __bind_key__ = 'peo_cur'
 
     prof_nusp = db.Column(db.ForeignKey('public.b02_professor.prof_nusp', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
     dis_code = db.Column(db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False)
@@ -286,7 +300,8 @@ t_b24_rel_dis_dis = db.Table(
     'b24_rel_dis_dis',
     db.Column('dis_code', db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
     db.Column('dis_req_code', db.ForeignKey('public.b05_disciplina.dis_code', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True, nullable=False),
-    schema='public'
+    schema='public',
+    info={'bind_key': 'curr'}
 )
 
 class User(db.Model):

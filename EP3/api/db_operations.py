@@ -12,12 +12,19 @@ db = SQLAlchemy(app)
 
 def get_name_from_email(email):
 	assert(email is not None)
+	#A linha abaixo muda o database que estamos conectados
+	#para 'acc_peo' (na verdade ele pega de um hash no config.py)
 	db.session.bind = db.get_engine(app, 'acc_peo')
+	#manda o database realizar a função get_pes (do database)
+	#e pegar a primeira entrada (só deveria ter uma)
 	data = db.session.query(func.public.get_pes(email)).first()
 
 	if data is None:
 		return None
 
+	#Por algum motivo, funcs que retoram tables retorna 
+	#uma string do tipo (valor1,valor2,valor3,...)
+	#A linha abaixo tira os parenteses e separa pela virgula
 	name = data[0][1:len(data[0])-1].split(',')[1]
 
 	return name
@@ -30,6 +37,8 @@ def get_servs_from_email(email):
 	results = []
 	for serv in data:
 		for row in serv:
+			#A func get_servs_from_email retorna um int
+			#então não precisa do role acima
 			results.append(row)
 
 	return results
@@ -50,16 +59,20 @@ def add_p(name, cpf):
 	try:
 		db.session.bind = db.get_engine(app, 'pessoas')
 		data = db.session.query(func.public.create_Pessoa(cpf, name)).first()
+		#commita se não deu erro
 		db.session.commit()
 		return "Pessoa criada com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
 
 	except Exception as e:
+		#se deu erro, volta atrás (só precisa no caso de escrita/update)
 		db.session.rollback()
-		return(str(e)+" <br> <a href=\"/\"> Voltar </a>")
+		return (str(e)+" <br> <a href=\"/\"> Voltar </a>")
 
 def get_p(p_id):
 	assert(p_id is not None)
 	try:
+		#Esse é outro jeito de pegar coisas, chamando pelo model
+		#No model está definido o bind, então não precisa se preocupar com ele
 		entry = B01Pessoa.query.filter_by(pes_id=p_id).first()
 		return (entry.pes_id, entry.pes_name, entry.pes_cpf)
 
