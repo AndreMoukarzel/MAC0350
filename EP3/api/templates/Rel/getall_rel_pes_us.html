@@ -19,9 +19,9 @@
 			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[2] }} </td>
 			<td style="text-align: center; border: 1px solid #dddddd;"> {{ row[3] }} </td>
 			<td style="text-align: center; border: 1px solid #dddddd; color: #0000cc;">
-				<a href="/update_rel_pes_us?id={{row[0]}}"> UPDATE </a> </td>
+				<a href="/update_rel_pes_us?cpf={{row[0]}}&email={{row[1]}}"> UPDATE </a> </td>
 			<td style="text-align: center; border: 1px solid #dddddd; color: #cc0000;">
-				<a href="/delete_rel_pes_us?code={{row[1]}}"> DELETE </a> </td>
+				<a href="/delete_rel_pes_us?cpf={{row[0]}}&email={{row[1]}}"> DELETE </a> </td>
 		</tr>
 		{% endfor %}
 	</table>

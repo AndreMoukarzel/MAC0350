@@ -308,7 +308,8 @@ def update_rel_pes_us():
 	if block is not None:
 		return block
 
-	rel_id = request.args.get('id')
+	original_cpf = request.args.get('cpf')
+	original_email = request.args.get('email')
 	if pes_id is None:
 		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
 
@@ -319,7 +320,7 @@ def update_rel_pes_us():
 		date_in = request.form['datein']
 		date_out = request.form['dateout']
 
-		result = db_operations.update_rel_pes_us(rel_id, cpf, email, date_in, date_out)
+		result = db_operations.update_rel_pes_us(original_cpf, original_email, cpf, email, date_in, date_out)
 
 		if type(result) == str:
 			return result + "<br> <a href=\"/\"> Voltar </a>"
