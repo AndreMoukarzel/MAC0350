@@ -719,13 +719,13 @@ INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
 	VALUES (0001, 'CRUD Pessoas', 'Permite criar, deletar e atualizar uma pessoa, e ver as pessoas criadas');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0002, 'create_Professor()', 'cria um professor');
+	VALUES (0002, 'Acesso a Working Profs', 'Permite usar a função Working_Profs');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0003, 'create_Aluno()', 'cria um aluno');
+	VALUES (0003, 'CRUD Curso', 'Permite criar, deletar e atualizar um curso, e ver os cursos criados');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
-	VALUES (0004, 'create_Administrador()', 'cria um administrador');
+	VALUES (0004, 'CRUD Perfil', 'Permite criar, deletar e atualizar um perfil, e ver os perfis criados');
 
 INSERT INTO b11_Servico (serv_code, serv_name, serv_desc)
 	VALUES (0005, 'create_new_Professor()', 'cria um professor e, se necessário, a pessoa correspondente');

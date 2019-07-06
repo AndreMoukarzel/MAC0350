@@ -30,6 +30,13 @@ CREATE SERVER server_curriculum FOREIGN DATA WRAPPER postgres_fdw OPTIONS (host 
 CREATE USER MAPPING FOR CURRENT_USER SERVER server_curriculum OPTIONS (user 'dba', password '123');
 
 --DDL
+CREATE FOREIGN TABLE b01_Pessoa (
+	pes_id SERIAL,
+	pes_cpf varchar(11) NOT NULL,
+	pes_name varchar(200)
+)
+SERVER server_pessoas;
+
 CREATE FOREIGN TABLE b02_Professor (
 	prof_id SERIAL,
 	prof_nusp varchar(9) NOT NULL,
@@ -842,6 +849,26 @@ LANGUAGE plpgsql;
 COMMIT;
 
 --RETRIEVALS
+/* Os argumentos são um ano e semestre */
+/* Retorna o nome e nusp de todos os professores lecionando neste ano e semestre, assim como o código e nome das disciplinas */
+/* que o respectivo professor lecionou em tal ano e semestre */
+BEGIN;
+CREATE OR REPLACE FUNCTION working_profs(semestre integer, ano integer)
+RETURNS TABLE(Nome varchar(11), Nusp varchar(9), Disc_Code varchar(7), Disciplina varchar(80)) AS
+$$
+BEGIN
+	RETURN QUERY
+		SELECT pes_name as Nome, prof_nusp as Nusp, dis_code as Disc_Code, dis_name as Disciplina 
+		FROM b01_pessoa
+		INNER JOIN b02_professor on pes_cpf = prof_cpf
+		INNER JOIN b21_oferecimento on prof_nusp = rel_prof_nusp 
+		INNER JOIN b05_disciplina on rel_dis_code = dis_code
+		WHERE rel_oferecimento_semester = $1 and rel_oferecimento_year = $2;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
 /* Os argumentos são um ano e semestre */
 /* Retorna o nome e nusp de todos os professores lecionando neste ano e semestre, assim como o código e nome das disciplinas */
 /* que o respectivo professor lecionou em tal ano e semestre */
