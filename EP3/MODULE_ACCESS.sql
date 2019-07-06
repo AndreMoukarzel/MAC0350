@@ -813,6 +813,9 @@ INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Webmaster', 0005);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
+	VALUES ('Webmaster', 0004);
+
+INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
 	VALUES ('Aluno', 0002);
 
 INSERT INTO  b15_rel_pf_se (rel_perf_name, rel_serv_code)
