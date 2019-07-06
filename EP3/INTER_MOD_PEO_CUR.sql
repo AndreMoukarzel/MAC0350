@@ -458,6 +458,23 @@ COMMIT;
 
 --UPDATES
 BEGIN;
+CREATE OR REPLACE FUNCTION update_Full_rel_Professor_Disciplina(key1 varchar(9), key2 varchar(7), nusp varchar(9), code varchar(7), semester integer, year integer)
+RETURNS prof_dis_key AS
+$$
+DECLARE
+id prof_dis_key;
+BEGIN
+	UPDATE b16_rel_prof_dis
+	SET rel_prof_nusp = nusp, rel_dis_code = code, rel_prof_disc_semester = semester, rel_prof_disc_year = year
+	WHERE rel_prof_nusp = key1 AND rel_dis_code = key2
+	RETURNING rel_prof_nusp, rel_dis_code into id;
+	RETURN id;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION update_rel_Professor_Disciplina_prof_nusp(key1 varchar(9), key2 varchar(7), new varchar(9))
 RETURNS prof_dis_key AS
 $$
