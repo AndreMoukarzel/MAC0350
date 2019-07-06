@@ -95,5 +95,24 @@
 
 	{% endif %}
 
+	{% if 6 in servs %}
+
+	<h2>Criar novo vínculo entre professor e disciplina</h2>
+
+	<form action="/add_rel_prof_dis">
+	  NUSP do Professor: <input type="text" name="prof_nusp" required><br>
+	  Código da Disciplina: <input type="text" name="dis_code" required><br>
+	  Semestre: <input type="number" name="semester" required><br>
+	  Ano: <input type="number" name="year" required><br>
+	  <br>
+	  <input type="submit" value="Criar">
+	</form>
+
+	<br>
+
+	<a href="/getall_rel_prof_dis"> Ver todos os vínculos entre professores e disciplinas </a>
+
+	{% endif %}
+
 </body>
 </html>
