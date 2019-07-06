@@ -200,7 +200,7 @@ def add_curso():
 	return db_operations.add_curso(code, name, cpf, timein, timeout)
 
 app.route("/getall_curso")
-def getall_p():
+def getall_curso():
 	block = check_permission(3)
 
 	if block is not None:
