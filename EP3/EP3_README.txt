@@ -22,4 +22,7 @@ Gabriel Sarti Massukado, NUSP 10284177
 enquanto na pasta raíz do projeto:
 	0) psql
 	1) \i CREATE_ALL.sql
-	2) python3 api/app.py
+	2) \q
+	3) python3 api/app.py
+	4) Abra um browser de internet no endereço localhost:5000
+	5) Faça login com um dos usuários disponíveis
