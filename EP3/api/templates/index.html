@@ -56,7 +56,7 @@
 
 	<br>
 
-	<a href="/getall_curso"> Ver todas as curso </a>
+	<a href="/getall_curso"> Ver todos os cursos </a>
 
 	<br><br>
 
@@ -72,6 +72,27 @@
 	  <br>
 	  <input type="submit" value="Pesquisar">
 	</form> 
+
+	<br><br>
+	{% endif %}
+
+	{% if 5 in servs %}
+
+	<h2>Criar novo vínculo entre pessoa e usuário</h2>
+
+	<form action="/add_rel_pes_us">
+	  CPF da Pessoa: <input type="text" name="cpf" required><br>
+	  Email do Usuário: <input type="email" name="email" required><br>
+	  Data de Início: <input type="datetime-local" name="timein" step="1" required><br>
+	  Data de Fim: <input type="datetime-local" name="timeout" step="1" required><br>
+	  <br>
+	  <input type="submit" value="Criar">
+	</form>
+
+	<br>
+
+	<a href="/getall_rel_pes_us"> Ver todos os vínculos entre pessoas e usuários </a>
+
 	{% endif %}
 
 </body>
