@@ -248,7 +248,6 @@ def update_curso():
 		#Datatime em html é YYYY-MM-DDTHH:MM:SS
 		cur_info[4] = str(cur_info[4]).replace(" ","T")
 		cur_info[5] = str(cur_info[5]).replace(" ","T")
-		print(cur_info[4])
 
 		return render_template('Curso/update_curso.html', info=cur_info)
 
@@ -415,6 +414,11 @@ def update_rel_pes_us():
 		if type(rel_info) == str:
 			return rel_info + "<br> <a href=\"/\"> Voltar </a>"
 
+		rel_info = list(rel_info)
+		#Datatime em html é YYYY-MM-DDTHH:MM:SS
+		rel_info[2] = str(rel_info[2]).replace(" ","T")
+		rel_info[3] = str(rel_info[3]).replace(" ","T")
+
 		return render_template('Rel/update_rel_pes_us.html', info=rel_info)
 
 @app.route("/delete_rel_pes_us")
@@ -426,12 +430,11 @@ def delete_rel_pes_us():
 
 	cpf=request.args.get('cpf')
 	email=request.args.get('email')
-	date_in=request.args.get('datein')
-	date_out=request.args.get('dateout')
+
 	if cpf is None:
 		return "No ID Specified <br> <a href=\"/\"> Voltar </a>"
 
-	result = db_operations.delete_rel_pes_us(cpf)
+	result = db_operations.delete_rel_pes_us(cpf, email)
 
 	return result
 

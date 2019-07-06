@@ -241,7 +241,7 @@ def delete_rel_pes_us(cpf, email):
 		print(data[0])
 
 		db.session.commit()
-		return "rel_pes_us deletado com id = {}. <br> <a href=\"/getall_curso\"> Voltar </a>".format(data[0])
+		return "rel_pes_us deletado com id = {}. <br> <a href=\"/getall_rel_pes_us\"> Voltar </a>".format(data[0])
 
 	except Exception as e:
 		db.session.rollback()
