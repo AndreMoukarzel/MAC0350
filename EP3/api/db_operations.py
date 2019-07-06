@@ -326,5 +326,58 @@ def delete_per(p_name):
 		db.session.rollback()
 		return(str(e))
 
+def add_rel_prof_dis(prof_nusp, dis_code, semester, year):
+	assert(prof_nusp is not None)
+	assert(dis_code is not None)
+
+	try:
+		db.session.bind = db.get_engine(app, 'peo_cur')
+		data = db.session.query(func.public.create_rel_prof_dis(prof_nusp, dis_code, semester, year)).first()
+		#commita se não deu erro
+		db.session.commit()
+		return "rel_prof_dis criada com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
+	
+	except Exception as e:
+		#se deu erro, volta atrás (só precisa no caso de escrita/update)
+		db.session.rollback()
+		return (str(e)+" <br> <a href=\"/\"> Voltar </a>")
+
+def get_all_rel_prof_dis():
+	try:
+		data = B16RelProfDi.query.all()
+		results = [] 
+		for entry in data:
+			results.append((entry.rel_prof_nusp, entry.rel_dis_code, entry.rel_prof_disc_semester, entry.rel_prof_disc_year))
+
+		return results
+
+	except Exception as e:
+		return(str(e))
+
+def update_rel_prof_dis(prof_nusp, dis_code, semester, year):
+	try:
+		db.session.bind = db.get_engine(app, 'peo_cur')
+		data = db.session.query(func.public.update_Full_rel_Professor_Disciplina(prof_nusp, dis_code, semester, year)).first()
+		db.session.commit()
+
+	except Exception as e:
+		db.session.rollback()
+		return(str(e))
+
+def delete_rel_prof_dis(prof_nusp, dis_code, semester, year):
+	try:
+		db.session.bind = db.get_engine(app, 'peo_cur')
+		data = db.session.query(func.public.delete_prof_dis(prof_nusp, dis_code, semester, year)).first()
+
+		print(data[0])
+
+		db.session.commit()
+		return "rel_prof_dis deletado com id = {}. <br> <a href=\"/getall_curso\"> Voltar </a>".format(data[0])
+
+	except Exception as e:
+		db.session.rollback()
+		return(str(e))
+
+
 if __name__ == '__main__':
 	app.run()
