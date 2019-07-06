@@ -15,6 +15,9 @@ def get_name_from_email(email):
 	db.session.bind = db.get_engine(app, 'acc_peo')
 	data = db.session.query(func.public.get_pes(email)).first()
 
+	if data is None:
+		return None
+
 	name = data[0][1:len(data[0])-1].split(',')[1]
 
 	return name
@@ -87,11 +90,19 @@ def update_p(p_id, p_name, p_cpf):
 def delete_p(p_cpf):
 	try:
 		db.session.bind = db.get_engine(app, 'pessoas')
-		data = db.session.query(func.public.delete_Pessoa(p_cpf)).first()
+		data_p = db.session.query(func.public.delete_Pessoa(p_cpf)).first()
+
+		#Deletar a rel também
+		db.session.bind = db.get_engine(app, 'acc_peo')
+		data_a = db.session.query(func.public.delete_pes_us_from_cpf(p_cpf)).first()
+
+		print(data_a[0])
+
 		db.session.commit()
-		return "Pessoa deletada com id = {}. <br> <a href=\"/getall_p\"> Voltar </a>".format(data[0])
+		return "Pessoa deletada com id = {}. <br> <a href=\"/getall_p\"> Voltar </a>".format(data_p[0])
 
 	except Exception as e:
+		db.session.rollback()
 		return(str(e))
 
 def work_profs(semestre, ano):

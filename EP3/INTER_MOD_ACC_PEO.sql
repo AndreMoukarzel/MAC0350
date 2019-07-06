@@ -112,6 +112,22 @@ COMMIT;
 
 --DELETES
 BEGIN;
+CREATE OR REPLACE FUNCTION delete_pes_us_from_cpf(cpf varchar(11))
+RETURNS email AS
+$$
+DECLARE
+us_email email;
+BEGIN
+	DELETE FROM b20_rel_pes_us
+	WHERE rel_pes_cpf = cpf
+	RETURNING rel_us_email into us_email;
+	RETURN us_email;
+END;
+$$
+LANGUAGE plpgsql;
+COMMIT;
+
+BEGIN;
 CREATE OR REPLACE FUNCTION delete_pes_us(key1 varchar(11), key2 email)
 RETURNS pes_us_key AS
 $$

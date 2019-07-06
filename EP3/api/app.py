@@ -18,6 +18,12 @@ def index():
 		return redirect(url_for('login'))
 
 	name = db_operations.get_name_from_email(email)
+
+	if name is None:
+		error = "User not associated with any Person. Ask the Admin to fix this."
+		session.clear()
+		return error + "<br> <a href=\"/\"> Voltar </a>"
+
 	results = db_operations.get_servs_from_email(email)
 
 	return render_template('index.html', name=name, servs=results)

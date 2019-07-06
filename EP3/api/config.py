@@ -12,7 +12,7 @@ class Config(object):
         'access': 'postgresql://localhost/access',
         'curr': 'postgresql://localhost/curriculum',
         'acc_peo': 'postgresql://localhost/inter_acc_peo',
-        'peo_cur': 'postgresql://localhost/inter_peo_cur',
+        'peo_cur': 'postgresql://localhost/inter_peo_cur'
     }
 
 
