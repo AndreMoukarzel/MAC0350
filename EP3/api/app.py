@@ -163,8 +163,6 @@ def delete_p():
 
 @app.route("/work_profs")
 def work_profs():
-	return "Nem funciona com databases separados <br> <a href=\"/\"> Voltar </a>"
-
 	semestre=request.args.get('semestre')
 	ano=request.args.get('ano')
 

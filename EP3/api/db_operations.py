@@ -123,7 +123,7 @@ def work_profs(semestre, ano):
 	assert(ano is not None)
 
 	try:
-		#db.session.bind = db.get_engine(app, 'rel_pessoas_curriculo')
+		db.session.bind = db.get_engine(app, 'peo_cur')
 		data = db.session.query(func.public.working_profs(semestre, ano))
 
 		results = [] 
