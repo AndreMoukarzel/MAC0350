@@ -1,0 +1,1 @@
+DROP DATABASE IF EXISTS inter_acc_peo;
