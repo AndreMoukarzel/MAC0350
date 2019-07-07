@@ -274,7 +274,7 @@ def add_per(name, desc):
 		data = db.session.query(func.public.create_Perfil(name, desc)).first()
 		#commita se não deu erro
 		db.session.commit()
-		return "Perfil criada com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
+		return "Perfil criado com id = {}. <br> <a href=\"/\"> Voltar </a>".format(data[0])
 
 	except Exception as e:
 		#se deu erro, volta atrás (só precisa no caso de escrita/update)
