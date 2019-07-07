@@ -26,7 +26,7 @@ enquanto na pasta raíz do projeto:
 
  
 Atenção: o arquivo CREATE_ALL irá criar e popular as databases com o nome pessoas, access, curriculum,
-inter_acc_peo e inter_peo_cur. Caso existe alguma database com esses nomes, o programa pode não funcionar.
+inter_acc_peo e inter_peo_cur. Caso exista alguma database com esses nomes, o programa pode não funcionar.
 
 /******************************* TESTANDO *******************************/
 
